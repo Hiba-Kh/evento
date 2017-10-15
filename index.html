@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Conference</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
     <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
@@ -15,25 +18,28 @@
                 url: "x.php",
                 dataType: 'json', 
                 success: function(result){
-                    console.log(result);
-
+                  console.log(result);
+           
                     $.each(result, function(index, value) {
                         console.log('caste: ' + value['name']);
                         var x = '<div class="col-md-4 col-sm-6">'+
                                 '<div class="schedule-box">'+
+                                    '<h3>'+ value.name_event +'</h3>'+
+                                    '<p>'+ value.location +'</p>'+
+                                    '<div class="time">'+
+                                        '<date datetime="'+ value.start_date +'">'+ value.start_date +'</date> - <date datetime="'+ value.end_date +'">'+ value.end_date +'</date>'+
+                                    '</div>'+
+                                    '<br>'+
                                     '<div class="time">'+
                                         '<time datetime="'+ value.start +'">'+ value.start +'</time> - <time datetime="'+ value.end +'">'+ value.end +'</time>'+
                                     '</div>'+
-                                    '<h3>Welcome and intro</h3>'+
-                                    '<p>'+ value.name +'</p>'+
+                                    
                                     '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.html?id='+value.id+'\')">MORE</button>'+                       
                                 '</div>'+
                                 '</div>';
 
                         $("#coming_events").append(x);
                     });
-
-                   
                 },
                 error:function(error, code){
                     console.log(error);
@@ -46,9 +52,7 @@
     </script>
 
     <!-- css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    
 </head>
 
  <body data-spy="scroll" data-target="#site-nav">
