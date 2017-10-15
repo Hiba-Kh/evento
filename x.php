@@ -1,36 +1,72 @@
 <?php
-
 header('Content-Type: application/json');
-require "conn.php";
+
+
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+
 class Anything {
     var $id;
-    var $name;
+    var $location;
+    var $name_event;
     var $start;
+    var $start_date;   
+    var $end_date;
     var $end;
 }
+$event_id;
+$mysql_qry="SELECT * FROM my_event";
+$r=mysqli_query($conn,$mysql_qry);
+$i=0;
+$j=0;
+$l=0;
+$arr=array();
+$arr_date=array();
+$arr_date_sorted=array();
 
-// Get data from database and do your logic 
+     ;
+if (!$r)
+{echo "Failed";
+   die(mysqli_error($conn)); 
+}
 
+else {
+  
+while ($row= mysqli_fetch_assoc($r)) 
+        {
 $myObj0 = new Anything();
-$myObj0->id = 10;
-$myObj0->name = "John";
-$myObj0->start = "09:00 am";
-$myObj0->end = "10:00 am";
+$myObj0->id = $row['event_id'];
+$myObj0->location =$row['location_id'];
+$myObj0->name_event = $row['event_name'];
+$myObj0->start = $row['start_time'];
+$myObj0->start_date = $row['start_date'];
+$myObj0->end_date = $row['end_date'];
 
-$myObj1 = new Anything();
-$myObj1->id = 20;
-$myObj1->name = "Hiba";
-$myObj1->start = "03:00 am";
-$myObj1->end = "10:30 am";
+$arr_date[$j] =  $row['start_date'];
+$myObj0->end = $row['end_time'];
+$arr[$i]=$myObj0;
+$i++;
+$j++;
+    }
+}
+function date_sort($a, $b) {
+    return strtotime($a) - strtotime($b);
+}
+usort($arr_date, "date_sort");
 
-$myObj2 = new Anything();
-$myObj2->id = 30;
-$myObj2->name = "Asmar";
-$myObj2->start = "02:00 am";
-$myObj2->end = "11:30 am";
-
-$resp = array($myObj0, $myObj1, $myObj2);
-
-echo json_encode($resp);
-
+for ($k=0,$size=count($arr); $k < $size;$k++){
+  for ($h=0,$sizeH=count($arr); $h < $sizeH;$h++){
+   if ($arr[$h]->start_date == $arr_date[$k])
+   {
+       $arr_date_sorted[$k]=$arr[$h];
+       break;
+   }
+        }
+}
+echo json_encode($arr_date_sorted);
 ?>
+
