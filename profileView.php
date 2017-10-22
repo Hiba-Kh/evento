@@ -1,26 +1,17 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Classy Resume a Personal Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>Profile</title>
+
 <?php
-
-class UserData {
-    var $id;
-    var $firstname;
-    var $lastname;
-    var $gender;
-    var $address;
-    var $email;
-    var $job;
-}
-
     require "conn.php";
+    require "models.php";
+
     session_start();
     $user=$_SESSION['user_data'];
     if($user == null) {
-        header("location: signin.php");
+        header("location: signin.html");
     }
 ?>
 
@@ -30,7 +21,7 @@ class UserData {
         // A $( document ).ready() block.
         $(document).ready(function() {
             $.ajax({
-                url: "profile.php?id=" + $("#user_id").val(),
+                url: "profileController.php?id=" + $("#user_id").val(),
                 dataType: 'json', 
                 success: function(value){
                   console.log(value);
@@ -42,9 +33,9 @@ class UserData {
                                             '<div class="col-md-5 w3ls-ab-right">'+
                                                 '<div class="agile-about-right-img">'+
                                                     '<img src="assets/images/ab.jpg" alt="">'+
-                                                '</div>'+
-                                            '</div>'+
-                                            '<div class="col-md-7 w3ls-agile-left">'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '<div class="col-md-7 w3ls-agile-left">'+
                                                 '<div class="w3ls-agile-left-info">'+
                                                     '<h4 style="font-size:1.3em;">'+'JobTitle'+'</h4>'+
                                                     '<p>'+value.job+'</p>'+
@@ -69,7 +60,7 @@ class UserData {
                                         '<div class="clearfix"> </div>'+
                                     '</div>'+
                                 '</div>';
-                                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive">'+
+                                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive" >'+
                                          '<br>'+
                                         '<h2 style="font-size: 2em;">'+value.firstname+' '+value.lastname+'</h2>'+
 					                    '<span>'+value.job+'</span>'+
@@ -136,7 +127,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <a class="logo" href="index.html">
                         
                         <!-- logo image  -->
-                        <img src="assets/images/logo.png" alt="Logo">
+                        <img src="assets/images/logo.png"  alt="Logo">
 
                         Evento
                     </a>
@@ -160,7 +151,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <li><a href="administrated.html">Administrated </a></li>
                      <li><a  href="photos.html">Photos</a></li>
                       <li ><a href="about.html">About</a></li>
-                    <li><a  href="index.html">Sign Out</a></li>   
+                    <li><a  href="signout.php">Sign Out</a></li>   
                  
                    
                    
@@ -175,7 +166,8 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 	<div class="banner" id="banner">
 			
 		
-	</div>
+    </div>
+    
 <!-- //banner -->
 	</div>
 <!-- header -->

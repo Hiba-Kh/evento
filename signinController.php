@@ -1,6 +1,9 @@
 <?php
 require "conn.php";
+require "models.php";
+
 session_start();
+
 $error='';
 if (empty($_POST["email"]) || empty($_POST['Password']))
 {
@@ -66,8 +69,7 @@ else
                 }
 
                 $_SESSION['user_data'] = $user;
-                $_SESSION['login_user'] = $user_email;
-                $_SESSION['user_password'] = $user_pass;
+                
                 header("location: profileView.php");
             
             }
@@ -78,18 +80,6 @@ else
         }
 }
 
-function loadUserData ($user_email) {
-   
-}
-class UserData {
-    var $id;
-    var $firstname;
-    var $lastname;
-    var $gender;
-    var $address;
-    var $email;
-    var $job;
-}
 
 ?>
 
