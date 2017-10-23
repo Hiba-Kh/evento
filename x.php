@@ -1,7 +1,5 @@
 <?php
 header('Content-Type: application/json');
-
-
 $servername = "localhost";
 $database = "evento";
 $username = "root";
@@ -47,6 +45,7 @@ $myObj0->start_date = $row['start_date'];
 $myObj0->end_date = $row['end_date'];
 
 $arr_date[$j] =  $row['start_date'];
+
 $myObj0->end = $row['end_time'];
 $arr[$i]=$myObj0;
 $i++;

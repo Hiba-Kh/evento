@@ -3,6 +3,12 @@ header('Content-Type: application/json');
 
 $id = $_GET["id"];
 
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
 /*class speaker {
     //var $id;
     var $name;
@@ -10,57 +16,90 @@ $id = $_GET["id"];
 }*/
 class Anything {
     var $id;
+        var $event_id;
+
     var $name;
     var $start;
     var $end;
+    var $location;
     var $speakers;
 }
+$size_2;
+$resp =array();
+$arr =array();
+$sp=[];
+$sp_fname =array();
+$sp_lname =array();
+$sp_con=array();
+$i=0;
+$s=0;
 
-$resp = [];
+/*$mysql_qry="SELECT agenda_id FROM agenda WHERE agenda.event_id = $id ";
+$r=mysqli_query($conn,$mysql_qry);
+$row= mysqli_fetch_assoc($r);
+$agenda_id=$row['agenda_id'];
+*/
 
-if ($id == 10) {
+$mysql_qry2="SELECT * FROM sessions WHERE sessions.agenda_id = $id ";
+$r2=mysqli_query($conn,$mysql_qry2);
 
-    $myObj0 = new Anything();
-    $myObj0->id = 10;
-    $myObj0->name = "Greeting";
-    $myObj0->start = "09:00 am";
-    $myObj0->end = "10:00 am";
-    $myObj0->speakers = [];
-    
-    $myObj1 = new Anything();
-    $myObj1->id = 20;
-    $myObj1->name = "Break";
-    $myObj1->start = "03:00 am";
-    $myObj1->end = "10:30 am";
-    $myObj1->speakers = array("Hiba Khaliefeh" , "Shahira Arafat");
-    
-    $myObj2 = new Anything();
-    $myObj2->id = 30;
-    $myObj2->name = "Do Something";
-    $myObj2->start = "02:00 am";
-    $myObj2->end = "11:30 am";
-    $myObj2->speakers = [];
-       
-    $myObj3 = new Anything();
-    $myObj3->id = 40;
-    $myObj3->name = "Closing";
-    $myObj3->start = "02:00 am";
-    $myObj3->end = "11:30 am";
-    $myObj3->speakers = array("DaiGooR");
-
-       
-    $myObj4 = new Anything();
-    $myObj4->id = 50;
-    $myObj4->name = "QA";
-    $myObj4->start = "02:00 am";
-    $myObj4->end = "11:30 am";
-    $myObj4->speakers = [];
-
-    $resp = array($myObj0, $myObj1, $myObj2, $myObj3, $myObj4);
-
+if (!$r2)
+{
+    echo "Failed";
+   die(mysqli_error($conn)); 
 }
+else {
 
+while ($row2= mysqli_fetch_assoc($r2)) 
+        {
+    $myObj0 = new Anything();
+    $myObj0->id = $row2['session_id'];
+    $myObj0->event_id=$id;
+    $session_id =$row2['session_id'];
+    $myObj0->name = $row2['title'];
+    $myObj0->start = $row2['start_time'];
+    $myObj0->end = $row2['end_time'];
+    $myObj0->location = $row2['location'];
+    
+$mysql_qry3="SELECT speaker_id FROM session_speaker WHERE session_speaker.session_id = $session_id ";
+$r3=mysqli_query($conn,$mysql_qry3);
+$sp=[];
+$sp_fname=[];
+$i=0;
+if (!$r3)
+{
+   die(mysqli_error($conn)); 
+   $sp=[];
+}
+else {
+    if (mysqli_num_rows($r3) > 0)
+    {
+while ($row3= mysqli_fetch_assoc($r3)) 
+{
+    $sp[$i]=$row3['speaker_id'];
+   // echo count($sp);
+    $i++;
+}
+ 
 
-echo json_encode($resp);
+    }
+    
+}
+ for ($k=0,$size=count($sp); $k < $size;$k++){ 
+$mysql_qry4="SELECT first_name,last_name FROM users WHERE users.user_id = $sp[$k]";
+$r4=mysqli_query($conn,$mysql_qry4);
+$row4= mysqli_fetch_assoc($r4);
+$sp_fname[$k]=$row4['first_name'];
+$sp_lname[$k]=$row4['last_name'];
+  }
+  
+    $myObj0->speakers = $sp_fname;
+ //  $myObj0->speakers = [];
+    $arr[$s]=$myObj0;
+    $s++;
+    
+}
+}
+echo json_encode($arr);
 
 ?>

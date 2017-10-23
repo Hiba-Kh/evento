@@ -1,14 +1,95 @@
 
-<!--
-author: W3layouts
-author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Classy Resume a Personal Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>Profile</title>
+
+<?php
+    require "conn.php";
+    require "models.php";
+
+    session_start();
+    $user=$_SESSION['user_data'];
+    if($user == null) {
+        header("location: signin.html");
+    }
+?>
+
+    <!-- Javascript -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        // A $( document ).ready() block.
+        $(document).ready(function() {
+            $.ajax({
+                url: "profileController.php?id=" + $("#user_id").val(),
+                dataType: 'json', 
+                success: function(value){
+                  console.log(value);
+        
+                        console.log('caste: ' + value);
+                        var x = '<div class="container">'+
+                                    '<h3 class="w3l_head" style="font-size: 2.2em;">'+'My Account'+'</h3>'+
+                                    '<div class="w3l-grids-about">'+
+                                            '<div class="col-md-5 w3ls-ab-right">'+
+                                                '<div class="agile-about-right-img">'+
+                                                    '<img src="assets/images/ab.jpg" alt="">'+
+                                                    '</div>'+
+                                                    '</div>'+
+                                                    '<div class="col-md-7 w3ls-agile-left">'+
+                                                '<div class="w3ls-agile-left-info">'+
+                                                    '<h4 style="font-size:1.3em;">'+'JobTitle'+'</h4>'+
+                                                    '<p>'+value.job+'</p>'+
+                                                '</div>'+
+                                                '<div class="w3ls-agile-left-info">'+
+                                                    '<h4 style="font-size:1.3em;">'+'Name'+'</h4>'+
+                                                    '<p>'+value.firstname+' '+value.lastname+'</p>'+
+                                                '</div>'+
+                                                '<div class="w3ls-agile-left-info">'+
+                                                    '<h4 style="font-size:1.3em;">'+'Sex'+'</h4>'+
+                                                    '<p>'+value.gender+'</p>'+
+                                                '</div>'+
+                                                '<div class="w3ls-agile-left-info">'+
+                                                    '<h4 style="font-size:1.3em;">'+'Address'+'</h4>'+
+                                                    '<p>'+ value.address+'</p>'+
+                                                    '</div>'+
+                                                '<div class="w3ls-agile-left-info">'+
+                                                    '<h4 style="font-size:1.3em;">'+'Email Address'+'</h4>'+
+                                                    '<p><a href="mailto:example@email.com">'+value.email+'</a></p>'+
+                                                '</div>'+
+                                        '</div>'+
+                                        '<div class="clearfix"> </div>'+
+                                    '</div>'+
+                                '</div>';
+                                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive" >'+
+                                         '<br>'+
+                                        '<h2 style="font-size: 2em;">'+value.firstname+' '+value.lastname+'</h2>'+
+					                    '<span>'+value.job+'</span>'+
+                                         '<div class="callbacks_container">'+
+			                                '<div class="clearfix"></div>'+
+		                                    '</div>'+
+                                            '<br><br>'+
+                                              '<ul class="top-links">'+
+	                                                '<li><a href="#"><i class="fa fa-facebook"></i></a></li>'+
+    	                                            '<li><a href="#"><i class="fa fa-twitter"></i></a></li>'+
+		                                            '<li><a href="#"><i class="fa fa-linkedin"></i></a></li>'+
+                                                    '<li><a href="#"><i class="fa fa-google-plus"></i></a></li>'+
+                                    
+	                                             '</ul>';
+                        $("#about").append(x);
+                        $("#banner").append(y);
+
+              
+                },
+                error:function(error, code){
+                    console.log(error);
+                    console.log(code);
+                    alert("Error" + error);
+                }   
+            });
+        });
+        
+    </script>
+
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,6 +117,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 	
 
     <body>
+    <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
@@ -45,7 +127,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <a class="logo" href="index.html">
                         
                         <!-- logo image  -->
-                        <img src="assets/images/logo.png" alt="Logo">
+                        <img src="assets/images/logo.png"  alt="Logo">
 
                         Evento
                     </a>
@@ -69,7 +151,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <li><a href="administrated.html">Administrated </a></li>
                      <li><a  href="photos.html">Photos</a></li>
                       <li ><a href="about.html">About</a></li>
-                    <li><a  href="index.html">Sign Out</a></li>   
+                    <li><a  href="signout.php">Sign Out</a></li>   
                  
                    
                    
@@ -81,24 +163,11 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
 <div class="main" id="home">
 <!-- banner -->
-	<div class="banner">
-			<!--Slider-->
-			<img src="assets/images/pic2.jpg" alt=" " class="img-responsive">
-                        <br>
-                        <h2 style="font-size: 2em;">Shahira Arafat</h2>
-					<span>Computer Engineer</span>
-				<div class="callbacks_container">
-			<div class="clearfix"></div>
-		</div>
-		<!--//Slider-->
-                <br><br>
-   <ul class="top-links">
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								</ul>
-	</div>
+	<div class="banner" id="banner">
+			
+		
+    </div>
+    
 <!-- //banner -->
 	</div>
 <!-- header -->
@@ -106,42 +175,12 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
 <!-- //header -->
 <!-- about -->
-	<div class="about" id="about">
-		<div class="container">
-					<h3 class="w3l_head" style="font-size: 2.2em;">My Account</h3>
-			
-		<div class="w3l-grids-about">
-				<div class="col-md-5 w3ls-ab-right">
-					<div class="agile-about-right-img">
-						<img src="assets/images/ab.jpg" alt="">
-					</div>
-				</div>
-				<div class="col-md-7 w3ls-agile-left">
-					<div class="w3ls-agile-left-info">
-						<h4 style="font-size:1.3em;">Job Title</h4>
-						<p>Computer Engineer</p>
-					</div>
-					<div class="w3ls-agile-left-info">
-						<h4 style="font-size:1.3em;">Name</h4>
-						<p>Shahira Arafat</p>
-					</div>
-					<div class="w3ls-agile-left-info">
-						<h4 style="font-size:1.3em;">Sex</h4>
-						<p>Female</p>
-					</div>
-					<div class="w3ls-agile-left-info">
-						<h4 style="font-size:1.3em;">Address</h4>
-						<p> Nablus - Palestine</p>
-					</div>
-					<div class="w3ls-agile-left-info">
-						<h4 style="font-size:1.3em;">Email Address</h4>
-						<p><a href="mailto:example@email.com">shoshoarafat-1996@hotmail.com</a></p>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			</div>
-		</div>
+
+<div class="about" id="about">
+		
+        </div>
+                    
+    
 <!-- //about-bottom -->
 <!-- services -->
  <section id="upComing" class="section schedule">

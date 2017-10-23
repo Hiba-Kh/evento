@@ -1,48 +1,50 @@
 <?php
-require "conn.php";
-if(isset($_POST['email'])) 
-{
-    $user_name = $_POST["email"];
-}
-echo $user_name;
-if(isset($_POST['Password'])) 
-{
-$user_pass = $_POST["password"];
+header('Content-Type: application/json');
+$id = $_GET["id"];
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+class Anything {
+
+    var $id;
+var $id_agenda;
 }
 
-echo $user_pass;
+//echo $event_id;
+if (isset($_POST['add']))
+    {     
+$id = $_GET["id"];
+$myObj0 = new Anything();
+$myObj0->id = $id ;
 
-$mysql_qry="SELECT email FROM login WHERE login.email = '$user_name'";
-$result=mysqli_query($conn, $mysql_qry);
-if(!$result) 
-{
-    echo "wrong";
-	die(mysqli_error($conn));
-}
+                   $date=$_POST['date_agenda']; 
+                   
+$sql = "INSERT INTO agenda (event_id,agenda_date) VALUES ($id,'$date')";
 
-else
-{
-   if (mysqli_num_rows($result) > 0) 
-   { 
-       //echo "tahnks";
-       // output data of each row
-       while($row = mysqli_fetch_assoc($result)) 
-       {
-           if ($row["password"] == $user_pass)
-            {
-                header("Location:http://localhost/PhpProject1/conference-master/profile.html");
-                
-                //$link ="<script>window.open('http://localhost/conference/profile.html')</script>";
-                //echo $link;
-               // echo"<br>";
-              // echo $row["username"];
-               //echo"<br>";
-               
-               //echo $row["password"];
-              
-           } 
-       }
-   } 
-}
+if(mysqli_query($conn, $sql)){
+
+$mysql_qry2="SELECT * FROM agenda WHERE agenda.event_id =$id";
+$r2=mysqli_query($conn,$mysql_qry2);
+$row2= mysqli_fetch_assoc($r2);
+$id2 = $row2['agenda_id'];
+$myObj0->id_agenda = $id2 ;
+$resp = array($myObj0);
+echo json_encode($resp);
+header("Location:create_agenda.html?id=$id2");
+
+
+
+
+} else{
+  
+  
+}           
+   
+mysqli_close($conn);
+           
+            }          
 
 ?>

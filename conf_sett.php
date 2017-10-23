@@ -1,48 +1,62 @@
 <?php
-require "conn.php";
-if(isset($_POST['email'])) 
-{
-    $user_name = $_POST["email"];
-}
-echo $user_name;
-if(isset($_POST['Password'])) 
-{
-$user_pass = $_POST["password"];
-}
+header('Content-Type: application/json');
 
-echo $user_pass;
+$id = $_GET["id"];
 
-$mysql_qry="SELECT email FROM login WHERE login.email = '$user_name'";
-$result=mysqli_query($conn, $mysql_qry);
-if(!$result) 
-{
-    echo "wrong";
-	die(mysqli_error($conn));
-}
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
 
-else
-{
-   if (mysqli_num_rows($result) > 0) 
-   { 
-       //echo "tahnks";
-       // output data of each row
-       while($row = mysqli_fetch_assoc($result)) 
-       {
-           if ($row["password"] == $user_pass)
-            {
-                header("Location:http://localhost/PhpProject1/conference-master/profile.html");
-                
-                //$link ="<script>window.open('http://localhost/conference/profile.html')</script>";
-                //echo $link;
-               // echo"<br>";
-              // echo $row["username"];
-               //echo"<br>";
-               
-               //echo $row["password"];
-              
-           } 
-       }
-   } 
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+class Anything {
+                    var $id;
+                    var $c_name;
+                    var  $s_date;                 
+                    var $e_date;    
+                    var $s_time;                
+                    var $e_time;
+                    var $type;
+                    var $location;
+                    var $description;
+                    var $number;
 }
 
+// Get data from database and do your logic 
+
+
+
+$mysql_qry2="SELECT * FROM my_event WHERE my_event.event_id =$id";
+$r2=mysqli_query($conn,$mysql_qry2);
+
+if (!$r2)
+{
+    echo "Failed";
+    echo "ERROR: Could not able to execute $mysql_qry2. " . mysqli_error($conn);
+}
+else {
+$myObj0 = new Anything();
+$row2= mysqli_fetch_assoc($r2);
+$myObj0->id = $row2['event_id'];
+$myObj0->c_name = $row2['event_name'];
+$myObj0->s_date = $row2['start_date'];
+$myObj0->e_date = $row2['end_date'];
+$myObj0->s_time = $row2['start_time'];
+$myObj0->e_time = $row2['end_time'];
+$myObj0->description= $row2['description'];
+$myObj0->number = $row2['number_att'];
+$id_type= $row2['event_type_id'];
+$mysql_qry="SELECT * FROM event_type WHERE event_type.event_type_id = '$id_type' ";
+$r=mysqli_query($conn,$mysql_qry);
+$row= mysqli_fetch_assoc($r);
+$myObj0->type= $row['event_type_name'];
+$myObj0->location = $row2['location_id'];
+
+$resp = array($myObj0);
+echo json_encode($resp);
+
+}
+
+            
 ?>

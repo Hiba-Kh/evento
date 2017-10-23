@@ -16,15 +16,117 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
+<script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
+    $(document).ready(function() {
+        
+            $.ajax({
+                url: "conf_sett.php?id="+getUrlParameter("id"),
+                dataType: 'json', 
+                success: function(result){
+                    console.log(result);
+
+                    $.each(result, function(index, value) {
+                        console.log(value.id);
+                        var node =
+                      '<div class="row" style="margin-bottom: 15px;">'+     
+     '<button type="submit"  name="create" style = "border-color: black; float:right; margin-right:60px; margin-top:45px; padding:15px;" class="btn btn-black" onclick="window.open(\'Create_Next.html?id='+value.id+'\')">Create_Agenda</button>'+
+          '<h4 style="margin-top:50px;font-size: 2em;">Conference Basics</h4>'+
+          '<br>'+
+      '<div class="input-group input-group-icon" >'+
+          '<label style="color :blue; font-size: 1.3em;"> Conference Name </label>'+
+        '<input style="padding:20px 40px;text-align:left" type="text" name="c_name" value="'+value.c_name+'" />'+
+        
+      '</div>'+
+          '<label style="color :blue;font-size: 1.3em;"> Conference Date </label>'+
+          '<br>'+
+          
+           '<div class="input-group input-group-icon" style="float: right; margin-right:110px;">'+
+          '<label style="color :blue;">  End Date </label>'+
+        '<input style="padding:20px 80px;text-align:left" type="date"  name="e_date" value="'+value.e_date+'" />'+
+       
+      '</div>'+
+          
+       '<div class="input-group input-group-icon">'+
+         '<label style="color :blue;">  Start Date </label>'+
+        '<input style="padding:20px 80px;text-align:left"  type="date"  name="s_date" value="'+value.s_date+'" />'+
+      '</div>'+
+          
      
-</head>
+          '<div class="input-group input-group-icon" style="float: right; margin-right:110px;">'+
+
+       '<label style="color :blue;">  End Time </label>'+
+       
+        '<input  style="padding:20px 108px;text-align:left"  type="time"  name="e_time" value="'+value.e_time+'" />'+
+
+       '</div>'+
+      
+         ' <div class="input-group input-group-icon">'+
+          '<label style="color :blue;">  Start Time </label>'+
+        '<input style="padding:20px 107px;" type="time"  name="s_time" value="'+value.s_time+'" />'+
+
+      '</div>'+
+ 
+      
+       '<div class="input-group input-group-icon">'+
+       '<label style="color :blue; font-size: 1.3em;">  Conference Type </label>'+
+        '<input  style="padding:20px 43px;text-align:left"  type="text"  name="type" value="'+value.type+'" />'+
+       '</div>'+
+       
+          '<div class="input-group input-group-icon" >'+
+          '<label style="color :blue;font-size: 1.3em;"> Conference Description</label>'+
+        '<input type="text" style="width: 100%;padding:50px 18px;text-align:left;" name="description" value="'+value.description+'"/>'+
+      '</div>'+
+          
+          
+          '<div class="input-group input-group-icon" >'+
+          '<label style="color :blue;font-size: 1.3em;" > Conference Location </label>'+
+        '<input type="text" style="padding:20px 28px;text-align:left;"  name="location" value="'+value.location+'" />'+
+      '</div>'+
+          
+           '<div class="input-group input-group-icon" >'+
+         ' <label style="color :blue;font-size: 1.3em;"> Estimated number of Attendees </label>'+
+        '<input type="text" style="padding:20px 0px; text-align:left;"  name="n_attendee" value="'+value.number+'"/>'+
+      '</div>';
+      
+      
+                       
+                        $("#check").append(node);
+                    });
+                    
+                },
+                error:function(error, code){
+                    console.log(error);
+                    console.log(code);
+                    alert("Error" + error);
+                }   
+            });
+    });
+
+    </script>
+    <!-- css -->
 <body data-spy="scroll" data-target="#site-nav">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div >
+        <div style="margin-left: 20px;margin-right: 20px;">
             <div class="navbar-header">
 
                 <!-- logo -->
-                <div class="site-branding" style="padding-left: 20px;">
+                <div class="site-branding">
                     <a class="logo" href="index.html">
                         
                         <!-- logo image  -->
@@ -34,65 +136,65 @@
                     </a>
                 </div>
 
-            </div> 
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div><!-- /.navbar-header -->
+
+            <div class="collapse navbar-collapse" id="navbar-items">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!-- navigation menu -->
+                    <li><a href="Create.html">CreateConf. </a></li> 
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="upComing.html">UpComing </a></li>
+                    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Program
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="Proceeding.html">Proceedings</a></li>
+          <li><a href="Panel.html">Panel</a></li>
+          <li><a href="Awards.html">Awards</a></li>
+          <li><a href="Paper.html">Paper</a></li>
+          <li><a data-scroll href="#speakers">Speaker</a></li>
+          <li><a  data-scroll href="#faq">Agenda</a></li>
+          <li><a href="partners.html">Sponsors</a></li>
+        </ul>
+                        
+      </li>
+      
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Venue
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="Accommodation.html">Accommodation</a></li>
+          <li><a href="Photos_event.html">Photos</a></li>
+          <li><a href="Videos_event.html">Videos</a></li>
+         
+        </ul>
+                        
+      </li>
+     
+                    <li><a href="index.html">SignOut </a></li>
+                
+      
+    
+                
+                </ul>
+            </div>
         </div><!-- /.container -->
     </nav>
 
-   <div class="container">
-  <form>
-      <div class="row" style="margin-bottom: 15px;">
-          <h4 style="margin-top:50px;font-size: 2em;">Conference Basics</h4>
-          <br>
-      <div class="input-group input-group-icon" >
-          <label style="color :black;"> Conference Name </label>
-        <input type="text" />
-      </div>
-          <label style="color :black;"> Conference Date </label>
-          <br>
-       <div class="input-group input-group-icon">
-           <label> Start Date </label>
-        <input type="date" placeholder="Start Date"/>
-      </div>
-          
-      <div class="input-group input-group-icon">
-           <label> End Date </label>
-        <input type="date" placeholder="End Date"/>
-       
-      </div>
-  
-          <div class="form-group input-group">
-   <select class="form-control" name="Your Intreset" id="YourIntreset" required>
-                                <option >Conference Type</option>
-                                <option>Medical</option>
-                                <option>Political</option>
-                                <option>sport</option>
-                                <option>Technology</option>
-        </select>
-        </div>
-          
-          <div class="input-group input-group-icon" >
-          <label style="color :black;"> Conference Description</label>
-        <input type="text" style="width: 100%;padding: 50px;"/>
-      </div>
-          
-          
-          <div class="input-group input-group-icon" >
-          <label style="color :black;"> Conference Location </label>
-        <input type="text" />
-      </div>
-          
-           <div class="input-group input-group-icon" >
-          <label style="color :black;"> Estimated number of Attendees </label>
-        <input type="text" />
-      </div>
-      
-    <div class="row">
 
-     <a class="btn btn-white" href="Create_Next.html">Next</a>
-    </div>
-  </form>
+    <div id ="check" class="container" style="max-width: 1000px;">
+
 </div>
   
+
 
 
 

@@ -1,48 +1,159 @@
 <?php
-require "conn.php";
-if(isset($_POST['email'])) 
-{
-    $user_name = $_POST["email"];
-}
-echo $user_name;
-if(isset($_POST['Password'])) 
-{
-$user_pass = $_POST["password"];
-}
+header('Content-Type: application/json');
 
-echo $user_pass;
+$id = $_GET["id"];
 
-$mysql_qry="SELECT email FROM login WHERE login.email = '$user_name'";
-$result=mysqli_query($conn, $mysql_qry);
-if(!$result) 
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+class Anything {
+    var $id;
+    /*var $name;
+    var $start;
+    var $end;
+    var $location;
+    var $speakers;
+    
+    var $c_name;
+    var $s_date;
+    var $e_date;
+    var $description;*/
+    
+}
+    
+$myObj0 = new Anything();
+$myObj0->id = $id ;
+$resp = array($myObj0);
+echo json_encode($resp);
+
+if (isset($_POST['add']))
+    {     
+
+$id = $_GET["id"];
+$user_id;
+$event_id;
+$session_id;
+//$email_sp=array();
+                  $speaker_id=[];
+                   $session_name=$_POST['title'];
+                     $s_time=$_POST['start_time'];                 
+                     $e_time=$_POST['end_time'];
+                     $email_sp=$_POST['email_sp'];
+                     $location=$_POST['location'];
+
+//1
+$mysql_qry1="SELECT * FROM agenda WHERE agenda.agenda_id = $id";
+$r1=mysqli_query($conn,$mysql_qry1);
+$row1= mysqli_fetch_assoc($r1);
+$event_id = $row1['event_id'];
+echo "EventId Selected";
+
+//1
+//
+if (!empty($email_sp))
 {
-    echo "wrong";
-	die(mysqli_error($conn));
+//2
+$mysql_qry2="SELECT * FROM users WHERE users.email = '$email_sp'";
+$r2=mysqli_query($conn,$mysql_qry2);
+if (!$r2)
+{   
+ //6   
+    echo "WHAT TO DO ! IF NOT FOUND IN DATABASE";
+//6
+}
+else {
+$row2= mysqli_fetch_assoc($r2);
+$user_id = $row2['user_id'];
+echo "USERId Selected";
+//احط جملة الاي دي للسبيكر هون حسب اليوزر اي دي
+}
+ //2
+//3
+$mysql_qry3="SELECT * FROM speaker WHERE speaker.speaker_id = $user_id";
+$r3=mysqli_query($conn,$mysql_qry3);
+if (!$r3)
+{   
+ //4  
+echo "NOT FOUND in DB";    
+$sql4 = "INSERT INTO speaker (user_id,speaker_id,event_id) VALUES ($user_id,$user_id,$event_id)";
+if(mysqli_query($conn, $sql4)){
+    echo "inserted succ";
+}
+ else{
+      echo "NOT inserted in speaker(failed)";
+}           
+mysqli_close($conn);
+//4
+}
+else {
+      echo "FOUND speaker in DB";
+}
+//3
+
+//5
+$sql5 = "INSERT INTO sessions (title,location,start_time,end_time,event_id,agenda_id) VALUES ('$session_name','$location','$s_time','$e_time',$event_id,$id)";
+if(mysqli_query($conn, $sql5)){
+//7
+$mysql_qry7="SELECT * FROM sessions WHERE sessions.event_id = $event_id";
+$r7=mysqli_query($conn,$mysql_qry7);
+$row7= mysqli_fetch_assoc($r7);
+$session_id = $row7['session_id'];
+echo "SessionId Selected";
+
+//7
+}
+ else{
+        echo "NOT INSERTED IN DB SESSION";
+
+}           
+mysqli_close($conn);
+//5
+
+
+   //6
+$sql6 = "INSERT INTO session_speaker (session_id,speaker_id) VALUES ($session_id,$speaker_id)";
+if(mysqli_query($conn, $sql6)){
+
+        echo "INSERTED IN DB SESSION-SPEAKER";
+        header("Location:create_agenda.html?id=$id");
+
+}
+ else{
+        echo "NOT INSERTED IN DB SESSION-SPEAKER";
+
+}           
+mysqli_close($conn);
+//6
 }
 
 else
 {
-   if (mysqli_num_rows($result) > 0) 
-   { 
-       //echo "tahnks";
-       // output data of each row
-       while($row = mysqli_fetch_assoc($result)) 
-       {
-           if ($row["password"] == $user_pass)
-            {
-                header("Location:http://localhost/PhpProject1/conference-master/profile.html");
-                
-                //$link ="<script>window.open('http://localhost/conference/profile.html')</script>";
-                //echo $link;
-               // echo"<br>";
-              // echo $row["username"];
-               //echo"<br>";
-               
-               //echo $row["password"];
-              
-           } 
-       }
-   } 
+  //5
+$sql5 = "INSERT INTO sessions (title,location,start_time,end_time,event_id,agenda_id) VALUES ('$session_name','$location','$s_time','$e_time',$event_id,$id)";
+if(mysqli_query($conn, $sql5)){
+//7
+$mysql_qry7="SELECT * FROM sessions WHERE sessions.event_id = $event_id";
+$r7=mysqli_query($conn,$mysql_qry7);
+$row7= mysqli_fetch_assoc($r7);
+$session_id = $row7['session_id'];
+echo "SessionId Selected";
+header("Location:create_agenda.html?id=$id");
+
+//7
+}
+ else{
+        echo "NOT INSERTED IN DB SESSION";
+
+}           
+mysqli_close($conn);
+//5  
+  
 }
 
+
+
+ } //end     
 ?>
