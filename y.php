@@ -34,11 +34,11 @@ $sp_con=array();
 $i=0;
 $s=0;
 
-/*$mysql_qry="SELECT agenda_id FROM agenda WHERE agenda.event_id = $id ";
+$mysql_qry="SELECT agenda_id FROM agenda WHERE agenda.event_id = $id ";
 $r=mysqli_query($conn,$mysql_qry);
 $row= mysqli_fetch_assoc($r);
 $agenda_id=$row['agenda_id'];
-*/
+
 
 $mysql_qry2="SELECT * FROM sessions WHERE sessions.agenda_id = $id ";
 $r2=mysqli_query($conn,$mysql_qry2);

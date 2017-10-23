@@ -89,7 +89,7 @@ mysqli_close($conn);
 //4
 }
 else {
-      echo "FOUND speaker in DB";
+      echo "FOUND speaker in DB NO need to re-insert it again";
 }
 //3
 
@@ -111,34 +111,30 @@ echo "SessionId Selected";
 }           
 mysqli_close($conn);
 //5
-
-
-   //6
-$sql6 = "INSERT INTO session_speaker (session_id,speaker_id) VALUES ($session_id,$speaker_id)";
-if(mysqli_query($conn, $sql6)){
-
-        echo "INSERTED IN DB SESSION-SPEAKER";
+//8
+$sql8 = "INSERT INTO session_speaker (session_id,speaker_id) VALUES ($session_id,$user_id)";
+if(mysqli_query($conn, $sql8)){
+echo "INSERTED IN DB SESSION-SPEAKER";
         header("Location:create_agenda.html?id=$id");
-
 }
  else{
-        echo "NOT INSERTED IN DB SESSION-SPEAKER";
-
+  echo "NOT INSERTED IN DB SESSION-SPEAKER";
+echo "ERROR: Could not able to execute $sql8. " . mysqli_error($conn);
 }           
 mysqli_close($conn);
-//6
-}
+//8
+}//if
 
 else
 {
   //5
-$sql5 = "INSERT INTO sessions (title,location,start_time,end_time,event_id,agenda_id) VALUES ('$session_name','$location','$s_time','$e_time',$event_id,$id)";
-if(mysqli_query($conn, $sql5)){
+$sql_x = "INSERT INTO sessions (title,location,start_time,end_time,event_id,agenda_id) VALUES ('$session_name','$location','$s_time','$e_time',$event_id,$id)";
+if(mysqli_query($conn, $sql_x)){
 //7
-$mysql_qry7="SELECT * FROM sessions WHERE sessions.event_id = $event_id";
-$r7=mysqli_query($conn,$mysql_qry7);
-$row7= mysqli_fetch_assoc($r7);
-$session_id = $row7['session_id'];
+$mysql_qry_y="SELECT * FROM sessions WHERE sessions.event_id = $event_id";
+$r_y=mysqli_query($conn,$mysql_qry_y);
+$row_y= mysqli_fetch_assoc($r_y);
+$session_id = $row_y['session_id'];
 echo "SessionId Selected";
 header("Location:create_agenda.html?id=$id");
 
@@ -146,6 +142,7 @@ header("Location:create_agenda.html?id=$id");
 }
  else{
         echo "NOT INSERTED IN DB SESSION";
+echo "ERROR: Could not able to execute $sql_x. " . mysqli_error($conn);
 
 }           
 mysqli_close($conn);
