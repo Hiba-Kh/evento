@@ -9,12 +9,17 @@ $username = "root";
 $password = "";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
-
+/*class speaker {
+    //var $id;
+    var $name;
+   // var picture;
+}*/
 class Anything {
-    var $id;
+    var $id;    
+    var $session_id;    
+
         var $event_id;
         var $desc;
-
     var $name;
     var $start;
     var $end;
@@ -31,10 +36,11 @@ $sp_con=array();
 $i=0;
 $s=0;
 
-$mysql_qry="SELECT agenda_id FROM agenda WHERE agenda.event_id = $id ";
+$mysql_qry="SELECT * FROM agenda WHERE agenda.agenda_id = $id ";
 $r=mysqli_query($conn,$mysql_qry);
 $row= mysqli_fetch_assoc($r);
-$agenda_id=$row['agenda_id'];
+$event_id=$row['event_id'];
+
 /*
 $mysql_qry_x="SELECT * FROM my_event WHERE my_event.event_id = $id ";
 $r_x=mysqli_query($conn,mysql_qry_x);
@@ -54,8 +60,10 @@ else {
 while ($row2= mysqli_fetch_assoc($r2)) 
         {
     $myObj0 = new Anything();
-    $myObj0->id = $row2['session_id'];
-    $myObj0->event_id=$id;
+        $myObj0->id = $id;
+    $myObj0->session_id = $row2['session_id'];
+
+    $myObj0->event_id=$event_id;
     $session_id =$row2['session_id'];
     $myObj0->name = $row2['title'];
     $myObj0->start = $row2['start_time'];

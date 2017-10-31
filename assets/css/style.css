@@ -170,7 +170,7 @@ select option {
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
-.container {
+.container  {
   max-width: 38em;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;

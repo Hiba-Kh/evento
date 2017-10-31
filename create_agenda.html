@@ -64,14 +64,7 @@
       '<div class="input-group input-group-icon">'+
        '    <label> End Time </label>'+
         '<input type="time"  name="end_time" required/>'+
-       
-     ' </div>'+
-      '     <label style="color :black;"> Add Email of Speaker/s of session </label>'+
-       '  <h5>insert (;)between them</h5>'+
-      '<div class="input-group input-group-icon">'+
-       '  <input  style="width:auto;padding: 50px;" type="email" name="email_sp"/>'+
-       
-      '</div>'+
+      
          
        '    <label style="color :black;"> Add Location of session </label>'+
         
@@ -80,9 +73,9 @@
        
       '</div>'+
     '<div class="row">'+
-    '<button type="submit"  name="add" style = "border-color: black;margin-left:20px;margin-top: 10px;" class="btn btn-black">Add Session</button>'+
+        '<button type="submit"  name="done" style = "float:right; border-color: black;margin-left:200px; margin-top:17px;" class="btn btn-black" onclick="window.open(\'Agenda_Display.html?id='+value.id+'\')">Done</button>'+
+    '<button type="submit"  name="add" style = "border-color: black;margin-left:20px;margin-top: 10px;margin-bottom:10px;" class="btn btn-black">Add Session</button>'+
 
-    '<button type="submit"  name="done" style = "border-color: black;margin-left:380px;" class="btn btn-black" onclick="window.open(\'Agenda_Display.html?id='+value.id+'\')">Done</button>'+
 
     '</div>'+
   '</form>';

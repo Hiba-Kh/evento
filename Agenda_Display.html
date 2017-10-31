@@ -34,7 +34,7 @@
     $(document).ready(function() {
         
             $.ajax({
-                url: "y.php?id="+getUrlParameter("id"),
+                url: "y_1.php?id="+getUrlParameter("id"),
                 dataType: 'json', 
                 success: function(result){
                     console.log(result);
@@ -72,22 +72,32 @@
                                 node += '<p>' + value.speakers[i] + '</p>';
                             }
 
-                            node +=   '        </div>'+
-                            '    </div>';
+                            node +=   '</div>'+
+                            '</div>';
                         }
                      
                         node += '</div>';
- node +=  '<div class="container">'+
-        '<label>Add Session</label>'+
-        '<a href="create_agenda.html?id='+value.id+'" ><img src="assets/images/photos/add1.png" alt="Add" width="24" height="24" style="float:left;"/></a>'+
+                        
+ 
+      node +='<div style=" float:bottom;" class="container">'+
+        '<a href="create_agenda.html?id='+value.id+'" ><img src="assets/images/photos/delete.png" alt="Delete" width="24" height="24" /></a>'+
+    '<label>Delete Session</label>'+
+                '</div>';
+        
+    node +=  '<div class="container">'+
+        '<label>Add Speaker</label>'+
+        '<a href="speaker.html?id='+value.session_id+'" ><img src="assets/images/photos/add1.png" alt="Add_speaker" width="24" height="24" style="float:left;"/></a>'+
     '</div>'; 
     
-    node +=  '<div class="container">'+
-        '<label style="float:right; margin-right:400px;">Delete Session</label>'+
-        '<a href="create_agenda.html?id='+value.id+'" ><img src="assets/images/photos/delete.png" alt="Delete" width="24" height="24" style="float:right; margin-right:400px;"/></a>'+
-    '</div>';
+    
+        
+
                         $("#list_agenda").append(node);
+
                     });
+                    
+                    
+                    
                     
                 },
                 error:function(error, code){
@@ -181,10 +191,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    
-                    <a class="btn btn-white" href="signIn.html" style="float: right;">Attend</a>
+                                       
+       <div class="section-title" style="float:right;">  
+       <a href="Create_Next.html?id='+value.event_id+'" ><img src="assets/images/photos/add1.png" alt="Add" width="30" height="30" /></a>
+              <label style="font-size:1.2em; margin-top:10px;">Add Agenda</label>
+                  
+       </div>
+
                     <h2 class="section-title">Agenda</h2>
-                    <h3 class="section-title">**Some Description of the conference</h3>
+          <a href="create_agenda.html?id='+value.id+'" ><img  src="assets/images/photos/delete.png" alt="Delete" width="24" height="24"  /></a>
+          <label >Delete Agenda</label>  
+                     
+               
                 </div>
             </div>
             <div class="row">
@@ -193,6 +211,11 @@
               
                 </div>
             </div>
+            <br><br>
+            <h2 class="section-title" style="float:right; margin-right:895px;"> Add Session</h2>
+        <a href="create_agenda.html?id='+value.id+'" ><img src="assets/images/photos/add1.png" alt="Add" width="34" height="34" style="float:left;"/></a>
+           
+            
         </div>
     </section>
     
