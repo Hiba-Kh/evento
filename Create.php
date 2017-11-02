@@ -7,18 +7,7 @@ $database = "evento";
 $username = "root";
 $password = "";
 $conn = mysqli_connect($servername, $username, $password, $database);
-
-
-class Anything {
-   
-    var $name;
-
-}
-
 // Get data from database and do your logic 
-
-
-
 if (isset($_POST['done']))
     {      
                    $c_name=$_POST['c_name'];
