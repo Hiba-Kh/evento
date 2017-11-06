@@ -11,6 +11,8 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 
 class Anything {
     var $id;
+        var $event_id;
+
     /*var $name;
     var $start;
     var $end;
@@ -25,7 +27,13 @@ class Anything {
 }
     
 $myObj0 = new Anything();
+
+$mysql_qry1="SELECT * FROM agenda WHERE agenda.agenda_id = $id";
+$r1=mysqli_query($conn,$mysql_qry1);
+$row1= mysqli_fetch_assoc($r1);
+$event_id = $row1['event_id'];
 $myObj0->id = $id ;
+$myObj0->event_id=$event_id;
 $resp = array($myObj0);
 echo json_encode($resp);
 

@@ -23,6 +23,7 @@
 }
 </style>
 
+
 <script>
     var getUrlParameter = function getUrlParameter(sParam) {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -41,9 +42,11 @@
 
 $(document).ready(function(){
   //Chosen
-  $(".limitedNumbChosen").chosen({
-    placeholder_text_multiple: "Add Speaker to Session >>"
+  $("#selection").chosen({
+    placeholder_text_multiple: "Add Speaker/s to Session >>"
 	});
+        
+     
    $.ajax({
                 url: "speaker.php",
                 dataType: 'json', 
@@ -51,15 +54,33 @@ $(document).ready(function(){
                     console.log(result);
 
                     $.each(result, function(index, value) {
-                        console.log('caste: ' + value);
                         
-                        for (var i =0; i < value.speakers.length; i++) {
-                            var node = '<option value="'+i+'">'+value.speakers[i]+'</option>';
-                            }
-                      
-                        $("#selection").add(node);
+                        
+$.create('option', {'value': '2'}, 'shah').appendTo('#mySelect');
+  
+                        
+                       /* $('#selection').append($('', {value:2, text:'One'}));
+$('#selection').append('One');
+var option = new Option(text, value); $('#selection').append($(option));*/
+                      /*  for (var i =0; i < value.speakers.length; i++) {
+                           var node = '<option value="'+i+'">hiba</option>';
+                            }*/
+        
+      /* $('#selection').append($('<option>', {
+    value: 2,
+    text: 'Shah'
+}));*/
+/*$("#selecion").append('<option value="1">Shahira</option>');*/
+ 
+ /*$.each(selectValues, function(key, value) {   
+     $('#mySelect')
+         .append($("<option></option>")
+                    .attr("value",key)
+                    .text(value)); 
+});
+*/
                     });
-                    
+                   
                 },
                 error:function(error, code){
                     console.log(error);
@@ -99,8 +120,9 @@ $(document).ready(function(){
         <form action="speaker.php" method="POST" > 
                 <div  class="row"  style="margin-top:100px;margin-left: 20px ;">
                   <h4 style="float:left;font-weight: bold;font-size:1.5em;" class="section-title">Speaker Name </h4>
-                    <select id="selection"  style="float:right;margin-top:100px;"  class="limitedNumbChosen" multiple="true">
-       
+                    <select id="mySelect"  style="float:right;margin-top:100px;"  class="limitedNumbChosen" multiple="true">
+                  <option value="2">Hiba Khalifah</option>
+
                     </select>
            
                 </div>
@@ -109,6 +131,7 @@ $(document).ready(function(){
                 </div>
         </form>
     </div>
+
 
   </body>
 

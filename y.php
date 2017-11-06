@@ -12,9 +12,8 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 
 class Anything {
     var $id;
-        var $event_id;
-        var $desc;
-
+    var $event_id;
+    var $desc;
     var $name;
     var $start;
     var $end;
@@ -81,7 +80,6 @@ while ($row3= mysqli_fetch_assoc($r3))
    // echo count($sp);
     $i++;
 }
- 
 
     }
     

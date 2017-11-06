@@ -17,9 +17,9 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 class Anything {
     var $id;    
     var $session_id;    
-
-        var $event_id;
-        var $desc;
+    var $event_id;
+    var $desc;
+    var $date_agenda;
     var $name;
     var $start;
     var $end;
@@ -36,20 +36,24 @@ $sp_con=array();
 $i=0;
 $s=0;
 
-$mysql_qry="SELECT * FROM agenda WHERE agenda.agenda_id = $id ";
+
+
+$mysql_qry="SELECT * FROM agenda WHERE agenda.event_id = $id ";
 $r=mysqli_query($conn,$mysql_qry);
-$row= mysqli_fetch_assoc($r);
-$event_id=$row['event_id'];
-
-/*
-$mysql_qry_x="SELECT * FROM my_event WHERE my_event.event_id = $id ";
-$r_x=mysqli_query($conn,mysql_qry_x);
-$row_x= mysqli_fetch_assoc($r_x);
-$description=$row_x['description'];
-*/
-$mysql_qry2="SELECT * FROM sessions WHERE sessions.agenda_id = $id ";
+if (!$r)
+{
+   die(mysqli_error($conn)); 
+   echo"No Agnedas is created for this event yet";
+}
+else {
+    if (mysqli_num_rows($r) > 0)
+    {
+while ($row=mysqli_fetch_assoc($r)) 
+{ 
+$agenda_id=$row['agenda_id'];
+$date_agenda=$row['agenda_date'];
+$mysql_qry2="SELECT * FROM sessions WHERE sessions.agenda_id = $agenda_id ";
 $r2=mysqli_query($conn,$mysql_qry2);
-
 if (!$r2)
 {
     echo "Failed";
@@ -59,16 +63,16 @@ else {
 
 while ($row2= mysqli_fetch_assoc($r2)) 
         {
-    $myObj0 = new Anything();
-        $myObj0->id = $id;
-    $myObj0->session_id = $row2['session_id'];
-
-    $myObj0->event_id=$event_id;
+    $myObj1 = new Anything();
+    $myObj1->date_agenda=$date_agenda;
+    $myObj1->id = $agenda_id;
+    $myObj1->session_id = $row2['session_id'];
+    $myObj1->event_id=$id;
     $session_id =$row2['session_id'];
-    $myObj0->name = $row2['title'];
-    $myObj0->start = $row2['start_time'];
-    $myObj0->end = $row2['end_time'];
-    $myObj0->location = $row2['location'];
+    $myObj1->name = $row2['title'];
+    $myObj1->start = $row2['start_time'];
+    $myObj1->end = $row2['end_time'];
+    $myObj1->location = $row2['location'];
     
 $mysql_qry3="SELECT speaker_id FROM session_speaker WHERE session_speaker.session_id = $session_id ";
 $r3=mysqli_query($conn,$mysql_qry3);
@@ -86,7 +90,6 @@ else {
 while ($row3= mysqli_fetch_assoc($r3)) 
 {
     $sp[$i]=$row3['speaker_id'];
-   // echo count($sp);
     $i++;
 }
  
@@ -102,13 +105,14 @@ $sp_fname[$k]=$row4['first_name'];
 $sp_lname[$k]=$row4['last_name'];
   }
   
-    $myObj0->speakers = $sp_fname;
- //  $myObj0->speakers = [];
-    $arr[$s]=$myObj0;
+    $myObj1->speakers = $sp_fname;
+    $arr[$s]=$myObj1;
     $s++;
+    
     
 }
 }
+}}}
 echo json_encode($arr);
 
 ?>

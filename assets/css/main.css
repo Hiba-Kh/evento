@@ -180,7 +180,14 @@ ul li {
   text-transform: uppercase;
   text-align: center;
 }
-
+.section-slideShow {
+  color: black;
+  letter-spacing: 1px;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size:2em; 
+}
 /* 
  * 3.0 Helper Class
  */
@@ -367,6 +374,7 @@ ul li {
   margin-right: 5px;
   letter-spacing: 3px;
   text-transform: uppercase;
+  float:left;
 }
 .site-branding-index2 .logo {
   color: black;
@@ -389,7 +397,6 @@ ul li {
   min-height: 100vh;
   position: relative;
   text-align: center;
-  background: url(../images/backgrounds/header.jpg) no-repeat center center/cover;
   display: table;
 }
 .site-create{
