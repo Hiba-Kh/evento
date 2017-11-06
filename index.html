@@ -4,18 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Conference</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
-    
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="lib/jquery.bootpag.js"></script>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="js/jquery-3.2.1.min.js"></script>
 
         <style type="text/css">
@@ -25,7 +23,6 @@
         </style>
 
     <script>
-        // A $( document ).ready() block.
         $(document).ready(function() {
             $.ajax({
                 url: "x.php",
@@ -50,8 +47,6 @@
                         
                      x = '<div class="col-md-4 col-sm-6">'+
                                 '<div class="schedule-box">'+
-                                //'<img src="assets/images/images.jpg" style="margin:auto; width:200px;display:block" />'+
-
                                     '<h3>'+ value.name_event +'</h3>'+
                                     '<p>'+ value.location +'</p>'+
                                     '<div class="time">'+
@@ -91,7 +86,7 @@
             
            ' <p style="font-weight:bold;font-size:1.2em;">'+ location[1]+'</p>'+
             
-            '<a class="btn btn-white" data-scroll href="#registration" style="font-weight:bold;">Sign Up</a>';
+            '<a class="btn btn-white" data-scroll href="signUp.html" style="font-weight:bold;">Sign Up</a>';
         
                                         $("#seconde").append(y2);  
                 },
@@ -183,7 +178,7 @@
             
             <p style="font-weight:bold;" >First &amp; Largest Conference</p>
             
-            <a class="btn btn-white" data-scroll href="#registration" style="font-weight:bold;">Sign Up</a>
+            <a class="btn btn-white" data-scroll href="signUp.html" style="font-weight:bold;">Sign Up</a>
         
         </div>
   </div>
@@ -285,7 +280,7 @@
             
             
             <div style="margin-left:1360px" class="container">
-       <a href="Display_event.html" ><img src="assets/images/more.png" alt="more" width="80" height="80" /></a>
+       <a href="category.php" ><img src="assets/images/more.png" alt="more" width="80" height="80" /></a>
                 </div>
            
     </section>

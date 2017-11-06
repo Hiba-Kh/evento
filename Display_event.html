@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <!-- Javascript -->
+     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
         // A $( document ).ready() block.
         $(document).ready(function() {
             $.ajax({
-                url: "x.php",
+                url: "Display_event.php",
                 dataType: 'json', 
                 success: function(result){
                   console.log(result);
            
                     $.each(result, function(index, value) {
-                        console.log('caste: ' + value['name']);
+                     console.log('caste: ' + value['name']);
                         var x = '<div class="col-md-4 col-sm-6">'+
                                 '<div class="schedule-box">'+
                                     '<h3>'+ value.name_event +'</h3>'+
