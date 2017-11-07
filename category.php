@@ -20,6 +20,12 @@ input[type=text], input[type=password] {
 	font-size:16px;
 }
 
+select option {
+    background: white;
+    color: black;
+    
+}
+
 /* Set a style for all buttons */
 button {
     background-color: #4CAF50;
@@ -66,7 +72,10 @@ button:hover {
     margin: 4% auto 15% auto;
     border: 1px solid #888;
     width: 40%; 
-	padding-bottom: 30px;
+	padding-bottom: 80px;
+        margin-top: 180px;
+}
+.greenText{ background-color:white;
 }
 
 /* The Close Button (x) */
@@ -74,6 +83,7 @@ button:hover {
     position: absolute;
     right: 25px;
     top: 0;
+    
     color: #000;
     font-size: 35px;
     font-weight: bold;
@@ -93,7 +103,7 @@ button:hover {
 }
 </style>
 </style>
-<body background="../background1.png">
+<body background="assets/images/flat_icons.jpg">
 
   <?php
     require "conn.php";
@@ -109,14 +119,14 @@ button:hover {
     <form class="modal-content animate"  action="category.php" method="post">
         
     <div class="imgcontainer">
-      <h1 style="text-align:center;color: green;">Please choose the category of the conferences you are interested in to see</h1>
+      <h1 style="text-align:center;color: #7ed321;">Please choose the category of the conferences you are interested in to see</h1>
     </div>
 
     <div class="container">
       <div class="row">
        <div class="form-group input-group">
-   <select class="form-control" name="taskOption" id="category"  required>
-                                <option readonly>Choose Category</option> 
+   <select  onchange="this.className=this.options[this.selectedIndex].className"  class="form-control greenText" name="taskOption" id="category"  required>
+                                <option  readonly>Choose Category</option> 
                                 <option>All</option>
                                 <option>Medicine</option>
                                 <option>Politics</option>
@@ -133,7 +143,7 @@ button:hover {
         </select>
         </div>
       </div> 
-        <input type="submit" value="Press Ok" style="color: green"/>
+        <input type="submit" value="Press Ok" style="color: #7ed321"/>
      
     </div>
     
