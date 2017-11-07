@@ -40,10 +40,10 @@
                 dataType: 'json', 
                 success: function(result){
                     console.log(result);
-
+var node;
                     $.each(result, function(index, value) {
                         console.log(value.id);
-                        var node =
+                        node =
                       '<div class="row" style="margin-bottom: 15px;">'+     
      '<button type="submit"  name="create" style = "border-color: black; float:right; margin-right:60px; margin-top:45px; padding:15px;" class="btn btn-black" onclick="window.open(\'Create_Next.html?id='+value.id+'\')">Create_Agenda</button>'+
           '<h4 style="margin-top:50px;font-size: 2em;">Conference Basics</h4>'+
@@ -105,10 +105,21 @@
       '</div>';
       
       
+      
                        
                         $("#check").append(node);
                     });
-                    
+ var n= '<form style="margin-right:420px;" method="post" action="upload.php" enctype="multipart/form-data">'+
+ '<div style="color :blue;font-size: 1.3em;">'+
+  ' <label for="file">Choose file to upload</label>'+
+   '<input type="file" id="file" name="file" multiple>'+
+ '</div>'+
+ '<div style="color :blue;font-size: 1.3em;">'+
+  '   <button type="submit" name="submit">Submit</button>'+
+ '</div>'+
+'</form>'; 
+                        $("#check2").append(n);
+
                 },
                 error:function(error, code){
                     console.log(error);
@@ -194,10 +205,10 @@
 
 </div>
   
+    <div id ="check2" class="container" style="max-width: 1000px;">
 
-
-
-
+</div>
+  
     
 
     <!-- script -->
