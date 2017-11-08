@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <style>
-                #map {
-                  height: 400px;
-                  width: 100%;
-                 }
-              </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Conference</title>
-   
+    
     <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
-    
     var getUrlParameter = function getUrlParameter(sParam) {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
@@ -34,26 +27,11 @@
 
     $(document).ready(function() {
         
-            $.ajax
-            ({
-                url: "agendaController.php?id="+getUrlParameter("id"),
+            $.ajax({
+                url: "y.php?id="+getUrlParameter("id"),
                 dataType: 'json', 
-                success: function(result)
-                {
+                success: function(result){
                     console.log(result);
-                    function marker ()
-                    {
-                        center:new google.maps.LatLng(result.location_lat,result.location_lng);
-                        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                       // lat=geometry.location.lat;
-                        //lng=data.results[0].geometry.location.lng;
-                        //point= new google.maps.LatLng(lat,lng);
-                        map.setCenter(point);
-                        zoom = 14;
-                        marker = createMarker(point,"<h3>Marker"+(markersArray.length+1)+" "+point+"</h3>",zoom);
-                    };
-                    
-
 
                     $.each(result, function(index, value) {
                         console.log('caste: ' + value.id);
@@ -69,6 +47,9 @@
                         '                                <div class="session">'+
                         '                                    <time>'+value.start+' - '+value.end+'</time>'+
                         '                                    <h2>'+value.name+'</h2>'+
+                        
+                       
+                                                              '<h3>'+value.location+'</h3>'+
                         '                                </div>'+
                         '                            </div>'+
                         '                        </div>'+
@@ -85,29 +66,21 @@
                             for (var i =0; i < value.speakers.length; i++) {
                                 node += '<p>' + value.speakers[i] + '</p>';
                             }
-
-                            node +=   '        </div>'+
-                            '    </div>';
+                            node +='</div>'+
+                            '</div>';
                         }
                        
                         node += '</div>';
-                    
 
                         $("#list_agenda").append(node);
                     });
-                    var attend= 
-                     '<a class="btn btn-white" href="attend.php?id='+getUrlParameter("id")+'" style="float: right;">Attend</a>'+
-                     '<h2 class="section-title">Agenda</h2>'+
-                        '<h3 class="section-title">**Some Description of the conference</h3>';
-                    $("#attend").append(attend);
-
+                    
                 },
                 error:function(error, code){
                     console.log(error);
                     console.log(code);
                     alert("Error" + error);
-                },
-                  
+                }   
             });
     });
 
@@ -159,7 +132,7 @@
           <li><a href="Paper.html">Paper</a></li>
           <li><a data-scroll href="#speakers">Speaker</a></li>
           <li><a  data-scroll href="#faq">Agenda</a></li>
-          <li><a href="Sponsor_Display.html">Sponsors</a></li>
+          <li><a href="partners.html">Sponsors</a></li>
         </ul>
                         
       </li>
@@ -193,9 +166,11 @@
  <section id="faq" class="section-index2 faq">
         <div class="container">
             <div class="row">
-                <div id="attend"class="col-md-12">
-                                 
-                  
+                <div class="col-md-12">
+                    
+                    <a class="btn btn-white" href="signIn.html" style="float: right;">Attend</a>
+                    <h2 class="section-title">Agenda</h2>
+                    <h3 class="section-title">**Some Description of the conference</h3>
                 </div>
             </div>
             <div class="row">
@@ -375,71 +350,21 @@
     </section>
 
 
-        <section id="location" class="section location">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <h2 class="section-title">Event Location</h2>
-
-                        <address>
-                            <p>Eardenia<br> The Grand Hall<br> House # 08, Road #52, Street<br> Phone: +1159t3764<br> Email: example@mail.com</p>
-                        </address>
-                    </div>
-                    <div class="col-sm-9">
-               
-
-                        <div id="map"></div>
-                        <script>
-                          function initMap()
-                            {
-                                var uluru = {lat: -25.363, lng: 131.044};
-                                var map = new google.maps.Map(document.getElementById('map'), {
-                                zoom: 4,
-                                center: uluru
-                                });
-                                var marker = new google.maps.Marker({
-                                position: uluru,
-                                map: map
-                                });
-                                 infoWindow = new google.maps.InfoWindow;
-                                if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(function(position) {
-                                    var pos = {
-                                    lat: position.coords.latitude,
-                                    lng: position.coords.longitude
-                                    };
-
-                                    infoWindow.setPosition(pos);
-                                    infoWindow.setContent('Location found.');
-                                    infoWindow.open(map);
-                                    map.setCenter(pos);
-                                }, function() {
-                                    handleLocationError(true, infoWindow, map.getCenter());
-                                });
-                                } else {
-                                // Browser doesn't support Geolocation
-                                handleLocationError(false, infoWindow, map.getCenter());
-                                }
-                            }
-                            function handleLocationError(browserHasGeolocation, infoWindow, pos)
-                                {
-                                    infoWindow.setPosition(pos);
-                                    infoWindow.setContent(browserHasGeolocation ?
-                                                        'Error: The Geolocation service failed.' :
-                                                        'Error: Your browser doesn\'t support geolocation.');
-                                    infoWindow.open(map);
-                                }
-                                                    </script>
-                       <script async defer
-                       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfGpSHEHb1lytFDkZ6sesd4H1MbIXzqs&callback=initMap">
-                       </script>    
-                      
-
-                    </div>
+     <section id="location" class="section location">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h2 class="section-title">Event Location</h2>
+                    <address>
+                        <p>Eardenia<br> The Grand Hall<br> House # 08, Road #52, Street<br> Phone: +1159t3764<br> Email: example@mail.com</p>
+                    </address>
+                </div>
+                <div class="col-sm-9">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96706.50013548559!2d-78.9870674333782!3d40.76030630398601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sbd!4v1436299406518" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
-        </section>
-
+        </div>
+    </section>
 
     <footer class="site-footer">
         <div class="container">

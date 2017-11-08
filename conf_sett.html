@@ -41,8 +41,10 @@
                 success: function(result){
                     console.log(result);
 var node;
+var event_id;
                     $.each(result, function(index, value) {
                         console.log(value.id);
+                        event_id=value.id;
                         node =
                       '<div class="row" style="margin-bottom: 15px;">'+     
      '<button type="submit"  name="create" style = "border-color: black; float:right; margin-right:60px; margin-top:45px; padding:15px;" class="btn btn-black" onclick="window.open(\'Create_Next.html?id='+value.id+'\')">Create_Agenda</button>'+
@@ -109,15 +111,17 @@ var node;
                        
                         $("#check").append(node);
                     });
- var n= '<form style="margin-right:420px;" method="post" action="upload.php" enctype="multipart/form-data">'+
- '<div style="color :blue;font-size: 1.3em;">'+
-  ' <label for="file">Choose file to upload</label>'+
-   '<input type="file" id="file" name="file" multiple>'+
- '</div>'+
- '<div style="color :blue;font-size: 1.3em;">'+
-  '   <button type="submit" name="submit">Submit</button>'+
- '</div>'+
-'</form>'; 
+  
+  var n=  '<div class="section-title" >'+  
+       '<a href="UploadFile.php?id='+event_id+'" ><img src="assets/images/photos/add1.png" alt="Add1" width="30" height="30" /></a>'+
+              '<label style="font-size:1.2em; margin-top:10px;">Add File</label>'+        
+                  '</div>';
+ 
+      n+=  '<div class="section-title" >'+  
+       '<a href="ImageUpload.php?id='+event_id+'" ><img src="assets/images/photos/add1.png" alt="Add2" width="30" height="30" /></a>'+
+              '<label style="font-size:1.2em; margin-top:10px;">Add Sponsor</label>'+        
+                  '</div>';
+                    
                         $("#check2").append(n);
 
                 },
@@ -173,7 +177,7 @@ var node;
           <li><a href="Paper.html">Paper</a></li>
           <li><a data-scroll href="#speakers">Speaker</a></li>
           <li><a  data-scroll href="#faq">Agenda</a></li>
-          <li><a href="partners.html">Sponsors</a></li>
+          <li><a href="Sponsor_Display.html">Sponsors</a></li>
         </ul>
                         
       </li>
