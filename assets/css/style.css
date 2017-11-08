@@ -148,8 +148,13 @@ select option {
   line-height: 3.4em;
   text-align: center;
   pointer-events: none;
+  -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
 }
 .input-group-icon .input-icon:after {
+    width: 3.4em;
+  height: 3.4em;
   position: absolute;
   top: 0.6em;
   bottom: 0.6em;
@@ -162,6 +167,11 @@ select option {
   -o-transition: 0.35s ease-in-out;
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
+
+ -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
 }
 .input-group-icon .input-icon i {
   -webkit-transition: 0.35s ease-in-out;
