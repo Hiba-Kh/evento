@@ -7,11 +7,14 @@ session_start();
 $error='';
 if (empty($_POST["email"]) || empty($_POST['Password']))
 {
+    
     $error = "Email or Passwrd is invlid";
 }
- 
+
 else 
-{ 
+{     echo "here";
+    
+    
     $user_email = $_POST["email"];
     $user_pass = $_POST["Password"];
     $mysql_qry="SELECT * FROM login WHERE password = '$user_pass' AND email = '$user_email'";
@@ -25,7 +28,12 @@ else
             $rows = mysqli_num_rows($result);
             if ($rows == 1)
             {
+                
                 $user = new UserData();
+                $type_row = mysqli_fetch_assoc($result);                
+                $user->type = $type_row['type'];
+                echo $user->type;
+                
                 $mysql_qry="SELECT * FROM users WHERE  email = '$user_email'";
                 $result=mysqli_query($conn, $mysql_qry);
                 if(!$result) 
@@ -70,7 +78,27 @@ else
 
                 $_SESSION['user_data'] = $user;
                 
-                header("location: profileView.php");
+                if (strcmp($user->type , "member")==0)
+                {
+                    
+                    header("location: memberProfileView.php");
+                    
+
+                }
+                if (strcmp($user->type , "admin")==0)
+                {
+                    
+                    header("location: adminProfileView.php");
+                    
+
+                }
+
+
+                if (strcmp($user->type , "speaker")==0)
+                {                    
+                    header("location: speakerProfileView.php");
+                    
+                }
             
             }
             else

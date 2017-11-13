@@ -93,6 +93,7 @@ if ( $flag_year || $flag_firstname || $flag_lastname || $flag_email || $flag_pas
     
 }
 
+$user_id;
 echo $first_name,$last_name,$email,$password,$phone,$interest,$prof;
 $mysql_qry = "INSERT INTO users (user_id,first_name, last_name, email ,pass) VALUES (null,'$first_name', '$last_name', '$email','$password')";
 $result=mysqli_query($conn, $mysql_qry);
@@ -101,13 +102,28 @@ if(!$result)
 {
 	die(mysqli_error($conn));
 }
+$mysql_qry4 = "SELECT * FROM users ";
+$result4=mysqli_query($conn, $mysql_qry4);
+while($row4 = mysqli_fetch_assoc($result4)) 
+{
+  $user_id=$row4['user_id'];
+}
 
-$mysql_qry2 = "INSERT INTO meta_data (gender,interest,BD_day,BD_month,BD_year,professional_student,job,address) VALUES ('$gender', '$interest', '$day','$month','$year','$professional_student','$prof','$address')";
+
+$mysql_qry2 = "INSERT INTO meta_data (user_id,gender,interest,BD_day,BD_month,BD_year,professional_student,job,address) VALUES ('$user_id','$gender', '$interest', '$day','$month','$year','$professional_student','$prof','$address')";
 $result2=mysqli_query($conn, $mysql_qry2);
 if(!$result2) 
 {
 	die(mysqli_error($conn));
 }
+$type="member";
+$mysql_qry3 = "INSERT INTO login (email,password,type) VALUES ('$email', '$password','member')";
+$result3=mysqli_query($conn, $mysql_qry3);
+if(!$result3) 
+{
+	die(mysqli_error($conn));
+}
+
 
 
 //////////////// $new_row_id = mysql_insert_id();

@@ -8,6 +8,7 @@ class UserData {
     var $address;
     var $email;
     var $job;
+    var $type;
 }
 
 class AgendaData {

@@ -70,7 +70,10 @@ for ($k=0,$size=count($arr); $k < $size;$k++){
         }
 }
 echo json_encode($arr_date_sorted);
-header("Location:Display_event.html");
+header("Location:temp.php?id=$id");
+/*echo 
+*/
+
 
 ?>
 

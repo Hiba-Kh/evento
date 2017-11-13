@@ -11,7 +11,7 @@
     session_start();
     $user=$_SESSION['user_data'];
     if($user == null) {
-        header("location: signin.html");
+        header("location: signinView.php");
     }
 ?>
 
@@ -146,11 +146,11 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- navigation menu -->
-                    <li><a href="Create.html">CreateConf. </a></li> 
+                    <li><a href="speakerProfileView.php">My Profile </a></li> 
+                    <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
-                    <li><a href="administrated.html">Administrated </a></li>
+                    <li><a href="administrated.html">Speaker At </a></li>
                      <li><a  href="photos.html">Photos</a></li>
-                      <li ><a href="about.html">About</a></li>
                     <li><a  href="signout.php">Sign Out</a></li>   
                  
                    

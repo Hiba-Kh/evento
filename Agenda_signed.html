@@ -1,12 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <style>
+
+    <style>
                 #map {
                   height: 400px;
                   width: 100%;
                  }
+                 *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
+
+                /* Full-width input fields */
+                input[type=text], input[type=password] {
+                    width: 90%;
+                    padding: 12px 20px;
+                    margin: 8px 26px;
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    box-sizing: border-box;
+                    font-size:16px;
+                }
+
+                /* Set a style for all buttons */
+                button {
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 14px 20px;
+                    margin: 8px 26px;
+                    border: none;
+                    cursor: pointer;
+                    width: 90%;
+                    font-size:20px;
+                }
+                button:hover {
+                    opacity: 0.8;
+                }
+
+                /* Center the image and position the close button */
+                .imgcontainer {
+                    text-align: center;
+                    margin: 24px 0 12px 0;
+                    position: relative;
+                }
+                .avatar {
+                    width: 200px;
+                    height:200px;
+                    border-radius: 50%;
+                }
+
+                /* The Modal (background) */
+                .modal {
+                    display:none;
+                    position: fixed;
+                    z-index: 1;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                    background-color: rgba(0,0,0,0.4);
+            }
+
+                /* Modal Content Box */
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: 4% auto 15% auto;
+                    border: 1px solid #888;
+                    width: 40%; 
+                    padding-bottom: 30px;
+                }
+
+                /* The Close Button (x) */
+                .close {
+                    position: absolute;
+                    right: 25px;
+                    top: 0;
+                    color: #000;
+                    font-size: 35px;
+                    font-weight: bold;
+                }
+                .close:hover,.close:focus {
+                    color: red;
+                    cursor: pointer;
+                }
+
+                /* Add Zoom Animation */
+                .animate {
+                    animation: zoom 0.6s
+                }
+                @keyframes zoom {
+                    from {transform: scale(0)} 
+                    to {transform: scale(1)}
+                }
               </style>
+              *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
+              
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,32 +119,29 @@
         }
     };
 
-    $(document).ready(function() {
-        
-            $.ajax
-            ({
-                url: "agendaController.php?id="+getUrlParameter("id"),
-                dataType: 'json', 
-                success: function(result)
+    $(document).ready(function()
+    {
+        $.ajax
+        ({
+            url: "agendaController.php?id="+getUrlParameter("id"),
+            dataType: 'json', 
+            success: function(result)
+            {
+                console.log(result);
+                function marker ()
                 {
-                    console.log(result);
-                    function marker ()
-                    {
-                        center:new google.maps.LatLng(result.location_lat,result.location_lng);
-                        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                       // lat=geometry.location.lat;
-                        //lng=data.results[0].geometry.location.lng;
-                        //point= new google.maps.LatLng(lat,lng);
-                        map.setCenter(point);
-                        zoom = 14;
-                        marker = createMarker(point,"<h3>Marker"+(markersArray.length+1)+" "+point+"</h3>",zoom);
-                    };
+                    center:new google.maps.LatLng(result.location_lat,result.location_lng);
+                    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                    // lat=geometry.location.lat;
+                    //lng=data.results[0].geometry.location.lng;
+                    //point= new google.maps.LatLng(lat,lng);
+                    map.setCenter(point);
+                    zoom = 14;
+                    marker = createMarker(point,"<h3>Marker"+(markersArray.length+1)+" "+point+"</h3>",zoom);
+                };
                     
-
-
-                    $.each(result, function(index, value) {
-                        console.log('caste: ' + value.id);
-                        
+                 $.each(result, function(index, value) {
+                 console.log('caste: ' + value.id);
                         var node = '<div class="panel panel-default">'+
                         '    <div class="panel-heading" role="tab" id="headingTwo">'+
                         '        <h4 class="panel-title">'+
@@ -86,19 +170,30 @@
                                 node += '<p>' + value.speakers[i] + '</p>';
                             }
 
-                            node +=   '        </div>'+
-                            '    </div>';
+                            node +=   '</div>'+
+                                      '</div>';
                         }
                        
-                        node += '</div>';
-                    
-
-                        $("#list_agenda").append(node);
+                    node += '</div>';
+                
+                    $("#list_agenda").append(node);
                     });
                     var attend= 
-                     '<a class="btn btn-white" href="attend.php?id='+getUrlParameter("id")+'" style="float: right;">Attend</a>'+
+                     '<a class="btn btn-white"  id="attendButton" onclick="attendButton()" style="float: right;">Attend</a>'+
+                     '<div class="row">'+ 
+                     '<div class="col-md-12">'+
+                     
+                     ' <a class="btn btn-white" id="interestButton" onclick="interestButton()"   style="float: right;margin-top:8px;"> Interest</a>'+
+                     '<div class="row">'+ 
+                     '<div class="col-md-12">'+
+                     
+                     ' <a class="btn btn-white"   href="ticket.php" style="float: right;margin-top:8px;"> Buy a Ticket</a>'+
+                     '</div>'+
+                     '</div>'+
+                     
                      '<h2 class="section-title">Agenda</h2>'+
-                        '<h3 class="section-title">**Some Description of the conference</h3>';
+                    '<h3 class="section-title">**Some Description of the conference</h3>' ; 
+
                     $("#attend").append(attend);
 
                 },
@@ -108,9 +203,177 @@
                     alert("Error" + error);
                 },
                   
-            });
+        });
     });
+    
+    function attendButton(){
+        var flag=true;
+        var resp;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
+        {  
+             if (this.readyState == 4 && this.status == 200) 
+            {
+               resp = this.responseText;
+               if (resp=="Success")
+               {
+                   flag=false;
+                  document.getElementById('modal-wrapper').style.display='block';
+                  var modal = document.getElementById('modal-wrapper');
+                    window.onclick = function(event)
+                     {
 
+                        if (event.target == modal)
+                        {
+                            modal.style.display = "none";
+
+                        }
+
+                    } 
+ 
+               }
+           }
+        };
+        xhttp.open("GET", href="signInTest.php", true);
+        xhttp.send(); 
+       var text = document.getElementById("attendButton").innerText;
+
+
+        if (text=='ATTEND' && flag)
+        {
+                 
+                $(document).ready(function() 
+                { 
+                     $.ajax
+                    ({
+                        url :  "attend.php?id="+getUrlParameter("id"),
+                        dataType: 'json', 
+                        success: function(value){
+
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                        },
+                        error : function () {
+                        console.log ('error');
+                        }
+                    });
+                   document.getElementById("attendButton").innerHTML="attended";
+
+
+                });
+            
+        }
+        else if(text=="ATTENDED")
+        {
+            document.getElementById( "attendButton").innerHTML="attend";
+        
+         $(document).ready(function() 
+            { 
+                    $.ajax
+                ({
+                    url :  "attendRemove.php?id="+getUrlParameter("id"),
+                    dataType: 'json', 
+                    success: function(value){
+
+                    console.log(value);
+                    console.log('caste: ' + value);
+                    console.log ('success');
+                    },
+                    error : function () {
+                    console.log ('error');
+                    }
+                });
+                });
+
+            };
+      
+    }
+
+
+    function interestButton()
+    {
+        var flag=true;
+        var resp;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
+        {  
+             if (this.readyState == 4 && this.status == 200) 
+            {
+               resp = this.responseText;
+               if (resp=="Success")
+               {
+                   flag=false;
+                  document.getElementById('modal-wrapper2').style.display='block';
+                  var modal = document.getElementById('modal-wrapper2');
+                    window.onclick = function(event)
+                     {
+
+                        if (event.target == modal)
+                        {
+                            modal.style.display = "none";
+
+                        }
+
+                    } 
+ 
+               }
+           }
+        };
+        xhttp.open("GET", href="signInTest.php", true);
+        xhttp.send(); 
+       var text = document.getElementById("interestButton").innerText;
+
+
+        if (text=='INTEREST' && flag)
+        {
+                 
+                $(document).ready(function() 
+                { 
+                     $.ajax
+                    ({
+                        url :  "interest.php?id="+getUrlParameter("id"),
+                        dataType: 'json', 
+                        success: function(value){
+
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                        },
+                        error : function () {
+                        console.log ('error');
+                        }
+                    });
+                   document.getElementById("interestButton").innerHTML="interested";
+
+
+                });
+            
+        }
+        else if(text=="INTERESTED")
+        {
+           document.getElementById( "interestButton").innerHTML="interest";
+                 
+           $(document).ready(function() 
+                { 
+                     $.ajax
+                    ({
+                        url :  "interestRemove.php?id="+getUrlParameter("id"),
+                        dataType: 'json', 
+                        success: function(value){
+
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                        },
+                        error : function () {
+                        console.log ('error');
+                        }
+                    });
+                });
+        };
+
+    }
     </script>
     <!-- css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -122,6 +385,7 @@
         <div class="container">
             <div class="navbar-header">
 
+               
                 <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
@@ -190,18 +454,15 @@
 
     
    
- <section id="faq" class="section-index2 faq">
+    <section id="faq" class="section-index2 faq">
         <div class="container">
             <div class="row">
                 <div id="attend"class="col-md-12">
-                                 
-                  
                 </div>
             </div>
+           
             <div class="row">
                 <div id="list_agenda" class="col-md-12">
-                   
-              
                 </div>
             </div>
         </div>
@@ -440,6 +701,7 @@
             </div>
         </section>
 
+        
 
     <footer class="site-footer">
         <div class="container">
@@ -462,4 +724,124 @@
     <script src="bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
+
+
+<div id="modal-wrapper" class="modal">
+        
+        <form class="modal-content animate" method="post" >
+              
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+            <img src="1.png" alt="Avatar" class="avatar">
+            <h1 style="text-align:center">Please Sign In first</h1>
+          </div>
+      
+          <div class="imgccontainer">
+            <input type="text" id = "email" placeholder="Enter Email" name="email">
+            <input type="password" id="password" placeholder="Enter Password" name="password">        
+            <button type="submit" onclick="  loginAttendFunctoin()" style=" background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 26px;
+            border: none;
+            cursor: pointer;
+            width: 90%;
+            font-size:20px;">Login</button>
+            <input type="checkbox" style="margin:26px 30px;"> Remember me      
+            <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+          </div>
+          
+        </form>
+        
+      </div>
+    </div>
+
+
+    <div id="modal-wrapper2" class="modal">
+        
+        <form class="modal-content animate" method="post" >
+              
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal-wrapper2').style.display='none'" class="close" title="Close PopUp">&times;</span>
+            <img src="1.png" alt="Avatar" class="avatar">
+            <h1 style="text-align:center">Please Sign In first</h1>
+          </div>
+      
+          <div class="imgccontainer">
+            <input type="text" id = "email2" placeholder="Enter Email" name="email2">
+            <input type="password" id="password2" placeholder="Enter Password" name="password2">        
+            <button type="submit" onclick="  loginInterestFunctoin()" style=" background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 26px;
+            border: none;
+            cursor: pointer;
+            width: 90%;
+            font-size:20px;">Login</button>
+            <input type="checkbox" style="margin:26px 30px;"> Remember me      
+            <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+          </div>
+          
+        </form>
+        
+      </div>
+    </div>
+
+      <script>
+          function  loginAttendFunctoin(){
+
+            document.getElementById("attendButton").innerHTML="attended";
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            $(document).ready(function() 
+                { 
+                 $.ajax
+                ({
+                        url :  "signToAttend.php?email="+email+"&pass="+password+"&id="+getUrlParameter("id"),
+                        dataType: 'json', 
+                        success: function(value){
+                          alert("hiba");
+
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                        },
+                        error : function () {
+                        console.log ('error');
+                        }
+                });
+                });
+
+          }
+
+          function loginInterestFunctoin()
+          {
+              
+            document.getElementById("interestButton").innerHTML="interested";
+            var email = document.getElementById('email2').value;
+            var password = document.getElementById('password2').value;
+            $(document).ready(function() 
+                { 
+                 $.ajax
+                ({
+                        url :  "signToInterest.php?email="+email+"&pass="+password+"&id="+getUrlParameter("id"),
+                        dataType: 'json', 
+                        
+                        success: function(value){
+                          alert("hiba");
+
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                        },
+                        error : function () {
+                        console.log ('error');
+                        }
+                });
+                });
+
+
+          }
+
+      </script>
 </html>
