@@ -1,4 +1,35 @@
-<!DOCTYPE html>
+<?php
+$id = $_GET["id"];
+
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+$result = mysqli_query($conn, "SELECT * FROM sponsor");
+  echo "<section id='partner' class='section partner' style='padding-bottom:300px;'>";
+       echo " <div class='container'>";
+        echo "    <div class='row'>";
+          echo "      <div class='col-md-12'>";
+           echo "         <h3 class='section-title'>Sponsors Of The Conference</h3>";
+           echo "     </div>";
+         echo "   </div>";
+                  echo "   <div class='row'>";
+
+while ($row = mysqli_fetch_array($result)) {
+	
+        
+          echo "      <div class='col-sm-3'>";
+           echo "         <img src='images/".$row['image']."' class='partner-box'></a>";
+           echo "     </div>";
+
+	}
+                  echo "  </div>   ";
+
+           echo " </section>";
+
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -41,41 +72,14 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- navigation menu -->
-                    <li><a href="Create.html">CreateConf. </a></li> 
-                    <li><a href="profile.html">Profile</a></li>
-                    <li><a href="upComing.html">UpComing </a></li>
-                    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Program
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Proceeding.html">Proceedings</a></li>
-          <li><a href="Panel.html">Panel</a></li>
-          <li><a href="Awards.html">Awards</a></li>
-          <li><a href="Paper.html">Paper</a></li>
-         
-          <li><a href="Agenda_signed.html">Agenda</a></li>
-          <li><a href="partners.html">Sponsors</a></li>
-        </ul>
-                        
-      </li>
-      
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Venue
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Accommodation.html">Accommodation</a></li>
-          <li><a href="Photos_event.html">Photos</a></li>
-          <li><a href="Videos_event.html">Videos</a></li>
-         
-        </ul>
-                        
-      </li>
-     
-                
-                    <li><a href="index.html">SignOut </a></li>
-                
-      
-    
+                      <li><a href="signIn.html">Sign in</a></li>
+                      <li ><a  href="about.html">About</a></li>          
+                    <li><a  href="upComing.html">UpComing</a></li> 
+                     <li class="active"><a  href="photos.html">Photos</a></li>
+                         <li><a  href="index.html">Home</a></li>
+                                      
+                   
+                   
                 
                 </ul>
             </div>
@@ -86,48 +90,9 @@
        
     </header>
 
-    
-   
- <section id="faq" class="section-index2 faq">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <br>
-                    <h2 class="section-title">Accepted Papers</h2>
-                    <br>
-                    <h3 class="panel-title" style="color:blue;"> Main Conference </h3>
-               
- <a href="http://dl.acm.org/citation.cfm?id=2976767">Click here</a>
-
- <br> <br>
-                    <h3 class="panel-title" style="color:blue;"> Demos and posters</h3>
-                   
-                    <a href="http://ceur-ws.org/Vol-1725/">Click here</a>
-
-  <br> <br>
-
-<h3 class="panel-title" style="color:blue;"> Models and evolution</h3>
-                   
-                    <a href="http://ceur-ws.org/Vol-1706/">Click here</a>
-
-                    <br> <br>
-
-<h3 class="panel-title" style="color:blue;"> Globalization Of Modeling Languages Workshop</h3>
-                   
-                    <a href="http://ceur-ws.org/Vol-1731/">Click here</a>
-
-  <br> <br>
 
 
-
-                    
-            </div>
-                </div>
-            </div>
-    </section>
-    
-  
-    <footer class="site-footer" style ="margin-top: 100px;">
+    <footer class="site-footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

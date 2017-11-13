@@ -1,4 +1,34 @@
-<!DOCTYPE html>
+<?php
+$id = $_GET["id"];
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
+$conn = mysqli_connect($servername, $username, $password, $database);
+$result = mysqli_query($conn, "SELECT * FROM file");
+        $i =0;
+
+ echo'  <section id="faq" class="section-index2 faq">';
+     echo'   <div class="container">';
+          echo'  <div class="row">';
+          echo'      <div class="col-md-12">';
+            echo'        <br>';
+            echo'        <h2 class="section-title">Accepted Papers</h2>';
+            echo'        <br>';
+             echo'       <h3 class="panel-title" style="color:blue;"> Main Conference </h3>';
+       
+while ($row = mysqli_fetch_array($result)) {
+echo"<object data= type='application/pdf' width='300' height='200'>";
+echo"<a href='uploads/".$row['file']."'>File$i.pdf</a>";
+echo'</object>';
+            echo'<br>';
+$i++;
+	}
+        echo'          </div>';
+         echo'       </div>';
+         echo'   </div>';
+   echo' </section>';
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,7 +37,6 @@
 
     <title>Conference</title>
 
-    <!-- css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -51,10 +80,10 @@
           <li><a href="Proceeding.html">Proceedings</a></li>
           <li><a href="Panel.html">Panel</a></li>
           <li><a href="Awards.html">Awards</a></li>
-          <li><a href="Paper.html">Paper</a></li>
-          
-         <li><a href="Agenda_signed.html">Agenda</a></li>
-          <li><a href="partners.html">Sponsors</a></li>
+          <li><a href="paper.php">Paper</a></li>
+         
+          <li><a href="Agenda_signed.html">Agenda</a></li>
+          <li><a href="Sponsor_Display.html">Sponsors</a></li>
         </ul>
                         
       </li>
@@ -82,44 +111,16 @@
         </div><!-- /.container -->
     </nav>
 
-   <section id="partner" class="section partner">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="section-title" style = "margin-top: 60px; font-size:2em;">Sponsors</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-1"></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-2"></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-3"></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-4"></a>
-                </div>
-            </div>
+    <header id="site-header-index2" class="site-header-index2 valign-center"> 
+       
+    </header>
 
-            <div class="row">
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-5"></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-6"></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-7"></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="partner-box partner-box-8"></a>
-                </div>
-            </div>   
-    </section>
-    <footer class="site-footer" style ="margin-top: 100px;">
+    
+   
+
+    
+  
+    <footer class="site-footer" style ="margin-top: 230px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
