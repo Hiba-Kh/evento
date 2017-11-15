@@ -198,7 +198,9 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                         </div>
                         <h3>Welcome and intro</h3>
                         <p> SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
+                         
+    <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
+    <button type="button" class="btn btn-link"  onclick="window.open('chat.php')">CHAT</button>                         
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">

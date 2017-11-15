@@ -9,6 +9,14 @@ class UserData {
     var $email;
     var $job;
     var $type;
+    
+    var $event_id;
+    var $location;
+    var $name_event;
+    var $start;
+    var $start_date;   
+    var $end_date;
+    var $end;
 }
 
 class AgendaData {
