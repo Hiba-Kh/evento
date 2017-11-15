@@ -45,6 +45,16 @@ header('Content-Type: application/json');
 
         $mysql_qry4="INSERT INTO event_interested(event_id, interested_id) VALUES ($event_id,$interested_id2) ";
         $result4=mysqli_query($conn, $mysql_qry4);
+        
+        $mysql_qry5="SELECT * FROM my_event WHERE event_id = $event_id ";
+        $result5=mysqli_query($conn, $mysql_qry5);
+        $row5 = mysqli_fetch_assoc($result5);
+        $NoOfInterestedFirst=$row5['NoOfInterested'];
+        $NoOfInterestedSecond = $NoOfInterestedFirst+1;;
+    
+        $mysql_qry6="UPDATE my_event SET NoOfInterested = $NoOfInterestedSecond  WHERE event_id = $event_id";
+        $result6=mysqli_query($conn, $mysql_qry6);
+
 
 
 

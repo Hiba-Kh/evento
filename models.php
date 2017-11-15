@@ -26,6 +26,11 @@ class AgendaData {
     var $location_lat;
 }
 
+class AnalysisData {
+    var $NoOfAttendee;
+    var $NoOfInterested;
+}
+
 
 
 ?>
