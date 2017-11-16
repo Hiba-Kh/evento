@@ -30,7 +30,7 @@
   
   
 </head>
-<body data-spy="scroll" data-target="#site-nav">
+<body background="assets/images/blueNew.jpg">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div >
             <div class="navbar-header">
@@ -50,16 +50,16 @@
         </div><!-- /.container -->
     </nav>
 
-   <div class="container">
+    <div class="container" style="color:blue;">
   <form action="Create.php" method="POST" > 
       <div class="row" style="margin-bottom: 15px;">
           <h4 style="margin-top:50px;font-size: 2em;">Conference Basics</h4>
           <br>
       <div class="input-group input-group-icon" >
-          <label style="color :black;"> Conference Name </label>
+          <label > Conference Name </label>
         <input type="text" name="c_name" required/>
       </div>
-          <label style="color :black;"> Conference Date </label>
+          <label > Conference Date </label>
           <br>
        <div class="input-group input-group-icon">
            <label> Start Date </label>
@@ -72,43 +72,31 @@
        
       </div>
           
-          <div class="input-group input-group-icon">
-           <label> Start Time </label>
-        <input type="time"  name="s_time" required/>
-      </div>
-          
-      <div class="input-group input-group-icon">
-           <label> End Time </label>
-        <input type="time"  name="e_time" required/>
-       
-      </div>
-          
-  
           <div class="form-group input-group">
-              <label style="color :black;"> Conference type </label>
+              <label> Conference type </label>
    <select class="form-control" style="color: black; background: white;" id="YourIntreset" name="type"  required>
                                 <option style="color: black;" ></option>
                                 <option style="color: black;">Medical</option>
                                 <option style="color: black;">Political</option>
                                 <option style="color: black;">Sport</option>
                                 <option style="color: black;">Technology</option>
-                                <option style="color: black;">Religous</option>
+                                <option style="color: black;">Religuos</option>
         </select>
         </div>
           
           <div class="input-group input-group-icon" >
-          <label style="color :black;"> Conference Description</label>
+          <label > Conference Description</label>
         <input type="text" style="width: 100%;padding: 50px;" name="description" required/>
       </div>
           
           
           <div class="input-group input-group-icon" >
-          <label style="color :black;" > Conference Location </label>
+          <label  > Conference Location </label>
         <input type="text" name="location" required />
       </div>
 
       <div class="input-group input-group-icon" >
-            <label style="color :black;" > Click to Set this location in the map </label>
+            <label  > Click to Set this location in the map </label>
         </div>
 
       
@@ -236,7 +224,7 @@
       
           
            <div class="input-group input-group-icon" >
-          <label style="color :black;"> Estimated number of Attendees </label>
+          <label > Estimated number of Attendees </label>
         <input type="text" name="n_attendee" />
       </div>
       

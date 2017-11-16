@@ -13,8 +13,7 @@ if (isset($_POST['done']))
                    $c_name=$_POST['c_name'];
                     $s_date=$_POST['s_date'];                 
                     $e_date=$_POST['e_date'];    
-                    $s_time=$_POST['s_time'];                 
-                    $e_time=$_POST['e_time'];
+                   
                     $type=$_POST['type'];
                     $location=$_POST['location'];    
                     $des=$_POST['description'];
@@ -27,7 +26,7 @@ $event_type_id = $row['event_type_id'];
 
 
 
-$sql = "INSERT INTO my_event (event_name,location_id,start_date,end_date,start_time,end_time,event_type_id,description,number_att) VALUES ('$c_name',$location,'$s_date','$e_date','$s_time','$e_time',$event_type_id,'$des','$number')";
+$sql = "INSERT INTO my_event (event_name,location_id,start_date,end_date,event_type_id,description,number_att) VALUES ('$c_name',$location,'$s_date','$e_date',$event_type_id,'$des','$number')";
 if(mysqli_query($conn, $sql)){
 $mysql_qry2="SELECT * FROM my_event WHERE my_event.event_name ='$c_name'";
 

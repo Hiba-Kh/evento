@@ -30,16 +30,19 @@ $sp_con=array();
 $i=0;
 $s=0;
 
-$mysql_qry="SELECT agenda_id FROM agenda WHERE agenda.event_id = $id ";
+$mysql_qry="SELECT * FROM agenda WHERE agenda.event_id = $id ";
 $r=mysqli_query($conn,$mysql_qry);
+
+if (!$r){
+    
+    header("location:NoAgenda.php");
+}
+ else {
+    
+
 $row= mysqli_fetch_assoc($r);
 $agenda_id=$row['agenda_id'];
-/*
-$mysql_qry_x="SELECT * FROM my_event WHERE my_event.event_id = $id ";
-$r_x=mysqli_query($conn,mysql_qry_x);
-$row_x= mysqli_fetch_assoc($r_x);
-$description=$row_x['description'];
-*/
+
 $mysql_qry2="SELECT * FROM sessions WHERE sessions.agenda_id = $id ";
 $r2=mysqli_query($conn,$mysql_qry2);
 
@@ -77,7 +80,6 @@ else {
 while ($row3= mysqli_fetch_assoc($r3)) 
 {
     $sp[$i]=$row3['speaker_id'];
-   // echo count($sp);
     $i++;
 }
 
@@ -93,12 +95,11 @@ $sp_lname[$k]=$row4['last_name'];
   }
   
     $myObj0->speakers = $sp_fname;
- //  $myObj0->speakers = [];
     $arr[$s]=$myObj0;
     $s++;
     
 }
 }
 echo json_encode($arr);
-
+ }
 ?>

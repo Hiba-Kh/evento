@@ -23,6 +23,8 @@ $myObj0 = new Anything();
 $myObj0->id = $id ;
 
                    $date=$_POST['date_agenda']; 
+                    $s_time=$_POST['s_time'];                 
+                    $e_time=$_POST['e_time'];
            $paymentDate=date('Y-m-d', strtotime($date));
            
 $mysql_qry_d="SELECT * FROM my_event WHERE my_event.event_id =$id";
@@ -37,7 +39,7 @@ $end_d = $row2_d['end_date'];
     
 if (($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd))
 {
- $sql = "INSERT INTO agenda (event_id,agenda_date) VALUES ($id,'$date')";
+ $sql = "INSERT INTO agenda (event_id,agenda_date,start_time,end_time) VALUES ($id,'$date','$s_time','$e_time')";
 
 if(mysqli_query($conn, $sql)){
 

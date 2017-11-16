@@ -40,13 +40,25 @@ $myObj0 = new Anything();
 $myObj0->id = $row['event_id'];
 $myObj0->location =$row['location_id'];
 $myObj0->name_event = $row['event_name'];
-$myObj0->start = $row['start_time'];
 $myObj0->start_date = $row['start_date'];
 $myObj0->end_date = $row['end_date'];
 
 $arr_date[$j] =  $row['start_date'];
+$mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
+$r3=mysqli_query($conn,$mysql_qry3);
 
-$myObj0->end = $row['end_time'];
+if (!r3)
+{
+ $myObj0->start ='UNKNOWN';
+$myObj0->end = 'UNKNOWN'; 
+}
+else{
+ $row3= mysqli_fetch_assoc($r3);
+$myObj0->start = $row3['start_time'];
+$myObj0->end = $row3['end_time'];
+        
+
+}
 $arr[$i]=$myObj0;
 $i++;
 $j++;
