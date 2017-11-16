@@ -145,9 +145,19 @@
                                     };
 
                                     mapWindow.setPosition(pos);
-                                    mapWindow.setContent('&nbsp;'+'&nbsp;'+'&nbsp;'+'&nbsp;'+'&nbsp;'+'Your Location'.fontcolor("blue").bold().big());
+                                    mapWindow.setContent('&nbsp;'+'&nbsp;'+'&nbsp;'+'&nbsp;'+'&nbsp;'+'You are here'.fontcolor("blue").bold());
                                     mapWindow.open(map);
                                     map.setCenter(pos);
+
+                                    marker = new google.maps.Marker({
+                                      position: pos,
+                                      map: map
+                                    });
+                            
+                            
+                                    google.maps.event.addListener(marker, 'click', function() {
+                                      infowindow.open(map, marker);
+                                    });
                                 }),
 
                               infowindow = new google.maps.InfoWindow({
@@ -161,6 +171,11 @@
                               google.maps.event.addListener(map, 'click', function(event) {
                                 //$("#add").show();
                                 $("#add").submit(function(event){$(this).hide(); return false;})
+                                
+                                if (marker != undefined) {
+                                  marker.setMap(null);
+                                }
+
                                 marker = new google.maps.Marker({
                                   position: event.latLng,
                                   map: map
@@ -187,6 +202,8 @@
                                   messagewindow.open(map, marker);
                                 }
                               });
+
+                              infowindow.close();
                             }
                         
                             function downloadUrl(url, callback) {
