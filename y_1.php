@@ -1,19 +1,13 @@
 <?php
 header('Content-Type: application/json');
-
 $id = $_GET["id"];
-
 $servername = "localhost";
 $database = "evento";
 $username = "root";
 $password = "";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
-/*class speaker {
-    //var $id;
-    var $name;
-   // var picture;
-}*/
+
 class Anything {
     var $id;    
     var $session_id;    
@@ -35,8 +29,6 @@ $sp_lname =array();
 $sp_con=array();
 $i=0;
 $s=0;
-
-
 
 $mysql_qry="SELECT * FROM agenda WHERE agenda.event_id = $id ";
 $r=mysqli_query($conn,$mysql_qry);
@@ -112,7 +104,11 @@ $sp_lname[$k]=$row4['last_name'];
     
 }
 }
-}}}
+}
+
+ }
+ 
+ }
 echo json_encode($arr);
 
 ?>

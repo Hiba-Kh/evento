@@ -13,8 +13,7 @@ if (empty($_POST["email"]) || empty($_POST['Password']))
 
 else 
 {     echo "here";
-    
-    
+   
     $user_email = $_POST["email"];
     $user_pass = $_POST["Password"];
     $mysql_qry="SELECT * FROM login WHERE password = '$user_pass' AND email = '$user_email'";

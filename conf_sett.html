@@ -37,6 +37,7 @@
                     console.log(result);
 var node;
 var event_id;
+
                     $.each(result, function(index, value) {
                         console.log(value.id);
                         event_id=value.id;
@@ -109,7 +110,7 @@ var event_id;
                   '</div>';
                     
                         $("#check").append(node);
-
+alert("Conference is Created Successfully");
                 },
                 error:function(error, code){
                     console.log(error);

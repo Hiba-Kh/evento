@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    
     <style>
                 #map {
                   height: 400px;
@@ -93,14 +97,6 @@
                 }
               </style>
               *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
-              
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Conference</title>
-   
-    <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
     
@@ -179,21 +175,19 @@
                     $("#list_agenda").append(node);
                     });
                     var attend= 
-                     '<a class="btn btn-white"  id="attendButton" onclick="attendButton()" style="float: right;">Attend</a>'+
-                     '<div class="row">'+ 
-                     '<div class="col-md-12">'+
+                      '<div style="float:right;">'+      
+                     '<a class="btn btn-white inline"   id="attendButton" onclick="attendButton()" style="width:220px;" >Attend</a>'+
                      
-                     ' <a class="btn btn-white" id="interestButton" onclick="interestButton()"   style="float: right;margin-top:8px;"> Interest</a>'+
-                     '<div class="row">'+ 
-                     '<div class="col-md-12">'+
                      
-                     ' <a class="btn btn-white"   href="ticket.php" style="float: right;margin-top:8px;"> Buy a Ticket</a>'+
-                     '</div>'+
-                     '</div>'+
+                     ' <a class="btn btn-white inline"  id="interestButton" onclick="interestButton()" style="width:220px;" >Interest</a>'+
+                    
                      
+                     ' <a class="btn btn-white inline"  href="ticket.php" style="width:220px;">Buy a Ticket</a>'+
+                    '</div>'+
+                     '<br>'+
                      '<h2 class="section-title">Agenda</h2>'+
-                    '<h3 class="section-title">**Some Description of the conference</h3>' ; 
-
+                    '<h3 class="section-title">**Some Description of the conference</h3>';
+                  
                     $("#attend").append(attend);
 
                 },
@@ -349,25 +343,17 @@
                 });
             });
         }
+    }
     </script>
-    <!-- css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    
 </head>
-<body data-spy="scroll" data-target="#site-nav">
+<body background="assets/images/babyBlue.png">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
-
-               
-                <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png" alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -410,24 +396,13 @@
           <li><a href="Accommodation.html">Accommodation</a></li>
           <li><a href="Photos_event.html">Photos</a></li>
           <li><a href="Videos_event.html">Videos</a></li>
-         
         </ul>
-                        
       </li>
-     
-                    <li><a href="index.html">SignOut </a></li>
-                
-      
-    
-                
+        <li><a href="index.html">SignOut </a></li>
                 </ul>
             </div>
         </div><!-- /.container -->
     </nav>
-
-    
-
-    
    
     <section id="faq" class="section-index2 faq">
         <div class="container">
@@ -443,7 +418,8 @@
         </div>
     </section>
     
-   <section id="speakers" class="section-speaker speakers">
+    
+   <section id="speakers" class="section section-speaker speakers">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -518,67 +494,9 @@
                 </div><!-- /.col-md-4 -->
             </div><!-- /.row -->
 
-            <div class="row">
-                <div class="col-md-4">
-
-                    <div class="speaker">
-
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-4.jpg">
-                        </figure>
-
-                        <h4>Jhon Smith</h4>
-
-                        <p>CEO of Peren</p>
-
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="speaker">
-
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-5.jpg">
-                        </figure>
-
-                        <h4>Jhon Smith</h4>
-
-                        <p>CEO of Peren</p>
-
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="speaker">
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-6.jpg">
-                        </figure>
-                        <h4>Jhon Smith</h4>
-                        <p>CEO of Peren</p>
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
-    </section>
+       </section>
+    
   <section id="facts" class="section bg-image-1 facts text-center">
         <div class="container">
             <div class="row">
@@ -669,14 +587,11 @@
                        <script async defer
                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfGpSHEHb1lytFDkZ6sesd4H1MbIXzqs&callback=initMap">
                        </script>    
-                      
-
                     </div>
                 </div>
             </div>
         </section>
 
-        
 
     <footer class="site-footer">
         <div class="container">
@@ -822,6 +737,9 @@
 
 
           }
+    
 
       </script>
+      </body>
+
 </html>

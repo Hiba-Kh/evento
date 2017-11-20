@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conference</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    
         <style>
                 #map {
                   height: 400px;
                   width: 100%;
                  }
               </style>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Conference</title>
     
-    <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
+     <script>
+      $(document).ready(function() {
+           
+            $(".delete").click(function(){
+             a = $(this).attr('rel'); 
+             alert(a);
+           
+    });
+        });                          
+             </script>
     <script>
     var getUrlParameter = function getUrlParameter(sParam) {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -32,21 +44,22 @@
     };
 
     $(document).ready(function() {
-        
             $.ajax({
                 url: "y_1.php?id="+getUrlParameter("id"),
                 dataType: 'json', 
                 success: function(result){
                     console.log(result);
 
-var event_id;
-var agenda_title;
+                         var event_id;
+                         var agenda_title;
 
-                    $.each(result, function(index, value) {
-                        console.log('caste: ' + value.event_id);
+            $.each(result, function(index, value) {
+                 console.log('caste: ' + value.event_id);
+                 
                         event_id=value.event_id;
                         agenda_title=value.date_agenda;
-                        var node = '<div class="panel panel-default">'+
+                        
+                var node = '<div class="panel panel-default" >'+
                         '    <div class="panel-heading" role="tab" id="headingTwo">'+
                         '        <h4 class="panel-title">'+
                         '            <a class="faq-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo'+value.event_id+'" aria-expanded="false" aria-controls="collapseTwo'+value.event_id+'">'+
@@ -64,7 +77,16 @@ var agenda_title;
                         '                </section>'+
                         '            </a>'+
                         '        </h4>'+
-                        '    </div>';
+                        
+                     '<div style=" float:bottom;" class="container">'+
+                     '<a href="#" class="delete" rel ="4" ><img src="assets/images/photos/delete.png" alt="Delete" width="24" height="24" /></a>'+
+                     '<label>Delete Session</label>'+
+                     '</div>'+
+                     
+              
+                     
+                     
+                   '</div>';
                 
                
                         if(value.speakers.length > 0) {
@@ -75,47 +97,42 @@ var agenda_title;
                             for (var i =0; i < value.speakers.length; i++) {
                                 node += '<p>' + value.speakers[i] + '</p>';
                             }
-
                             node +=   '</div>'+
                             '</div>';
                         }
                      
                         node += '</div>';
                         
- 
-      node +='<div style=" float:bottom;" class="container">'+
-        '<a href="create_agenda.html?id='+value.event_id+'" ><img src="assets/images/photos/delete.png" alt="Delete" width="24" height="24" /></a>'+
-    '<label>Delete Session</label>'+
-                '</div>';
-        
-    node +=  '<div class="container">'+
-        '<label>Add Speaker</label>'+
-        '<a href="speaker.html?id='+value.session_id+'" ><img src="assets/images/photos/add1.png" alt="Add_speaker" width="24" height="24" style="float:left;"/></a>'+
-    '</div>'; 
-    
-    
-        
-
-                        $("#list_agenda").append(node);
-
+                     node +=  '<div class="container">'+
+                     '<label>Add Speaker</label>'+
+                     '<a href="SelectSpeaker.html?id='+value.session_id+'" ><img src="assets/images/photos/add1.png" alt="Add_speaker" width="24" height="24" style="float:left;"/></a>'+
+                     '</div>'; 
+             
+                     $("#list_agenda").append(node);
                     });
                     
                  var y =    '<h2 class="section-title">'+agenda_title+'</h2>'+
 
-                         
                 '<div class="section-title" style="float:left;">'+  
-                         '<a href="create_agenda.html?id='+event_id+'" ><img  src="assets/images/photos/delete.png" alt="Delete" width="30" height="30"  /></a>'+
-         ' <label style="font-size:1.2em; margin-top:10px">Delete Agenda</label>'+
-                            '</div>'+
+                 '<a href="create_agenda.html?id='+event_id+'" ><img  src="assets/images/photos/delete.png" alt="Delete" width="30" height="30"  /></a>'+
+                  ' <label style="font-size:1.2em; margin-top:10px">Delete Agenda</label>'+
+                    '</div>'+
 
-                    
                     '<div class="section-title" style="float:right;">'+  
-       '<a href="Create_Next.html?id='+event_id+'" ><img src="assets/images/photos/add1.png" alt="Add" width="30" height="30" /></a>'+
-              '<label style="font-size:1.2em; margin-top:10px;">Add Agenda</label>'+        
-                  '</div>';
+                     '<a href="Create_Next.html?id='+event_id+'" ><img src="assets/images/photos/add1.png" alt="Add" width="30" height="30" /></a>'+
+                      '<label style="font-size:1.2em; margin-top:10px;">Add Agenda</label>'+        
+                       '</div>';
+                    
+                    
+                    
+                    '<div class="row">'+
+              '<div >'+
+              '<p>shahira</p>'+
+          '<a href="#" class="delete" rel ="23" >Delete</a>'+
+           '   </div>'+
+           ' </div>'+
                     
                 $("#addAgenda").append(y);
-
                 },
                 error:function(error, code){
                     console.log(error);
@@ -126,21 +143,16 @@ var agenda_title;
     });
 
     </script>
-    <!-- css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    
 </head>
-<body data-spy="scroll" data-target="#site-nav">
+<body>
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
 
-                <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
+                       
                         <img src="assets/images/logo.png" alt="Logo">
 
                         Evento
@@ -156,10 +168,9 @@ var agenda_title;
 
             </div><!-- /.navbar-header -->
 
-            <div class="collapse navbar-collapse" id="navbar-items">
+   <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
 
-                    <!-- navigation menu -->
                     <li><a href="Create.html">CreateConf. </a></li> 
                     <li><a href="profile.html">Profile</a></li>
                     <li><a href="upComing.html">UpComing </a></li>
@@ -192,18 +203,11 @@ var agenda_title;
      
                     <li><a href="index.html">SignOut </a></li>
                 
-      
-    
-                
                 </ul>
             </div>
         </div><!-- /.container -->
     </nav>
 
-    
-
-    
-   
  <section id="faq" class="section-index2 faq">
         <div class="container">
             <div  id ="addAgenda" class="row">
@@ -221,7 +225,11 @@ var agenda_title;
               
                 </div>
             </div>
+            
+            
             <br><br>
+            
+            
             <h2 class="section-title" style="float:right; margin-right:895px;"> Add Session</h2>
         <a href="create_agenda.html?id='+value.id+'" ><img src="assets/images/photos/add1.png" alt="Add" width="34" height="34" style="float:left;"/></a>
            
@@ -424,7 +432,10 @@ var agenda_title;
                             });
                           }
                         </script>
-                       <script async defer
+                        
+                  
+           
+        <script async defer
                        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
                        </script>
 

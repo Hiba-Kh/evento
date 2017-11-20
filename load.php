@@ -1,5 +1,4 @@
 <?php
-$id = $_GET["id"];
 $servername = "localhost";
 $database = "evento";
 $username = "root";

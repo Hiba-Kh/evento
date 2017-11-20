@@ -24,14 +24,12 @@ $msg = "";
 
 ?>
 <html>
-     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>

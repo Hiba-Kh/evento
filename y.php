@@ -32,17 +32,17 @@ $s=0;
 
 $mysql_qry="SELECT * FROM agenda WHERE agenda.event_id = $id ";
 $r=mysqli_query($conn,$mysql_qry);
-
-if (!$r){
-    
-    header("location:NoAgenda.php");
+if (!$r)
+{
+   die(mysqli_error($conn)); 
+   echo"No Agnedas is created for this event yet";
 }
- else {
-    
-
-$row= mysqli_fetch_assoc($r);
+else {
+    if (mysqli_num_rows($r) > 0)
+    {
+while ($row=mysqli_fetch_assoc($r)) 
+{ 
 $agenda_id=$row['agenda_id'];
-
 $mysql_qry2="SELECT * FROM sessions WHERE sessions.agenda_id = $id ";
 $r2=mysqli_query($conn,$mysql_qry2);
 
@@ -97,9 +97,10 @@ $sp_lname[$k]=$row4['last_name'];
     $myObj0->speakers = $sp_fname;
     $arr[$s]=$myObj0;
     $s++;
-    
+        }}  
+}
 }
 }
 echo json_encode($arr);
- }
+ 
 ?>
