@@ -1,26 +1,10 @@
 <?php
 header('Content-Type: application/json');
 $id = $_GET["id"];
-$servername = "localhost";
-$database = "evento";
-$username = "root";
-$password = "";
+require "conn.php";
+require "models.php";
+session_start();
 
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-class Anything {
-    var $id;    
-    var $session_id;    
-    var $event_id;
-    var $desc;
-    var $date_agenda;
-    var $name;
-    var $start;
-    var $end;
-    var $location;
-    var $speakers;
-}
-$size_2;
 $resp =array();
 $arr =array();
 $sp=[];
@@ -35,7 +19,6 @@ $r=mysqli_query($conn,$mysql_qry);
 if (!$r)
 {
    die(mysqli_error($conn)); 
-   echo"No Agnedas is created for this event yet";
 }
 else {
     if (mysqli_num_rows($r) > 0)
@@ -84,11 +67,8 @@ while ($row3= mysqli_fetch_assoc($r3))
     $sp[$i]=$row3['speaker_id'];
     $i++;
 }
- 
-
-    }
-    
-}
+  }
+   }
  for ($k=0,$size=count($sp); $k < $size;$k++){ 
 $mysql_qry4="SELECT first_name,last_name FROM users WHERE users.user_id = $sp[$k]";
 $r4=mysqli_query($conn,$mysql_qry4);
@@ -96,19 +76,11 @@ $row4= mysqli_fetch_assoc($r4);
 $sp_fname[$k]=$row4['first_name'];
 $sp_lname[$k]=$row4['last_name'];
   }
-  
     $myObj1->speakers = $sp_fname;
     $arr[$s]=$myObj1;
     $s++;
-    
-    
-}
-}
-}
-
- }
- 
- }
-echo json_encode($arr);
+}}}}}
+ $_SESSION['session_data'] = $arr;
+ header("location: Agenda_Display_Test.php");
 
 ?>

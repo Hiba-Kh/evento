@@ -1,22 +1,9 @@
 <?php
- require "conn.php";
+    require "conn.php";
     require "models.php";
 
     session_start();
-    $user=$_SESSION['user_data'];
-    if($user == null) {
-        header("location: signinView.php");
-    }
-
-class Anything {
-    var $event_id;
-    var $location;
-    var $name_event;
-    var $start;
-    var $start_date;   
-    var $end_date;
-    var $end;
-}
+  
  $user=$_SESSION['user_data'];
 //VARIABLES
 $event_id;

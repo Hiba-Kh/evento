@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,6 @@
 <?php
     require "conn.php";
     require "models.php";
-
     session_start();
     $user=$_SESSION['user_data'];
     if($user == null) {
@@ -15,10 +13,8 @@
     }
 ?>
 
-    <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
-        // A $( document ).ready() block.
         $(document).ready(function() {
             $.ajax({
                 url: "profileController.php?id=" + $("#user_id").val(),

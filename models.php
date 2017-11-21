@@ -1,5 +1,16 @@
 <?php
-
+class Anything {
+    var $id;    
+    var $session_id;    
+    var $event_id;
+    var $desc;
+    var $date_agenda;
+    var $name;
+    var $start;
+    var $end;
+    var $location;
+    var $speakers;
+}
 class UserData {
     var $id;
     var $firstname;
@@ -12,6 +23,7 @@ class UserData {
     
     
 }
+
 class eventData
 {
     var $event_id;

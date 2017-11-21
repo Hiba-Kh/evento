@@ -211,7 +211,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
  </section>
     
     
- <section id="InterestedComing" class="section schedule">
+ <section class="section schedule">
         <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
@@ -219,7 +219,53 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                 </div>
             </div>
                 <div  id="InterestedComing" class="bs-docs-example row" >
-                       
+                        <?php
+     $j=0;
+     foreach($_SESSION['event_Intrested'] as $key=>$value)
+    {
+         $j++;
+     if ($j<4){
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+          
+    } 
+     }  
+
+   echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
+    ?>             
+                    
+                    </div>
+             <div  id="showmore2" style="display:none;" class="bs-docs-example row" >
+     <?php
+    
+     foreach($_SESSION['event_Intrested'] as $key=>$value)
+    {
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+          
+    } 
+       echo '<input type="button" class="btn btn-black" name="Show less" value="Show less" style="margin-top:50px;margin-right:470px;margin-left:15px;width:150px;height:50px;" onClick="showLess2()"> ';     
+
+    ?>             
+                    
+                    </div>
+            
                     </div>
     </section>
     
@@ -352,6 +398,19 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     document.getElementById("showmore").style.display = "none";
              }
              
+             function showMore2 ()
+                {
+      
+    document.getElementById("showmore2").style.display = "";
+    document.getElementById("InterestedComing").style.display = "none";
+             }
+             
+             function showLess2 ()
+                {
+      
+    document.getElementById("InterestedComing").style.display = "";
+    document.getElementById("showmore2").style.display = "none";
+             }
 	</script>
 </body>
 </html>

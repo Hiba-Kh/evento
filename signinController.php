@@ -114,8 +114,8 @@ $mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
 $r3=mysqli_query($conn,$mysql_qry3);
 if (!$r3)
 {
-$myObj0->start = 'un';
-$myObj0->end ='un';
+$event->start = 'un';
+$event->end ='un';
 }
 else{
  $row3= mysqli_fetch_assoc($r3);
@@ -129,27 +129,31 @@ $i++;
 
 
 $j=0;               
-$mysql_qry_Intrested="SELECT * FROM my_event where my_event.admin_id=$user->id";
+$mysql_qry_Intrested="SELECT * FROM interested where interested.user_id=$user->id";
 $r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
-$row_Intrested= mysqli_fetch_assoc($r_Intrested);
 
 if (!$r_Intrested)
 {
-   echo "NO events for this admin";
+   echo "NOTHING TO SHOW";
    die(mysqli_error($conn)); 
 }
 else {
-while ($row_Intrested= mysqli_fetch_assoc($r_Intrested)) 
+ $row_Intrested= mysqli_fetch_assoc($r_Intrested);
+ $conference_type=$row_Intrested['interested_id'];
+ $mysql_qry_Intrested2="SELECT * FROM my_event where my_event.event_type_id=$conference_type";
+ $r_Intrested2=mysqli_query($conn,$mysql_qry_Intrested2);
+    
+while ($row_Intrested2= mysqli_fetch_assoc($r_Intrested2)) 
     {
 $event2 = new eventData();
-$event2->event_id = $row_Intrested['event_id'];
-$event2->location = $row_Intrested['location_id'];
-$event2->name_event = $row_Intrested['event_name'];
-$event2->start_date = $row_Intrested['start_date'];
-$event2->end_date = $row_Intrested['end_date'];
+$event2->event_id = $row_Intrested2['event_id'];
+$event2->location = $row_Intrested2['location_id'];
+$event2->name_event = $row_Intrested2['event_name'];
+$event2->start_date = $row_Intrested2['start_date'];
+$event2->end_date = $row_Intrested2['end_date'];
 
-$id2=$row_Intrested['event_id'];
-$arr_date2[$j] = $row_Intrested['start_date'];
+$id2=$row_Intrested2['event_id'];
+$arr_date2[$j] = $row_Intrested2['start_date'];
 //Display If it has Agenda
 $mysql_qry3_Intrested="SELECT * FROM agenda WHERE agenda.event_id = $id2 ";
 $r3_Intrested=mysqli_query($conn,$mysql_qry3_Intrested);
@@ -171,15 +175,11 @@ $j++;
                 $_SESSION['event_data'] = $arr;
                 $_SESSION['event_Intrested'] = $arr2;
                 header("location: adminProfileView.php");
-                    
-
                 }
-
 
                 if (strcmp($user->type , "speaker")==0)
                 {                    
                     header("location: speakerProfileView.php");
-                    
                 }
             
 
