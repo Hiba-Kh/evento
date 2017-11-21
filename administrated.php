@@ -17,7 +17,7 @@ class Anything {
     var $end_date;
     var $end;
 }
-    $user=$_SESSION['user_data'];
+ $user=$_SESSION['user_data'];
 //VARIABLES
 $event_id;
 $i=0;

@@ -28,6 +28,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
     session_start();
     $user=$_SESSION['user_data'];
+    $event=$_SESSION['event_data'];
     if($user == null) {
         header("location: signinView.php");
     }
@@ -38,9 +39,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
             $.ajax({
                 url: "profileController.php?id=" + $("#user_id").val(),
                 dataType: 'json', 
-                success: function(value){
-                  console.log(value);
-        
+                success: function(value){        
                         console.log('caste: ' + value);
                         var x = '<div class="container">'+
                                     '<h3 class="w3l_head" style="font-size: 2.2em;">'+'My Account'+'</h3>'+
@@ -88,11 +87,12 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     	                                            '<li><a href="#"><i class="fa fa-twitter"></i></a></li>'+
 		                                            '<li><a href="#"><i class="fa fa-linkedin"></i></a></li>'+
                                                     '<li><a href="#"><i class="fa fa-google-plus"></i></a></li>'+
-                                    
 	                                 '</ul>';
                                  
                         $("#about").append(x);
                         $("#banner").append(y);
+                       
+                        
                 },
                 error:function(error, code){
                     console.log(error);
@@ -147,94 +147,81 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
 <div class="about" id="about">
 		
-        </div>
+ </div>
    
  <section id="upComing" class="section schedule">
-        <div class="container">
+        <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title">Attended Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Up Coming Conferences</h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="09:00">09:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Welcome and intro</h3>
-                        <p> SD Asia</p>
-                         
-             <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
-             <button type="button" class="btn btn-link"  onclick="window.open('chat.php')">CHAT</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Tips and share</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>View from the top</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                       
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-            </div>
-    </section>
+                <div  id="coming_events" class="bs-docs-example row" >
+     <?php
+     $i=0;
+     $j=0;
+     foreach($_SESSION['event_data'] as $key=>$value)
+    {
+         $i++;
+     if ($i<4){
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+          
+    } 
+     }  
 
- <section id="upComing" class="section schedule">
-        <div class="container">
+   echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
+    ?>             
+                    
+                    </div>
+             <div  id="showmore" style="display:none;" class="bs-docs-example row" >
+     <?php
+    
+     foreach($_SESSION['event_data'] as $key=>$value)
+    {
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+          
+    } 
+       echo '<input type="button" class="btn btn-black" name="Show less" value="Show less" style="margin-top:50px;margin-right:470px;margin-left:15px;width:150px;height:50px;" onClick="showLess()"> ';     
+
+    ?>             
+                    
+                    </div>
+            
+            
+            
+            
+ </section>
+    
+    
+ <section id="InterestedComing" class="section schedule">
+        <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title">Intrested Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Interested Conferences</h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="09:00">09:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Welcome and intro</h3>
-                        <p> SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Tips and share</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>View from the top</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
+                <div  id="InterestedComing" class="bs-docs-example row" >
                        
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
                     </div>
-                </div>
-            </div>
     </section>
-    
     
     <footer class="site-footer">
         <div class="container">
@@ -348,6 +335,23 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 			$().UItoTop({ easingType: 'easeOutQuart' });
 								
 			});
+	</script>
+        
+        <script type="text/javascript">
+		function showMore ()
+                {
+      
+    document.getElementById("showmore").style.display = "";
+    document.getElementById("coming_events").style.display = "none";
+             }
+             
+             function showLess ()
+                {
+      
+    document.getElementById("coming_events").style.display = "";
+    document.getElementById("showmore").style.display = "none";
+             }
+             
 	</script>
 </body>
 </html>

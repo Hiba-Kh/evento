@@ -10,15 +10,18 @@ class UserData {
     var $job;
     var $type;
     
+    
+}
+class eventData
+{
     var $event_id;
     var $location;
     var $name_event;
     var $start;
     var $start_date;   
     var $end_date;
-    var $end;
+    var $end; 
 }
-
 class AgendaData {
     var $id;
     var $event_id;

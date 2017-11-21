@@ -3,7 +3,6 @@ require "conn.php";
 require "models.php";
 
 session_start();
-
 $error='';
 if (empty($_POST["email"]) || empty($_POST['Password']))
 {
@@ -27,7 +26,8 @@ else
             $rows = mysqli_num_rows($result);
             if ($rows == 1)
             {
-                
+                $arr=array();
+                $arr2=array();
                 $user = new UserData();
                 $type_row = mysqli_fetch_assoc($result);                
                 $user->type = $type_row['type'];
@@ -76,7 +76,7 @@ else
                 }
 
                 $_SESSION['user_data'] = $user;
-                
+
                 if (strcmp($user->type , "member")==0)
                 {
                     
@@ -86,8 +86,91 @@ else
                 }
                 if (strcmp($user->type , "admin")==0)
                 {
-                    
-                    header("location: adminProfileView.php");
+
+$i=0;               
+$mysql_qry_event="SELECT * FROM my_event where my_event.admin_id=$user->id";
+$r_event=mysqli_query($conn,$mysql_qry_event);
+$row_event= mysqli_fetch_assoc($r_event);
+
+if (!$r_event)
+{
+   echo "NO events for this admin";
+   die(mysqli_error($conn)); 
+}
+else {
+while ($row_event= mysqli_fetch_assoc($r_event)) 
+    {
+$event = new eventData();
+$event->event_id = $row_event['event_id'];
+$event->location = $row_event['location_id'];
+$event->name_event = $row_event['event_name'];
+$event->start_date = $row_event['start_date'];
+$event->end_date = $row_event['end_date'];
+
+$id=$row_event['event_id'];
+$arr_date[$j] = $row_event['start_date'];
+//Display If it has Agenda
+$mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
+$r3=mysqli_query($conn,$mysql_qry3);
+if (!$r3)
+{
+$myObj0->start = 'un';
+$myObj0->end ='un';
+}
+else{
+ $row3= mysqli_fetch_assoc($r3);
+$event->start = $row3['start_time'];
+$event->end = $row3['end_time'];
+}
+$arr[$i]=$event;
+$i++;
+    }
+}
+
+
+$j=0;               
+$mysql_qry_Intrested="SELECT * FROM my_event where my_event.admin_id=$user->id";
+$r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
+$row_Intrested= mysqli_fetch_assoc($r_Intrested);
+
+if (!$r_Intrested)
+{
+   echo "NO events for this admin";
+   die(mysqli_error($conn)); 
+}
+else {
+while ($row_Intrested= mysqli_fetch_assoc($r_Intrested)) 
+    {
+$event2 = new eventData();
+$event2->event_id = $row_Intrested['event_id'];
+$event2->location = $row_Intrested['location_id'];
+$event2->name_event = $row_Intrested['event_name'];
+$event2->start_date = $row_Intrested['start_date'];
+$event2->end_date = $row_Intrested['end_date'];
+
+$id2=$row_Intrested['event_id'];
+$arr_date2[$j] = $row_Intrested['start_date'];
+//Display If it has Agenda
+$mysql_qry3_Intrested="SELECT * FROM agenda WHERE agenda.event_id = $id2 ";
+$r3_Intrested=mysqli_query($conn,$mysql_qry3_Intrested);
+if (!$r3_Intrested)
+{
+$event2->start = 'un';
+$event2->end ='un';
+}
+else{
+$row3_Intrested= mysqli_fetch_assoc($r3_Intrested);
+$event2->start = $row3_Intrested['start_time'];
+$event2->end = $row3_Intrested['end_time'];
+}
+$arr2[$j]=$event2;
+$j++;
+    }
+}
+
+                $_SESSION['event_data'] = $arr;
+                $_SESSION['event_Intrested'] = $arr2;
+                header("location: adminProfileView.php");
                     
 
                 }
@@ -99,7 +182,10 @@ else
                     
                 }
             
-            }
+
+                
+           
+                }
             else
             {
                     $error = "Email or Password is invalid";
