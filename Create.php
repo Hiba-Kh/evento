@@ -4,11 +4,9 @@ require "models.php";
 session_start();
 $user=$_SESSION['user_data'];
 
-
-
 if (isset($_POST['done']))
     {      
- if (strcmp($user->type, "member")==0)
+ if (strcmp($user->type, "member")==0 || strcmp($user->type, "audience")==0 || strcmp($user->type, "speaker")==0)
 {
 $mysql2="SELECT * FROM users WHERE users.user_id = $user->id ";
 $r2=mysqli_query($conn,$mysql2);
@@ -25,17 +23,11 @@ else
 $mysql4="INSERT INTO admin (admin_id,user_id) VALUES ($user->id,$user->id)";
 if(mysqli_query($conn, $mysql4)){
     echo"succ"; 
-  
 }
 else 
 {
    echo"failed"; 
-   
-}
-
-}
-
-}     
+}}}    
                     $c_name=$_POST['c_name'];
                     $s_date=$_POST['s_date'];                 
                     $e_date=$_POST['e_date'];    
