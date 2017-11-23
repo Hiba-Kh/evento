@@ -81,6 +81,7 @@ $sp_lname[$k]=$row4['last_name'];
     $s++;
 }}}}}
  $_SESSION['session_data'] = $arr;
+ $_SESSION['Agenda_id'] = $agenda_id;
  header("location: Agenda_Display_Test.php");
 
 ?>

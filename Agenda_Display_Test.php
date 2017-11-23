@@ -14,18 +14,30 @@
 
     session_start();
     $session_data=$_SESSION['session_data'];
-   
+    $Agenda_id=$_SESSION['Agenda_id'];
    ?>
     <script src="js/jquery-3.2.1.min.js"></script>
      <script>
       $(document).ready(function() {
-           
+            
             $(".delete").click(function(){
-             a = $(this).attr('rel'); 
-             alert(a);
-           
+             var item = $(this).parent();
+             var id =$(this).attr('rel'); 
+
+            $.post('DeletePage.php',{'id' : id},function(data){
+              $(item).hide();
+            });     
     });
-        });                          
+    
+    $(".deleteAgenda").click(function(){
+             var item_Agenda = $(this).parent();
+             var id_Agenda =$(this).attr('rel'); 
+
+            $.post('DeleteAgenda.php',{'id' : id_Agenda},function(data){
+              $(item_Agenda).hide();
+            });     
+    });
+});                
              </script>
    
     
@@ -50,26 +62,13 @@
 
             </div>
 
-   <div class="collapse navbar-collapse" id="navbar-items">
+            <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="Create.html">CreateConf. </a></li> 
-                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="adminProfileView.php">My Profile </a></li> 
+                    <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
-                    <li class="dropdown">
-                        
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Program
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Proceeding.html">Proceedings</a></li>
-          <li><a href="Panel.html">Panel</a></li>
-          <li><a href="Awards.html">Awards</a></li>
-          <li><a href="Paper.html">Paper</a></li>
-          <li><a data-scroll href="#speakers">Speaker</a></li>
-          <li><a  data-scroll href="#faq">Agenda</a></li>
-          <li><a href="Sponsor_Display.html">Sponsors</a></li>
-          <li><a href="index.html">SignOut </a></li>
-        </ul>
-      </li>
+                    <li><a href="Administrated_display.php">My Conferences </a></li>
+                    <li><a href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>
         </div>
@@ -83,39 +82,42 @@
                 </div>
             </div>
             <div class="row">
-                <div id="list_agenda" class="col-md-12">
+            <div id="list_agenda" class="col-md-12">
+           <h2 class="section-title">Agenda</h2>
+            <h3 class="section-title">**Some Description of the conference</h3>
+     <?php echo  "<a href='#' class='deleteAgenda' rel ='$Agenda_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Agenda</p></a>";?>
            <?php    
             foreach($_SESSION['session_data'] as $key=>$value)
     {
-                 echo '  <div class="panel panel-default" >';
-                  echo '          <div class="panel-heading" role="tab" id="headingTwo">';
+                echo '  <div class="panel panel-default" >';
+                 echo '          <div class="panel-heading" role="tab" id="headingTwo">';
                   echo '              <h4 class="panel-title">';
                    echo '                <a class="faq-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo$value->event_id" aria-expanded="false" aria-controls="collapseTwo$value->event_id">';
-                     echo '                   <section id="section-ajenda" class="section-wrapper section-ajenda">';
+                    echo '                   <section id="section-ajenda" class="section-wrapper section-ajenda">';
                      echo '                       <div class="container">';
                        echo '                         <div class="row">';
-                           echo '                         <div class="col-md-4">';
-                          echo '                              <div class="session">';
-                             echo "                            <time>$value->start' - '$value->start'</time>";
-                              echo "                             <h2>'$value->name'</h2>";
+                         echo '                         <div class="col-md-4">';
+                           echo '                              <div class="session">';
+                             echo "                            <time>$value->start - $value->start</time>";
+                               echo "                             <h2>$value->name</h2>";
                                 echo '                        </div>';
                                  echo '                   </div>';
                                     echo '            </div>';
-                                   echo '         </div>';
+                                    echo '         </div>';
                                   echo '      </section>';
                                 echo '    </a>';
-                            echo '    </h4>';
+                             echo '    </h4>';
+                          echo   "<a href='#' class='delete' rel ='$value->session_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Session</p></a>";
                       echo '      </div>';
-            echo '    </div>';
-              
-             echo '   </div>';
-          echo '  </div>';
+                   echo '    </div>';
     } 
            ?> 
             <br><br>
-        <h2 class="section-title" style="float:right; margin-right:895px;"> Add Session</h2>
-        <a href="create_agenda.html?id='+value.id+'" ><img src="assets/images/photos/add1.png" alt="Add" width="34" height="34" style="float:left;"/></a>
+            <?php echo  " <a href='create_agenda.html?id=$Agenda_id'> <img  src='assets/images/photos/add1.png' alt='add' width='28' height='28' style='float:left;' /><p class='section-title' style='font-size:1.3em;'>Add Session</p></a>" ;?>
+
         </div>
+                        </div>
+
  </section>
     
     
