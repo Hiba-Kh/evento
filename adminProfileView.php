@@ -152,7 +152,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
         <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">My Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Attended Conferences</h3>
                 </div>
             </div>
                 <div  id="coming_events" class="bs-docs-example row" >

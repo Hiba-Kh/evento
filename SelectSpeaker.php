@@ -1,25 +1,34 @@
 <?php
+$id=$_GET['id'];
 //DataBase
 $hostname = "localhost";
 $username = "root";
 $password = "";
 $databaseName = "evento";
 $connect = mysqli_connect($hostname, $username, $password, $databaseName);
+require "models.php";
+
+session_start();
+$_SESSION['session_id']=$id;
+$mysql_qry2="SELECT * FROM sessions WHERE sessions.session_id = $id ";
+$r2=mysqli_query($connect,$mysql_qry2);
+$row2= mysqli_fetch_assoc($r2);
+$event_id=$row2['event_id'];
+$_SESSION['event_id']=$event_id;
+
 //Variables
 $first_name_speaker=array();
 $last_name_speaker=array();
 $i=0;
 $options = "";
 //QUERY
-$query = "SELECT * FROM speaker";
+$query = "SELECT * FROM users";
 $result = mysqli_query($connect, $query);
 while($row = mysqli_fetch_array($result))
 {
-    $speaker_id=$row['speaker_id'];
-    $query2 = "SELECT * FROM users where users.user_id=$speaker_id";
-    $result2 = mysqli_query($connect, $query2);
-    $row2 = mysqli_fetch_array($result2);
-    $first_name_speaker[$i]=$row2['first_name'];
+    $user_id=$row['user_id'];
+    
+    $first_name_speaker[$i]=$row['first_name'];
     //$last_name_speaker[$i]=$row2['last_name'];
     //setList
     //$options = $options."<option>$first_name_speaker[$i] $last_name_speaker[$i]</option>";
@@ -53,14 +62,9 @@ while($row = mysqli_fetch_array($result))
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div >
             <div class="navbar-header">
-
-                <!-- logo -->
                 <div class="site-branding" style="padding-left: 20px;">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png" alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -95,6 +99,7 @@ while($row = mysqli_fetch_array($result))
 
 <script>
 $(document).ready(function(){
+    
  $('.selectpicker').selectpicker();
 
  $('#framework').change(function(){

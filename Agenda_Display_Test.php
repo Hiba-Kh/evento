@@ -17,7 +17,6 @@
     $Agenda_id=$_SESSION['Agenda_id'];
     $event_id =$_SESSION['event_id'] ;
     $description=$_SESSION['description'] ;
-
    ?>
     <script src="js/jquery-3.2.1.min.js"></script>
      <script>
@@ -41,14 +40,7 @@
             });     
     });
     
-    $(".adding").click(function(){
-             var item_speaker = $(this).parent();
-             var id_speaker =$(this).attr('rel'); 
-
-            $.post('DeleteAgenda.php',{'id' : id_speaker},function(data){
-              $(item_speaker).hide();
-            });     
-    });
+    
 });                
              </script>
    
@@ -122,7 +114,7 @@
                                 echo '    </a>';
                              echo '    </h4>';
                           echo   "<a href='#' class='delete' rel ='$value->session_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Session</p></a>";
-                         echo   "<a href='#' class='adding' rel ='$value->session_id'><img  src='assets/images/photos/add1.png' alt='add' width='30' height='30' style='float:left;' /><p class='section-title'>Add Speaker/s</p></a>";
+                         echo   "<a href='SelectSpeaker.php?id=$value->session_id'><img  src='assets/images/photos/add1.png' alt='add' width='30' height='30' style='float:left;' /><p class='section-title'>Add Speaker/s</p></a>";
                         echo '      </div>';
                       echo '    </div>';
     } 

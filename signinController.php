@@ -77,24 +77,52 @@ else
 
                 $_SESSION['user_data'] = $user;
 
-                if (strcmp($user->type , "member")==0)
-                {
-                    header("location: memberProfileView.php");
-                }
-                if (strcmp($user->type , "admin")==0)
+                
+              
+                
+                
+                if (strcmp($user->type ,"member")==0)
+                {              
+$mysqlT="SELECT * FROM speaker WHERE speaker.speaker_id = $user->id ";
+$rT=mysqli_query($conn,$mysqlT);
+if (!$rT)
+{
+header("location: memberProfileView.php");
+}
+else {
+$mysql2="SELECT * FROM users WHERE users.user_id = $user->id ";
+$email=$row2['email'];       
+$mysql3="UPDATE login SET type='speaker' WHERE login.email='$email' ";
+$r3=mysqli_query($conn,$mysql3);
+
+if(!$r3){
+    
+  echo"failed"; 
+}
+else{
+header("location: speakerProfileView.php");
+}
+}                        
+}
+                
+                if (strcmp($user->type ,"admin")==0)
                 {
 $i=0;               
-$mysql_qry_event="SELECT * FROM my_event where my_event.admin_id=$user->id";
-$r_event=mysqli_query($conn,$mysql_qry_event);
-$row_event= mysqli_fetch_assoc($r_event);
-
-if (!$r_event)
+$mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
+$r_audience=mysqli_query($conn,$mysql_qry_audience);
+if (!$r_audience)
 {
-   echo "NO events for this admin";
+   echo "NO attended events for this user";
    die(mysqli_error($conn)); 
 }
 else {
-while ($row_event= mysqli_fetch_assoc($r_event)) 
+$row_audience= mysqli_fetch_assoc($r_audience);
+$event_id=$row_audience['event_id'];
+
+$mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql_qry_event);
+
+while ($row_event= mysqli_fetch_assoc($r)) 
     {
 $event = new eventData();
 $event->event_id = $row_event['event_id'];
@@ -179,8 +207,12 @@ $j++;
                 }
             
                 if (strcmp($user->type , "audience")==0)
-                {    
-$i=0;               
+                {  
+$mysqlT = "SELECT * FROM speaker where speaker.speaker_id=$user->id";
+$rT=mysqli_query($conn,$mysqlT);
+if (!$rT)
+{
+    $i=0;               
 $mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
 $r_audience=mysqli_query($conn,$mysql_qry_audience);
 $row_audience= mysqli_fetch_assoc($r_audience);
@@ -271,8 +303,22 @@ $j++;
                 $_SESSION['event_data'] = $arr;
                 $_SESSION['event_Intrested'] = $arr2;
                 header("location: audienceProfileView.php");
-                }
+}
+else {
+$mysql2="SELECT * FROM users WHERE users.user_id = $user->id ";
+$email=$row2['email'];       
+$mysql3="UPDATE login SET type='speaker' WHERE login.email='$email' ";
+$r3=mysqli_query($conn,$mysql3);
+if(!$r3){  
+  echo"failed"; 
+}
+else{
+ header("location: speakerProfileView.php");
+}
 
+}                    
+                }
+             
                 }
             else
             {
