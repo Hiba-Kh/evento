@@ -15,6 +15,9 @@
     session_start();
     $session_data=$_SESSION['session_data'];
     $Agenda_id=$_SESSION['Agenda_id'];
+    $event_id =$_SESSION['event_id'] ;
+    $description=$_SESSION['description'] ;
+
    ?>
     <script src="js/jquery-3.2.1.min.js"></script>
      <script>
@@ -35,6 +38,15 @@
 
             $.post('DeleteAgenda.php',{'id' : id_Agenda},function(data){
               $(item_Agenda).hide();
+            });     
+    });
+    
+    $(".adding").click(function(){
+             var item_speaker = $(this).parent();
+             var id_speaker =$(this).attr('rel'); 
+
+            $.post('DeleteAgenda.php',{'id' : id_speaker},function(data){
+              $(item_speaker).hide();
             });     
     });
 });                
@@ -83,9 +95,11 @@
             </div>
             <div class="row">
             <div id="list_agenda" class="col-md-12">
-           <h2 class="section-title">Agenda</h2>
-            <h3 class="section-title">**Some Description of the conference</h3>
-     <?php echo  "<a href='#' class='deleteAgenda' rel ='$Agenda_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Agenda</p></a>";?>
+           <?php echo  " <a href='Create_Next.html?id=$event_id'> <img  src='assets/images/photos/add1.png' alt='add' width='28' height='28' style='float:left;' /><p class='section-title' style='font-size:1.3em; font-weight:bold;'>Add Agenda</p></a>" ;?>
+           <h2 class="section-title"  style='float:left;'>Agenda</h2>
+           <br> <br> <br>
+        <?php echo    "<h3 class='section-title'>**$description</h3>";?>
+     <?php echo  "<a href='#' class='deleteAgenda' rel ='$Agenda_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'  style='font-size:1.3em;font-weight:bold;'>Delete Agenda</p></a>";?>
            <?php    
             foreach($_SESSION['session_data'] as $key=>$value)
     {
@@ -108,12 +122,13 @@
                                 echo '    </a>';
                              echo '    </h4>';
                           echo   "<a href='#' class='delete' rel ='$value->session_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Session</p></a>";
-                      echo '      </div>';
-                   echo '    </div>';
+                         echo   "<a href='#' class='adding' rel ='$value->session_id'><img  src='assets/images/photos/add1.png' alt='add' width='30' height='30' style='float:left;' /><p class='section-title'>Add Speaker/s</p></a>";
+                        echo '      </div>';
+                      echo '    </div>';
     } 
            ?> 
             <br><br>
-            <?php echo  " <a href='create_agenda.html?id=$Agenda_id'> <img  src='assets/images/photos/add1.png' alt='add' width='28' height='28' style='float:left;' /><p class='section-title' style='font-size:1.3em;'>Add Session</p></a>" ;?>
+            <?php echo  " <a href='create_agenda.html?id=$Agenda_id'> <img  src='assets/images/photos/add1.png' alt='add' width='28' height='28' style='float:left;' /><p class='section-title' style='font-size:1.3em; font-weight:bold;'>Add Session</p></a>" ;?>
 
         </div>
                         </div>

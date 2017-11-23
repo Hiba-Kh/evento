@@ -13,7 +13,7 @@ $sp_lname =array();
 $sp_con=array();
 $i=0;
 $s=0;
-
+$description;
 $mysql_qry="SELECT * FROM agenda WHERE agenda.event_id = $id ";
 $r=mysqli_query($conn,$mysql_qry);
 if (!$r)
@@ -43,11 +43,17 @@ while ($row2= mysqli_fetch_assoc($r2))
     $myObj1->id = $agenda_id;
     $myObj1->session_id = $row2['session_id'];
     $myObj1->event_id=$id;
-    $session_id =$row2['session_id'];
     $myObj1->name = $row2['title'];
     $myObj1->start = $row2['start_time'];
     $myObj1->end = $row2['end_time'];
     $myObj1->location = $row2['location'];
+    
+    $session_id =$row2['session_id'];
+
+$mysql_qry5="SELECT * FROM my_event WHERE my_event.event_id = $id ";
+$r5=mysqli_query($conn,$mysql_qry5);
+$row5 = mysqli_fetch_assoc($r5);
+$description = $row5['description'];
     
 $mysql_qry3="SELECT speaker_id FROM session_speaker WHERE session_speaker.session_id = $session_id ";
 $r3=mysqli_query($conn,$mysql_qry3);
@@ -82,6 +88,9 @@ $sp_lname[$k]=$row4['last_name'];
 }}}}}
  $_SESSION['session_data'] = $arr;
  $_SESSION['Agenda_id'] = $agenda_id;
+ $_SESSION['event_id'] = $id;
+ $_SESSION['description'] = $description;
+
  header("location: Agenda_Display_Test.php");
 
 ?>

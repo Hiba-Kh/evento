@@ -7,6 +7,8 @@ $username = "root";
 $password = "";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
+
+
 class Anything {
 
     var $id;
@@ -22,7 +24,7 @@ $id = $_GET["id"];
 $myObj0 = new Anything();
 $myObj0->id = $id ;
 
-                   $date=$_POST['date_agenda']; 
+                    $date=$_POST['date_agenda']; 
                     $s_time=$_POST['s_time'];                 
                     $e_time=$_POST['e_time'];
            $paymentDate=date('Y-m-d', strtotime($date));
@@ -35,11 +37,12 @@ $end_d = $row2_d['end_date'];
 
 
  $contractDateBegin = date('Y-m-d', strtotime($start_d));
-    $contractDateEnd = date('Y-m-d', strtotime($end_d));
+ $contractDateEnd = date('Y-m-d', strtotime($end_d));
     
 if (($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd))
 {
  $sql = "INSERT INTO agenda (event_id,agenda_date,start_time,end_time) VALUES ($id,'$date','$s_time','$e_time')";
+ 
 
 if(mysqli_query($conn, $sql)){
 
@@ -55,7 +58,7 @@ header("Location:create_agenda.html?id=$id2");
 
 } else{
 
-    
+
 }           
    
 mysqli_close($conn);
@@ -64,7 +67,7 @@ mysqli_close($conn);
 }
 else
 {
-header("Location:Create_Next.html?id=$id");
+header("Location:IncorrectDate.php?id=$id");
 
 }
                    
