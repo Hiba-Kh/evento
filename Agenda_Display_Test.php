@@ -87,6 +87,7 @@
             </div>
             <div class="row">
             <div id="list_agenda" class="col-md-12">
+              
            <?php echo  " <a href='Create_Next.html?id=$event_id'> <img  src='assets/images/photos/add1.png' alt='add' width='28' height='28' style='float:left;' /><p class='section-title' style='font-size:1.3em; font-weight:bold;'>Add Agenda</p></a>" ;?>
            <h2 class="section-title"  style='float:left;'>Agenda</h2>
            <br> <br> <br>
@@ -104,7 +105,7 @@
                        echo '                         <div class="row">';
                          echo '                         <div class="col-md-4">';
                            echo '                              <div class="session">';
-                             echo "                            <time>$value->start - $value->start</time>";
+                             echo "                            <time>$value->start - $value->end</time>";
                                echo "                             <h2>$value->name</h2>";
                                 echo '                        </div>';
                                  echo '                   </div>';

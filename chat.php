@@ -5,8 +5,8 @@
 <title>Lets Chat</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <?php
- require "models.php";
-
+require "models.php";
+$id=$_GET['id'];
 $servername = "localhost";
 $database = "evento";
 $username = "root";
@@ -15,17 +15,11 @@ $password = "";
 $conn = mysqli_connect($servername, $username, $password, $database);
     if(!isset($_SESSION)) 
     { 
-        session_start(); 
+        session_start();
     } 
+        $_SESSION['event_id']=$id;
+        $user=$_SESSION['user_data'];
 
-    if(isset($_SESSION['user_data'])) {
-        
-            $user=$_SESSION['user_data'];
-
-    }
-else{
-	echo "NO DATA";
-	}
 ?>
 <style>
 *{margin:0px; padding:0px;font-family: Helvetica, Arial, sans-serif;}
@@ -70,11 +64,11 @@ function post()
     $.ajax
     ({
       type: 'post',
-      url: 'commentajax.php',
+      url: "commentajax.php?id=" + $("#event_id").val(),
       data: 
       {
          user_comm:comment,
-	     user_name:name
+	     user_name:name,
       },
       success: function (response) 
       {
@@ -117,6 +111,7 @@ function post()
 <form method='post' action="#" onsubmit="return post();" id="my_form" name="my_form">
 <div id="form-container">
 	<div class="form-text">
+       <input type="hidden" name="user_id" id="event_id" value="<?php echo $_SESSION['event_id'] ?>">
     	<input type="text" style="display:none" id="username" value="<?php echo $user->firstname ?>">
     	<textarea id="comment"></textarea>
     </div>

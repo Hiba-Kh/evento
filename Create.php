@@ -56,7 +56,7 @@ $row2= mysqli_fetch_assoc($r2);
 $id = $row2['event_id'];
 
 $sql5 = "INSERT INTO logs (msg,event_id,post_time) VALUES (':',$id,CURRENT_TIMESTAMP)";
-if(mysqli_query($conn, $sql)){
+if(mysqli_query($conn, $sql5)){
        echo "Succ";
 }
 else{
