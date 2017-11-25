@@ -10,6 +10,8 @@ class Anything {
     var $end;
     var $location;
     var $speakers;
+    var $description;
+
 }
 class UserData {
     var $id;
@@ -40,6 +42,11 @@ class AgendaData {
     var $name;
     var $start;
     var $end;
+    var $start_date;
+    var $end_end;
+    var $no_speaker;
+    var $no_tickets;
+    var $description;
     var $session_location;
     var $speakers;
     var $location_id;

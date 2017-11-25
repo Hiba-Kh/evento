@@ -144,12 +144,12 @@ hr {
 .btn:active.focus,
 .btn:active:focus,
 .btn:focus {
-  outline:greenyellow;
+  outline:blue;
 }
 
 .btn {
   border: 3;
-  border-color: greenyellow;
+  border-color: blue;
   border-radius: 0;
   padding: 6px 28px;
   text-transform: uppercase;
@@ -263,7 +263,7 @@ hr {
 .btn-white:hover, .btn-white:focus {
   color: #000;
   background-color: #fff;
-  border-color:greenyellow;
+  border-color:blue;
   border: 3px;
 }
 

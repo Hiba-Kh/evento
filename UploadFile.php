@@ -59,7 +59,7 @@ $msg = "";
 
 
     <div class="container" style="background:gainsboro;align-items: center;height:300px;margin-top: 180px; ">
-                <div  class="row"  style="margin-top:100px;margin-left: 20px;">
+                <div  class="row"  style="margin-top:70px;margin-left: 20px;">
                   <h4 style="float:left;font-weight: bold;font-size:1.7em; " class="section-title">Choose File To Upload </h4>
            <div id="content">
 	<form  method="post"  enctype="multipart/form-data">
@@ -67,7 +67,7 @@ $msg = "";
    <input type="file" id="file" name="file" multiple>
  </div>
  <div style="font-size: 1.3em;">
-     <button type="submit" name="upload" class="btn btn-black" style = "border-color: black;margin-left: 410px;margin-top: 25px;">Upload</button>
+     <button type="submit" name="upload" class="btn btn-black" style = "border-color: black;margin-left: 380px;margin-top: 25px;">Upload</button>
  </div>
 </form> 
 </div>

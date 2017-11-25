@@ -21,7 +21,6 @@ $msg = "";
 			$msg = "Failed to upload image";
 		}
 	}
-
 ?>
 <html>
      <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
@@ -47,10 +46,7 @@ $msg = "";
                 <!-- logo -->
                 <div class="site-branding" style="padding-left: 20px;">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png" alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -60,7 +56,7 @@ $msg = "";
     </nav>
 
     <div class="container" style="background:gainsboro;align-items: center;height:300px;margin-top: 180px; ">
-                <div  class="row"  style="margin-top:100px;margin-left: 20px;">
+                <div  class="row"  style="margin-top:74px;margin-left: 20px;">
                   <h4 style="float:left;font-weight: bold;font-size:1.7em; " class="section-title">Add Sponsor </h4>
            <div id="content">
 	<form method="POST"  enctype="multipart/form-data">
@@ -70,7 +66,7 @@ $msg = "";
 		</div>
 		
 		<div>
-			<button type="submit" name="upload"  style = "border-color: black;margin-left: 410px;margin-top: 25px;" class="btn btn-black" >Upload</button>
+			<button type="submit" name="upload"  style = "border-color: black;margin-left: 380px;margin-top: 25px;" class="btn btn-black" >Upload</button>
 		</div>
 	</form>
 </div>

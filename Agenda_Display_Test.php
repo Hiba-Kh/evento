@@ -46,7 +46,7 @@
    
     
 </head>
-<body>
+<body background="assets/images/White.jpg">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
@@ -114,10 +114,18 @@
                                   echo '      </section>';
                                 echo '    </a>';
                              echo '    </h4>';
-                          echo   "<a href='#' class='delete' rel ='$value->session_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Session</p></a>";
-                         echo   "<a href='SelectSpeaker.php?id=$value->session_id'><img  src='assets/images/photos/add1.png' alt='add' width='30' height='30' style='float:left;' /><p class='section-title'>Add Speaker/s</p></a>";
-                        echo '      </div>';
-                      echo '    </div>';
+                           echo   "<a href='#' class='delete' rel ='$value->session_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Session</p></a>";
+                          echo   "<a href='SelectSpeaker.php?id=$value->session_id'><img  src='assets/images/photos/add1.png' alt='add' width='30' height='30' style='float:left;' /><p class='section-title'>Add Speaker/s</p></a>";
+                      echo '   </div>';
+    
+                            echo "    <div id='collapseTwo' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingTwo'>";
+                            echo '          <div class="panel-body">';
+                            echo '          <h3>Speakers</h3>';
+                            echo   "<a href='SelectSpeaker.php?id=$value->session_id'><img  src='assets/images/photos/delete.png' alt='Delete' width='30' height='30' style='float:left;' /><p class='section-title'>Delete Speaker</p></a>";
+                            echo '</div>';
+                            echo '</div>';
+                        
+                   echo '</div>';
     } 
            ?> 
             <br><br>

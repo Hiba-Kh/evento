@@ -29,6 +29,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     session_start();
     $user=$_SESSION['user_data'];
     $event=$_SESSION['event_data'];
+    
     if($user == null) {
         header("location: signinView.php");
     }

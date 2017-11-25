@@ -110,12 +110,19 @@ header("location: speakerProfileView.php");
 $i=0;               
 $mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
 $r_audience=mysqli_query($conn,$mysql_qry_audience);
-if (!$r_audience)
+if (empty($r_audience))
 {
-   echo "NO attended events for this user";
-   die(mysqli_error($conn)); 
+echo '                       <div class="container">';
+                       echo '                         <div class="row">';
+                         echo '                         <div class="col-md-4">';
+                               echo "                             <h2>Nothing To show Yet</h2>";
+                                                   
+                                    echo '            </div>';
+                                    echo '         </div>';
+    die(mysqli_error($conn)); 
 }
 else {
+
 $row_audience= mysqli_fetch_assoc($r_audience);
 $event_id=$row_audience['event_id'];
 
