@@ -333,8 +333,7 @@ hr {
   .section-title-type {
     color: #313131;
     letter-spacing: 1px;
-    //margin: 0 0 60px;
-    //text-transform: uppercase;
+   
     text-align: left;
   }
 }
@@ -512,7 +511,6 @@ padding:30px;
 
 @media (min-width: 768px) {
   .navbar-custom {
-   // background-color: transparent;
     padding-top: 10px;
   }
 
@@ -678,7 +676,7 @@ padding:30px;
 .grid-item {
   float: left;
   overflow: hidden;
-  padding: 3px;
+  
   margin: 0;
   width: 100%;
 }

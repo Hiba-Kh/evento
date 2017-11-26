@@ -66,9 +66,13 @@ $msg = "";
  <div style="font-size: 1.3em;margin-right: 30px;">
    <input type="file" id="file" name="file" multiple>
  </div>
- <div style="font-size: 1.3em;">
-     <button type="submit" name="upload" class="btn btn-black" style = "border-color: black;margin-left: 380px;margin-top: 25px;">Upload</button>
- </div>
+  <div class="row" style="margin-top:35px; ">            
+        <button type="submit" name="upload"  style = "border-color: black;float:left;" class="btn btn-black" >Upload</button>
+       <?php 
+     $new_id=$id; 
+     echo " <a href='paper.php?id=$new_id' class='btn btn-black' style = 'display: inline;float:right;margin-right:30px;'>Done</a> ";
+     ?>      
+                </div>
 </form> 
 </div>
                 </div>

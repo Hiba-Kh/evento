@@ -7,6 +7,11 @@ $username = "root";
 $password = "";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
+
+    require "models.php";
+
+    session_start();
+    $_SESSION['event_id']=$id;
 $msg = "";
 	if (isset($_POST['upload'])) {
             echo $id;
@@ -66,13 +71,21 @@ $msg = "";
 		</div>
 		
 		<div>
-			<button type="submit" name="upload"  style = "border-color: black;margin-left: 380px;margin-top: 25px;" class="btn btn-black" >Upload</button>
-		</div>
+        <div class="row" style="margin-top:35px; ">            
+        <button type="submit" name="upload"  style = "border-color: black;float:left;" class="btn btn-black" >Upload</button>
+       <?php 
+     $new_id=$id; 
+
+     echo " <a href='Sponsor_Display.php?id=$new_id' class='btn btn-black' style = 'display: inline;float:right;margin-right:30px;'>Done</a> ";
+     ?>      
+                </div>
+                                    </div>
+
 	</form>
 </div>
-                </div>
+</div>
                 
-    </div>
+</div>
 
 
   </body>
