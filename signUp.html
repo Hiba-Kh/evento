@@ -3,132 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <title>Sign Up Form</title>
-  
+  <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
-      <link rel="stylesheet" href="assets/css/style.css">
-
-  
+  <link rel="stylesheet" href="assets/css/style.css">
+<style>
+option
+{
+    
+    color:black;
+}
+    
+</style>
 </head>
 
-<body>
+<body background="assets/images/White.jpg">
   
-<div class="container">
-  <p>* required </p>
+<div class="container" style="color: black;">
   <form action="signup.php" method="post">
     <div class="row">
-      <h4>Account</h4>
+      <h4 style="font-size:1.2em;">Account</h4>
       <div class="input-group input-group-icon">
         
-        <input type="text" name="first_name" placeholder="* First Name"/>
+        <input type="text" name="first_name" placeholder="First Name" required/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
        <div class="input-group input-group-icon">
-        <input type="text"name="last_name" placeholder="* Last Name"/>
+        <input type="text" name="last_name" placeholder="Last Name" required/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       <div class="input-group input-group-icon">
-          <input type="text" name="country" placeholder="Your Country"/>
+          <input type="text" name="country" placeholder="Your Country" required/>
           <div class="input-icon"><i class="fa fa-user"></i></div>
         </div>
       <div class="input-group input-group-icon">
-        <input type="text" name="address" placeholder="Adderss"/>
+        <input type="text" name="address" placeholder="Adderss" required/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       
       <div class="input-group input-group-icon">
-        <input type="email" name = "email" placeholder="* Email Adress"/>
+        <input type="email" name = "email" placeholder="Email Adress" required/>
         <div class="input-icon"><i class="fa fa-envelope"></i></div>
       </div>
       <div class="input-group input-group-icon">
-        <input type="password" name="password" placeholder="* Password"/>
+        <input type="password" name="password" placeholder="Password" required/>
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
       <div class="input-group input-group-icon">
-        <input type="tel" name="phone" placeholder="Phone"/>
+        <input type="tel" name="phone" placeholder="Phone" required/>
         <div class="input-icon"><i class="fa fa-phone"></i></div>
       </div>
       
     </div>
        <div class="row">
        <div class="form-group input-group">
-   <select class="form-control" name="Your_Intreset" id="YourIntreset"  required>
+   <select class="form-control" style="color: black;" name="Your_Intreset" id="YourIntreset"  required>
                                 <option readonly>* Your Intreset</option> 
-                                <option>Medicine</option>
-                                <option>Politics</option>
-                                <option>sport</option>
-                                <option>Technology</option>
-                                <option>Art</option>
-                                <option>Engineering</option>
-                                <option>Science</option>
-                                <option>Food</option>
-                                <option>Law</option>
-                                <option>Economy</option>                                
-                                <option>Media and TV </option>
-                                
-                                
-                                
+                                <option style="color: black;">Medicine</option>
+                                <option style="color: black;">Politics</option>
+                                <option style="color: black;">sport</option>
+                                <option style="color: black;">Technology</option>
+                                <option style="color: black;">Art</option>
+                                <option style="color: black;">Engineering</option>
+                                <option style="color: black;">Science</option>
+                                <option style="color: black;">Food</option>
+                                <option style="color: black;">Law</option>
+                                <option style="color: black;">Economy</option>                                
+                                <option style="color: black;">Media and TV </option>
                                 
         </select>
         </div>
       </div>
-  <div class="row">
-       <div class="form-group input-group">
-   <select class="form-control" name="Your_Profession" id="YourProfession" required>
+  <div class="row" style="width: 100%;">
+       <div class=" input-group input-group-icon">
+   <select class="input-group input-group-icon" style="color: black;" name="Your_Profession" id="YourProfession" required>
                                 <option readonly>Your Profession</option>
-                                <option>Doctor</option>
-                                <option>Engineer</option>
-                                <option>Teacher</option>
-                                <option>Accountan</option>
-                                <option>Trader</option>
-                                <option>journalistic</option>
-                                <option>lawyer</option>
-                                <option>Instructor</option>
-                                           
-                                
+                                <option style="color: black;">Student</option>
+                                <option style="color: black;">Doctor</option>
+                                <option style="color: black;">Engineer</option>
+                                <option style="color: black;">Teacher</option>
+                                <option style="color: black;">Accounting</option>
+                                <option style="color: black;">Trader</option>
+                                <option style="color: black;">journalistic</option>
+                                <option style="color: black;">lawyer</option>
+                                <option style="color: black;">Instructor</option>
         </select>
         </div>
                    </div>
-    <div class="row">
-      <div class="col-half">
+      <div class="row" style="width: 100%;">
         <h4> * Date of Birth</h4>
-        <div class="input-group">
-          <div class="col-third">
-            <input type="text" name="day" placeholder="DD"/>
-          </div>
-          <div class="col-third">
-            <input type="text" name = "month" placeholder="MM"/>
-          </div>
-          <div class="col-third">
-            <input type="text" name="year" placeholder="YYYY"/>
-          </div>
+        <div class="input-group input-group-icon">
+            <input type="date" name="birthDate" required/>
         </div>
-      </div>
-      <div class="col-half">
+        </div>
+        <div class="row">
+
+     
         <h4>* Gender</h4>
         <div class="input-group">
-          <input type="radio" name="gender" value="male" id="gender-male"/>
-          <label for="gender-male">Male</label>
-          <input type="radio" name="gender" value="female" id="gender-female"/>
-          <label for="gender-female">Female</label>
+          <input style="color: black;" type="radio" name="gender" value="male" id="gender-male" required/>
+          <label style="color: black;" for="gender-male">Male</label>
+          <input style="color: black;" type="radio" name="gender" value="female" id="gender-female" required/>
+          <label style="color: black;" for="gender-female">Female</label>
         </div>
-      </div>
-        
+    
+           </div>
+  <div class="row">
         <h4>Profession</h4>
         <div class="input-group">
-          <input type="radio" name="Profession" value="Student" id="Stuednt"/>
-          <label for="Student">Student</label>
-          <input type="radio" name="Profession" value="Professional" id="Professional"/>
-          <label for="Professional">Professional</label>
+          <input style="color: black;" type="radio" name="Profession" value="Student" id="Student" required/>
+          <label style="color: black;" for="Student">Student</label>
+          <input style="color: black;" type="radio" name="Profession" value="Professional" id="Professional" required/>
+          <label style="color: black;" for="Professional">Professional</label>
         </div>
-     
-    </div>
-  
-    <div class="row">
+        </div>
 
-       <button type="submit" class="btn btn-black" id="registration-submit-btn">Submit</button>
+   
+    <div class="row" >
+       <button type="submit" class="btn btn-white" style="border-color: yellowgreen;"  id="registration-submit-btn">Submit</button>
     </div>
   </form>
 </div>
