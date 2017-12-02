@@ -12,7 +12,7 @@ if (empty($_POST["email"]) || empty($_POST['Password']))
 }
 
 else 
-{     echo "here";
+{     
     
     
     $user_email = $_POST["email"];

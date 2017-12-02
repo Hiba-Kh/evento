@@ -1,15 +1,16 @@
 
 <?php
+header('Content-Type: application/json');
 require "conn.php";
 require "models.php";
 $user_email=$_GET["email"];
 $user_pass=$_GET["pass"];
 $event_id=$_GET["id"];
-echo $user_email;
 session_start();
 
 $mysql_qry="SELECT * FROM login WHERE password = '$user_pass' AND email = '$user_email'";
 $result=mysqli_query($conn, $mysql_qry);
+    
     if(!$result) 
     {
         die(mysqli_error($conn));
@@ -39,7 +40,8 @@ $result=mysqli_query($conn, $mysql_qry);
                                 $user->id=$row["user_id"];
                             
                         }
-                            
+                        
+                        echo  json_encode("{\"status\":\"success\"}");
                         $mysql_qry2="SELECT * FROM meta_data WHERE  user_id = '$user->id'";
                         $result2=mysqli_query($conn, $mysql_qry2);
                         if(!$result2) 
@@ -59,7 +61,11 @@ $result=mysqli_query($conn, $mysql_qry);
                         }
                     
                 
-                    }      
+                    }  
+                    else
+                    {
+                        echo  json_encode("{\"status\":\"failure\"}");
+                    }    
                 }
 
             $_SESSION['user_data'] = $user;

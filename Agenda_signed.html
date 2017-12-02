@@ -121,6 +121,8 @@
 
     $(document).ready(function()
     {
+        var speakersInConf = [];
+
         $.ajax
         ({
             url: "agendaController.php?id="+getUrlParameter("id"),
@@ -128,31 +130,24 @@
             success: function(result)
             {
                 console.log(result);
-                function marker ()
-                {
-                    center:new google.maps.LatLng(result.location_lat,result.location_lng);
-                    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                    // lat=geometry.location.lat;
-                    //lng=data.results[0].geometry.location.lng;
-                    //point= new google.maps.LatLng(lat,lng);
-                    map.setCenter(point);
-                    zoom = 14;
-                    marker = createMarker(point,"<h3>Marker"+(markersArray.length+1)+" "+point+"</h3>",zoom);
-                };
+             //   $.each(data, function() {
+//  $.each(this, function(k, v) {
+                //initMap({lat: result.location_lat, lng: result.location_lng});
                     
-                 $.each(result, function(index, value) {
-                 console.log('caste: ' + value.id);
+                 $.each(result.agendas, function() {
+                     $.each(this.sessions,function(index, value){
+                        console.log('sessions: ' + value.session_id);
                         var node = '<div class="panel panel-default">'+
                         '    <div class="panel-heading" role="tab" id="headingTwo">'+
                         '        <h4 class="panel-title">'+
-                        '            <a class="faq-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo'+value.id+'" aria-expanded="false" aria-controls="collapseTwo'+value.id+'">'+
+                        '            <a class="faq-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo'+value.session_id+'" aria-expanded="false" aria-controls="collapseTwo'+value.id+'">'+
                         '                <section id="section-ajenda" class="section-wrapper section-ajenda">'+
                         '                    <div class="container">'+
                         '                        <div class="row">'+
                         '                            <div class="col-md-4">'+
                         '                                <div class="session">'+
-                        '                                    <time>'+value.start+' - '+value.end+'</time>'+
-                        '                                    <h2>'+value.name+'</h2>'+
+                        '                                    <time>'+value.start_time+' - '+value.end_time+'</time>'+
+                        '                                    <h2>'+value.session_title+'</h2>'+
                         '                                </div>'+
                         '                            </div>'+
                         '                        </div>'+
@@ -161,23 +156,26 @@
                         '            </a>'+
                         '        </h4>'+
                         '    </div>';
-                        if(value.speakers.length > 0) {
-                            node += '    <div id="collapseTwo'+value.id+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">'+
-                            '               <div class="panel-body">'+
-                            '            <h3>Speakers</h3>';
 
-                            for (var i =0; i < value.speakers.length; i++) {
-                                node += '<p>' + value.speakers[i] + '</p>';
-                            }
-
-                            node +=   '</div>'+
-                                      '</div>';
+                        if (this.speakers) {
+                            $.each(this.speakers,function(index, speaker){
+                                console.log('speakers: ' + speaker.id);
+                                speakersInConf.push(speaker);
+                                node += '<div id="collapseTwo'+value.session_id+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">'+
+                                        '    <div class="panel-body">'+
+                                        '        <h3>Speakers</h3>';
+                                node += '        <p>' + speaker.firstname + ' ' + speaker.lastname +'</p>';
+                                node += '    </div>'+
+                                        '</div>';
+                            });
                         }
                        
-                    node += '</div>';
+                       
+                        node += '</div>';
                 
-                    $("#list_agenda").append(node);
+                        $("#list_agenda").append(node);
                     });
+                 });
                     var attend= 
                      '<a class="btn btn-white"  id="attendButton" onclick="attendButton()" style="float: right;">Attend</a>'+
                      '<div class="row">'+ 
@@ -196,6 +194,8 @@
 
                     $("#attend").append(attend);
 
+                    drawSpeakerPanel(speakersInConf);
+
                 },
                 error:function(error, code){
                     console.log(error);
@@ -206,6 +206,33 @@
         });
     });
     
+    function drawSpeakerPanel(speakersInConf) {
+        var row = '<div class="row">';
+        for(var index = 0; index < speakersInConf.length; index++) {
+             row += '<div class="col-md-4">'+
+                        '<div class="speaker">'+
+
+                            '<figure>'+
+                            '    <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-1.jpg">'+
+                            '</figure>'+
+                            '<h4>'+ speakersInConf[index].firstname +' '+ speakersInConf[index].lastname + '</h4>'+
+                            '<p>CEO of Peren</p>'+
+                            '<ul class="social-block">'+
+                            '     <li><a href=""><i class="ion-social-twitter"></i></a></li>'+
+                            '    <li><a href=""><i class="ion-social-facebook"></i></a></li>'+
+                            '    <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>'+
+                            '    <li><a href=""><i class="ion-social-googleplus"></i></a></li>'+
+                            '</ul>'+
+
+                        '</div><!-- /.speaker -->'+
+                    '</div><!-- /.col-md-4 -->';
+
+           
+        }
+        row += '</div>';
+        $('#speakersContainer').append(row);
+    }
+
     function attendButton(){
 
         var resp;
@@ -349,6 +376,7 @@
                 });
             });
         }
+    }
     </script>
     <!-- css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -444,7 +472,7 @@
     </section>
     
    <section id="speakers" class="section-speaker speakers">
-        <div class="container">
+        <div id="speakersContainer" class="container">
             <div class="row">
                 <div class="col-md-12">
 
@@ -453,130 +481,7 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="speaker">
-
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-1.jpg">
-                        </figure>
-
-                        <h4>Jhon Smith</h4>
-
-                        <p>CEO of Peren</p>
-
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-
-                    </div><!-- /.speaker -->
-                </div><!-- /.col-md-4 -->
-
-                <div class="col-md-4">
-                    <div class="speaker">
-
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-2.jpg">
-                        </figure>
-
-                        <h4>Jhon Smith</h4>
-
-                        <p>CEO of Peren</p>
-
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-
-                    </div><!-- /.speaker -->
-                </div><!-- /.col-md-4 -->
-
-                <div class="col-md-4">
-                    <div class="speaker">
-
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-3.jpg">
-                        </figure>
-
-                        <h4>Jhon Smith</h4>
-
-                        <p>CEO of Peren</p>
-
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-
-                    </div><!-- /.speaker -->
-                </div><!-- /.col-md-4 -->
-            </div><!-- /.row -->
-
-            <div class="row">
-                <div class="col-md-4">
-
-                    <div class="speaker">
-
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-4.jpg">
-                        </figure>
-
-                        <h4>Jhon Smith</h4>
-
-                        <p>CEO of Peren</p>
-
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="speaker">
-
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-5.jpg">
-                        </figure>
-
-                        <h4>Jhon Smith</h4>
-
-                        <p>CEO of Peren</p>
-
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="speaker">
-                        <figure>
-                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-6.jpg">
-                        </figure>
-                        <h4>Jhon Smith</h4>
-                        <p>CEO of Peren</p>
-                        <ul class="social-block">
-                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
-                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
-                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
-                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </section>
   <section id="facts" class="section bg-image-1 facts text-center">
@@ -626,9 +531,12 @@
 
                         <div id="map"></div>
                         <script>
-                          function initMap()
+                          function initMap(uluru)
                             {
-                                var uluru = {lat: -25.363, lng: 131.044};
+                                if (!uluru) {
+                                    uluru = {lat: 31.898043, lng: 35.204269};
+                                }
+
                                 var map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 4,
                                 center: uluru
@@ -822,6 +730,9 @@
 
 
           }
+    
 
       </script>
+      </body>
+
 </html>
