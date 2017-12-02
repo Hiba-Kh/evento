@@ -140,10 +140,11 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index_signed.php">Home</a></li>
                     <li><a href="memberProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
-                    <li><a  href="signout.php">Sign Out</a></li>   
+                    <li><a href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>
         </div><!-- /.container -->

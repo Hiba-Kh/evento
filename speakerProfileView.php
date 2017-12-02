@@ -90,29 +90,21 @@
         
     </script>
 
-<!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Classy Resume Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //for-mobile-apps -->
 <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="assets/css/style_profile.css" rel="stylesheet" type="text/css" media="all" />
-<!-- gallery -->
 <link type="text/css" rel="stylesheet" href="assets/css/cm-overlay.css" />
-
-<!-- //gallery -->
-<!-- font-awesome icons -->
 <link href="assets/css/font-awesome.css" rel="stylesheet"> 
-
-<!-- //font-awesome icons -->
 <link href="//fonts.googleapis.com/css?family=Gidugu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/main_profile.css">
+<link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="assets/css/main_profile.css">
 </head>
 	
 
@@ -125,10 +117,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                 <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png"  alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -139,43 +128,25 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
             </div><!-- /.navbar-header -->
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-
-                    <!-- navigation menu -->
                     <li><a href="speakerProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
                     <li><a href="SpeakerDisplay.php">Speaker At </a></li>
                     <li><a  href="photos.html">Photos</a></li>
                     <li><a  href="signout.php">Sign Out</a></li>   
-                 
-                   
-                   
-                
                 </ul>
             </div>
         </div><!-- /.container -->
     </nav>
 
 <div class="main" id="home">
-<!-- banner -->
 	<div class="banner" id="banner">
-			
-		
     </div>
-    
-<!-- //banner -->
 	</div>
-<!-- header -->
-	
-
-<!-- //header -->
-<!-- about -->
-
 <div class="about" id="about">
 		
         </div>
@@ -205,16 +176,13 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
                     echo' </div>';   
-          
     } 
      }  
 if(count($_SESSION['event_data']) > 3)
 {
    echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
-    
 }
     ?>             
-                    
                     </div>
              <div  id="showmore" style="display:none;" class="bs-docs-example row" >
      <?php

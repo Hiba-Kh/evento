@@ -12,7 +12,6 @@ $sp_lname =array();
 $sp_con=array();
 $i=0;
 $s=0;
-$myObj0 = new AgendaData();
 $mysql_qry="SELECT * FROM agenda WHERE event_id = $event_id ";
 $result=mysqli_query($conn,$mysql_qry);
 $row= mysqli_fetch_assoc($result);
