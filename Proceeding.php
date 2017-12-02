@@ -1,4 +1,34 @@
-<!DOCTYPE html>
+<?php
+$id = $_GET["id"];
+$servername = "localhost";
+$database = "evento";
+$username = "root";
+$password = "";
+$conn = mysqli_connect($servername, $username, $password, $database);
+$result = mysqli_query($conn, "SELECT * FROM file WHERE file.event_id=$id");
+        $i =0;
+
+ echo'  <section id="faq" class="section-index2 faq">';
+     echo'   <div class="container">';
+          echo'  <div class="row">';
+          echo'      <div class="col-md-12">';
+            echo'        <br>';
+            echo'        <h2 class="section-title">Accepted Papers</h2>';
+            echo'        <br>';
+             echo'       <h3 class="panel-title" style="color:blue;"> Main Conference </h3>';
+       
+while ($row = mysqli_fetch_array($result)) {
+echo"<object data= type='application/pdf' width='300' height='200'>";
+echo"<a href='uploads/".$row['file']."'>File$i.pdf</a>";
+echo'</object>';
+            echo'<br>';
+$i++;
+	}
+        echo'          </div>';
+         echo'       </div>';
+         echo'   </div>';
+   echo' </section>';
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,7 +37,6 @@
 
     <title>Conference</title>
 
-    <!-- css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -20,10 +49,7 @@
                 <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png" alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -34,7 +60,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
             </div><!-- /.navbar-header -->
 
             <div class="collapse navbar-collapse" id="navbar-items">
@@ -48,11 +73,10 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Program
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li class = "active"><a href="Proceeding.html">Proceedings</a></li>
+          <li><a href="Proceeding.php">Proceedings</a></li>
           <li><a href="Panel.html">Panel</a></li>
           <li><a href="Awards.html">Awards</a></li>
-          <li><a href="Paper.html">Paper</a></li>
-          
+          <li><a href="paper.php">Paper</a></li>
           <li><a href="Agenda_signed.html">Agenda</a></li>
           <li><a href="Sponsor_Display.html">Sponsors</a></li>
         </ul>
@@ -63,7 +87,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Venue
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="Accommodation.html">Accommodation</a></li>
+          
           <li><a href="Photos_event.html">Photos</a></li>
           <li><a href="Videos_event.html">Videos</a></li>
          
@@ -88,46 +112,10 @@
 
     
    
- <section id="faq" class="section-index2 faq">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <br>
-                    <h2 class="section-title">Proceedings</h2>
-                    <br>
-                    <h3 class="panel-title" style="color:blue;"> Main Conference </h3>
-               
- <a href="http://dl.acm.org/citation.cfm?id=2976767">Click here</a>
 
- <br> <br>
-                    <h3 class="panel-title" style="color:blue;"> Demos and posters</h3>
-                   
-                    <a href="http://ceur-ws.org/Vol-1725/">Click here</a>
-
-  <br> <br>
-
-<h3 class="panel-title" style="color:blue;"> Models and evolution</h3>
-                   
-                    <a href="http://ceur-ws.org/Vol-1706/">Click here</a>
-
-                    <br> <br>
-
-<h3 class="panel-title" style="color:blue;"> Globalization Of Modeling Languages Workshop</h3>
-                   
-                    <a href="http://ceur-ws.org/Vol-1731/">Click here</a>
-
-  <br> <br>
-
-
-
-                    
-            </div>
-                </div>
-            </div>
-    </section>
     
   
-    <footer class="site-footer" style ="margin-top: 100px;">
+    <footer class="site-footer" style ="margin-top: 230px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

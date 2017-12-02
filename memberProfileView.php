@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,6 @@
 <?php
     require "conn.php";
     require "models.php";
-
     session_start();
     $user=$_SESSION['user_data'];
     if($user == null) {
@@ -15,10 +13,8 @@
     }
 ?>
 
-    <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
-        // A $( document ).ready() block.
         $(document).ready(function() {
             $.ajax({
                 url: "profileController.php?id=" + $("#user_id").val(),
@@ -144,44 +140,29 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-
-                    <!-- navigation menu -->
+                    <li><a href="index_signed.php">Home</a></li>
                     <li><a href="memberProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
-                     <li><a  href="photos.html">Photos</a></li>
-                    <li><a  href="signout.php">Sign Out</a></li>   
-                 
-                   
-                   
-                
+                    <li><a href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>
         </div><!-- /.container -->
     </nav>
 
 <div class="main" id="home">
-<!-- banner -->
 	<div class="banner" id="banner">
 			
 		
     </div>
     
-<!-- //banner -->
 	</div>
-<!-- header -->
-	
 
-<!-- //header -->
-<!-- about -->
 
 <div class="about" id="about">
 		
         </div>
-                    
-    
-<!-- //about-bottom -->
-<!-- services -->
+  
  <section id="upComing" class="section schedule">
         <div class="container">
             <div class="row">

@@ -29,7 +29,6 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     session_start();
     $user=$_SESSION['user_data'];
     $event=$_SESSION['event_data'];
-    
     if($user == null) {
         header("location: signinView.php");
     }
@@ -131,7 +130,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <li><a href="adminProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
-                    <li><a href="Administrated_display.php">My Conferences </a></li>
+                    <li><a href="attendedConf.php">My Conferences </a></li>
                     <li><a href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>
@@ -164,24 +163,23 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     {
          $i++;
      if ($i<4){
-               echo'<div class="col-md-4 col-sm-6">';
-                    echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
+                 echo'<div class="col-md-4 col-sm-6">';
+                 echo'<div class="schedule-box">';
+                 echo"<h3>'$value->name_event'</h3>";
                  echo" <p>'$value->location'</p>";
                  echo' <div class="time">';
                  echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
-                     echo' </div>';
-                    echo' </div>';   
+                 echo' </div>';
+                 echo' </div>';   
           
     } 
      }  
-if(count($_SESSION['event_data']) > 3)
-{
-   echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
-    
-}
+    if(count($_SESSION['event_data']) > 3)
+    {
+           echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
+    }
     ?>             
                     
                     </div>
@@ -202,7 +200,10 @@ if(count($_SESSION['event_data']) > 3)
                     echo' </div>';   
           
     } 
-       echo '<input type="button" class="btn btn-black" name="Show less" value="Show less" style="margin-top:50px;margin-right:470px;margin-left:15px;width:150px;height:50px;" onClick="showLess()"> ';     
+    
+               echo '<input type="button" class="btn btn-black" name="Show less" value="Show less" style="margin-top:50px;margin-right:470px;margin-left:15px;width:150px;height:50px;" onClick="showLess()"> ';     
+
+    
 
     ?>             
                     
@@ -241,11 +242,10 @@ if(count($_SESSION['event_data']) > 3)
           
     } 
      }  
-if(count($_SESSION['event_data']) > 3){
-
-  
-    echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
-}
+if(count($_SESSION['event_data']) > 3)
+    {
+   echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
+    }
     ?>             
                     
                     </div>
@@ -266,7 +266,6 @@ if(count($_SESSION['event_data']) > 3){
                     echo' </div>';   
           
     } 
-    
        echo '<input type="button" class="btn btn-black" name="Show less" value="Show less" style="margin-top:50px;margin-right:470px;margin-left:15px;width:150px;height:50px;" onClick="showLess2()"> ';     
 
     ?>             

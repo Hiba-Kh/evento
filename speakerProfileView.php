@@ -90,29 +90,21 @@
         
     </script>
 
-<!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Classy Resume Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //for-mobile-apps -->
 <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="assets/css/style_profile.css" rel="stylesheet" type="text/css" media="all" />
-<!-- gallery -->
 <link type="text/css" rel="stylesheet" href="assets/css/cm-overlay.css" />
-
-<!-- //gallery -->
-<!-- font-awesome icons -->
 <link href="assets/css/font-awesome.css" rel="stylesheet"> 
-
-<!-- //font-awesome icons -->
 <link href="//fonts.googleapis.com/css?family=Gidugu" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/main_profile.css">
+<link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="assets/css/main_profile.css">
 </head>
 	
 
@@ -125,10 +117,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                 <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png"  alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -139,134 +128,151 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
             </div><!-- /.navbar-header -->
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-
-                    <!-- navigation menu -->
                     <li><a href="speakerProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
-                    <li><a href="administrated.html">Speaker At </a></li>
-                     <li><a  href="photos.html">Photos</a></li>
+                    <li><a href="SpeakerDisplay.php">Speaker At </a></li>
+                    <li><a  href="photos.html">Photos</a></li>
                     <li><a  href="signout.php">Sign Out</a></li>   
-                 
-                   
-                   
-                
                 </ul>
             </div>
         </div><!-- /.container -->
     </nav>
 
 <div class="main" id="home">
-<!-- banner -->
 	<div class="banner" id="banner">
-			
-		
     </div>
-    
-<!-- //banner -->
 	</div>
-<!-- header -->
-	
-
-<!-- //header -->
-<!-- about -->
-
 <div class="about" id="about">
 		
         </div>
                     
+ <section id="upComing" class="section schedule">
+        <div class="container" style="width:1400px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Attended Conferences</h3>
+                </div>
+            </div>
+                <div  id="coming_events" class="bs-docs-example row" >
+     <?php
+     $i=0;
+     $j=0;
+     foreach($_SESSION['event_data'] as $key=>$value)
+    {
+         $i++;
+     if ($i<4){
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+    } 
+     }  
+if(count($_SESSION['event_data']) > 3)
+{
+   echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
+}
+    ?>             
+                    </div>
+             <div  id="showmore" style="display:none;" class="bs-docs-example row" >
+     <?php
     
-<!-- //about-bottom -->
-<!-- services -->
- <section id="upComing" class="section schedule">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="section-title">To be attended Conferences</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="09:00">09:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Welcome and intro</h3>
-                        <p> SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Tips and share</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>View from the top</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                       
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-            </div>
-    </section>
+     foreach($_SESSION['event_data'] as $key=>$value)
+    {
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+          
+    } 
+       echo '<input type="button" class="btn btn-black" name="Show less" value="Show less" style="margin-top:50px;margin-right:470px;margin-left:15px;width:150px;height:50px;" onClick="showLess()"> ';     
 
-<!-- //services -->
-<!-- /education -->
- <section id="upComing" class="section schedule">
-        <div class="container">
+    ?>             
+                    
+                    </div>
+            
+            
+            
+            
+ </section>
+    
+    
+ <section class="section schedule">
+        <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title">Intrested Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Interested Conferences</h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="09:00">09:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Welcome and intro</h3>
-                        <p> SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
+                <div  id="InterestedComing" class="bs-docs-example row" >
+                        <?php
+     $j=0;
+     foreach($_SESSION['event_Intrested'] as $key=>$value)
+    {
+         $j++;
+     if ($j<4){
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+          
+    } 
+     }  
+if(count($_SESSION['event_data']) > 3){
+
+  
+    echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
+}
+    ?>             
+                    
                     </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Tips and share</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
+             <div  id="showmore2" style="display:none;" class="bs-docs-example row" >
+     <?php
+    
+     foreach($_SESSION['event_Intrested'] as $key=>$value)
+    {
+               echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';
+                      echo"<h3>'$value->name_event'</h3>";
+                 echo" <p>'$value->location'</p>";
+                 echo' <div class="time">';
+                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo'</div>';
+                 echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
+                     echo' </div>';
+                    echo' </div>';   
+          
+    } 
+    
+       echo '<input type="button" class="btn btn-black" name="Show less" value="Show less" style="margin-top:50px;margin-right:470px;margin-left:15px;width:150px;height:50px;" onClick="showLess2()"> ';     
+
+    ?>             
+                    
                     </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>View from the top</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                       
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
+            
                     </div>
-                </div>
-            </div>
     </section>
 	<footer class="site-footer">
         <div class="container">
@@ -371,13 +377,8 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 						$('.cm-overlay').cmOverlay();
 					});
 				</script>
-<!-- js files -->
-
-
-
 <script src="assets/js/bars.js"></script>
 
-<!-- start-smoth-scrolling -->
 <script type="text/javascript" src="assets/js/move-top.js"></script>
 <script type="text/javascript" src="assets/js/easing.js"></script>
 <script type="text/javascript">
@@ -388,12 +389,9 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 		});
 	});
 </script>
-<!-- start-smoth-scrolling -->
 
-<!-- //js -->
 	<script src="assets/js/bootstrap.js"></script>
-<!-- //for bootstrap working -->
-<!-- here stars scrolling icon -->
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			/*
@@ -409,6 +407,34 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 								
 			});
 	</script>
-<!-- //here ends scrolling icon -->
+        <script type="text/javascript">
+		function showMore ()
+                {
+      
+    document.getElementById("showmore").style.display = "";
+    document.getElementById("coming_events").style.display = "none";
+             }
+             
+             function showLess ()
+                {
+      
+    document.getElementById("coming_events").style.display = "";
+    document.getElementById("showmore").style.display = "none";
+             }
+             
+             function showMore2 ()
+                {
+      
+    document.getElementById("showmore2").style.display = "";
+    document.getElementById("InterestedComing").style.display = "none";
+             }
+             
+             function showLess2 ()
+                {
+      
+    document.getElementById("InterestedComing").style.display = "";
+    document.getElementById("showmore2").style.display = "none";
+             }
+	</script>
 </body>
 </html>

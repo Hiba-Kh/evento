@@ -7,7 +7,7 @@ $username = "root";
 $password = "";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
-$result = mysqli_query($conn, "SELECT * FROM sponsor");
+$result = mysqli_query($conn, "SELECT * FROM sponsor WHERE sponsor.event_id=$id");
   echo "<section id='partner' class='section partner' style='padding-bottom:300px;'>";
        echo " <div class='container'>";
         echo "    <div class='row'>";

@@ -5,6 +5,28 @@
 /* 
  * 2.0 Global Style
  */
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-child {
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex:  1 1 auto;
+    -webkit-flex:  1 1 auto;
+    -ms-flex:  1 1 auto;
+    flex:  1 1 auto;
+    margin-right:5px;
+}
+.inline {
+   display:inline-block;
+   margin-right:5px;
+}
+
 html {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
@@ -112,6 +134,10 @@ ul li {
   color: #000;
 }
 
+hr {
+    margin: 20px 0;
+    border: 5px solid #f00;
+}
 .btn.active.focus,
 .btn.active:focus,
 .btn.focus,
@@ -122,7 +148,7 @@ ul li {
 }
 
 .btn {
-  border: 2;
+  border: 3;
   border-color: blue;
   border-radius: 0;
   padding: 6px 28px;
@@ -137,11 +163,7 @@ ul li {
   -webkit-transition-property: -webkit-transform;
           transition-property: transform;
 }
-.btn:hover {
-  -webkit-transform: scale(0.9);
-      -ms-transform: scale(0.9);
-          transform: scale(0.9);
-}
+
 
 .form-control {
   border-radius: 0;
@@ -242,7 +264,7 @@ ul li {
   color: #000;
   background-color: #fff;
   border-color:blue;
-  border: 1px;
+  border: 3px;
 }
 
 .btn-black {
@@ -311,8 +333,7 @@ ul li {
   .section-title-type {
     color: #313131;
     letter-spacing: 1px;
-    //margin: 0 0 60px;
-    //text-transform: uppercase;
+   
     text-align: left;
   }
 }
@@ -490,7 +511,6 @@ padding:30px;
 
 @media (min-width: 768px) {
   .navbar-custom {
-   // background-color: transparent;
     padding-top: 10px;
   }
 
@@ -656,7 +676,7 @@ padding:30px;
 .grid-item {
   float: left;
   overflow: hidden;
-  padding: 3px;
+  
   margin: 0;
   width: 100%;
 }

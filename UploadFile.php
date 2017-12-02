@@ -24,14 +24,12 @@ $msg = "";
 
 ?>
 <html>
-     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
@@ -61,16 +59,20 @@ $msg = "";
 
 
     <div class="container" style="background:gainsboro;align-items: center;height:300px;margin-top: 180px; ">
-                <div  class="row"  style="margin-top:100px;margin-left: 20px;">
+                <div  class="row"  style="margin-top:70px;margin-left: 20px;">
                   <h4 style="float:left;font-weight: bold;font-size:1.7em; " class="section-title">Choose File To Upload </h4>
            <div id="content">
 	<form  method="post"  enctype="multipart/form-data">
  <div style="font-size: 1.3em;margin-right: 30px;">
    <input type="file" id="file" name="file" multiple>
  </div>
- <div style="font-size: 1.3em;">
-     <button type="submit" name="upload" class="btn btn-black" style = "border-color: black;margin-left: 410px;margin-top: 25px;">Upload</button>
- </div>
+  <div class="row" style="margin-top:35px; ">            
+        <button type="submit" name="upload"  style = "border-color: black;float:left;" class="btn btn-black" >Upload</button>
+       <?php 
+     $new_id=$id; 
+     echo " <a href='paper.php?id=$new_id' class='btn btn-black' style = 'display: inline;float:right;margin-right:30px;'>Done</a> ";
+     ?>      
+                </div>
 </form> 
 </div>
                 </div>

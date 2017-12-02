@@ -1,7 +1,7 @@
 <?php
 require "conn.php";
 
-$flag_firstname =  $flag_lastname = $flag_email = $flag_password  = $flag_gender = $flag_interest = $flag_day = $flag_month =  $flag_year = false;
+$flag_firstname =  $flag_lastname = $flag_email = $flag_password  = $flag_gender = $flag_interest = $flag_birthDate = false;
 
 if(empty($_POST['first_name'])) 
 {
@@ -54,23 +54,13 @@ if(empty($_POST['gender']))
 }
 else $gender = $_POST["gender"];
 
-if(empty($_POST['day'])) 
+if(empty($_POST['birthDate'])) 
 {
-    $flag_day = true;
+    $flag_birthDate = true;
 }
-else $day = $_POST["day"];
+else $birthDate = $_POST["birthDate"];
 
-if(empty($_POST['month'])) 
-{
-    $flag_month = true;
-}
-else $month = $_POST["month"];
 
-if(empty($_POST['year'])) 
-{
-    $flag_year = true;
-}
-else $year = $_POST["year"];
 if(isset($_POST['Profession'])) 
 {
 $professional_student = $_POST["Profession"];
@@ -84,7 +74,7 @@ $address = $_POST["address"];
 
 
 
-if ( $flag_year || $flag_firstname || $flag_lastname || $flag_email || $flag_password || $flag_interest || $flag_gender || $flag_day || $flag_month || $flag_year)
+if (  $flag_firstname || $flag_lastname || $flag_email || $flag_password || $flag_interest || $flag_gender || $flag_birthDate)
 {
     echo "<script type='text/javascript'>alert('enter all the required field')
     window.location.href='signUp.html';
@@ -110,7 +100,7 @@ while($row4 = mysqli_fetch_assoc($result4))
 }
 
 
-$mysql_qry2 = "INSERT INTO meta_data (user_id,gender,interest,BD_day,BD_month,BD_year,professional_student,job,address) VALUES ('$user_id','$gender', '$interest', '$day','$month','$year','$professional_student','$prof','$address')";
+$mysql_qry2 = "INSERT INTO meta_data (user_id,gender,interest,BirthDate,professional_student,job,address) VALUES ('$user_id','$gender', '$interest', '$birthDate','$professional_student','$prof','$address')";
 $result2=mysqli_query($conn, $mysql_qry2);
 if(!$result2) 
 {

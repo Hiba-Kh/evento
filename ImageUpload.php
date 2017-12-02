@@ -7,6 +7,11 @@ $username = "root";
 $password = "";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
+
+    require "models.php";
+
+    session_start();
+    $_SESSION['event_id']=$id;
 $msg = "";
 	if (isset($_POST['upload'])) {
             echo $id;
@@ -21,7 +26,6 @@ $msg = "";
 			$msg = "Failed to upload image";
 		}
 	}
-
 ?>
 <html>
      <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
@@ -47,10 +51,7 @@ $msg = "";
                 <!-- logo -->
                 <div class="site-branding" style="padding-left: 20px;">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png" alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -60,7 +61,7 @@ $msg = "";
     </nav>
 
     <div class="container" style="background:gainsboro;align-items: center;height:300px;margin-top: 180px; ">
-                <div  class="row"  style="margin-top:100px;margin-left: 20px;">
+                <div  class="row"  style="margin-top:74px;margin-left: 20px;">
                   <h4 style="float:left;font-weight: bold;font-size:1.7em; " class="section-title">Add Sponsor </h4>
            <div id="content">
 	<form method="POST"  enctype="multipart/form-data">
@@ -70,13 +71,21 @@ $msg = "";
 		</div>
 		
 		<div>
-			<button type="submit" name="upload"  style = "border-color: black;margin-left: 410px;margin-top: 25px;" class="btn btn-black" >Upload</button>
-		</div>
+        <div class="row" style="margin-top:35px; ">            
+        <button type="submit" name="upload"  style = "border-color: black;float:left;" class="btn btn-black" >Upload</button>
+       <?php 
+     $new_id=$id; 
+
+     echo " <a href='Sponsor_Display.php?id=$new_id' class='btn btn-black' style = 'display: inline;float:right;margin-right:30px;'>Done</a> ";
+     ?>      
+                </div>
+                                    </div>
+
 	</form>
 </div>
-                </div>
+</div>
                 
-    </div>
+</div>
 
 
   </body>

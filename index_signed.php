@@ -22,7 +22,15 @@
                 text-align: center;
             }
         </style>
-
+<?php
+    require "conn.php";
+    require "models.php";
+    session_start();
+    $user=$_SESSION['user_data'];
+    if($user == null) {
+        header("location: signinView.php");
+    }
+?>
     <script>
         $(document).ready(function() {
             $.ajax({
@@ -107,6 +115,8 @@
 
 </head>
  <body data-spy="scroll" data-target="#site-nav">
+         <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
+
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
@@ -128,7 +138,8 @@
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="signinView.php">Sign in</a></li>
+                
+                    <li><a href="memberProfileView.php">My Profile </a></li> 
                     <li><a data-scroll href="#about">About</a></li>          
                     <li><a data-scroll href="#upComing">UpComing</a></li> 
                     <li><a data-scroll href="#photos">Photos</a></li>

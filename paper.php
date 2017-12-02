@@ -5,7 +5,7 @@ $database = "evento";
 $username = "root";
 $password = "";
 $conn = mysqli_connect($servername, $username, $password, $database);
-$result = mysqli_query($conn, "SELECT * FROM file");
+$result = mysqli_query($conn, "SELECT * FROM file WHERE file.event_id=$id");
         $i =0;
 
  echo'  <section id="faq" class="section-index2 faq">';

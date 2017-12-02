@@ -15,8 +15,7 @@ class Anything {
                     var $c_name;
                     var  $s_date;                 
                     var $e_date;    
-                    var $s_time;                
-                    var $e_time;
+                   
                     var $type;
                     var $location;
                     var $description;
@@ -42,8 +41,7 @@ $myObj0->id = $row2['event_id'];
 $myObj0->c_name = $row2['event_name'];
 $myObj0->s_date = $row2['start_date'];
 $myObj0->e_date = $row2['end_date'];
-$myObj0->s_time = $row2['start_time'];
-$myObj0->e_time = $row2['end_time'];
+
 $myObj0->description= $row2['description'];
 $myObj0->number = $row2['number_att'];
 $id_type= $row2['event_type_id'];

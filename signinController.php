@@ -3,20 +3,17 @@ require "conn.php";
 require "models.php";
 
 session_start();
-
 $error='';
 if (empty($_POST["email"]) || empty($_POST['Password']))
 {
-    
     $error = "Email or Passwrd is invlid";
 }
 
 else 
 {     
-    
-    
     $user_email = $_POST["email"];
     $user_pass = $_POST["Password"];
+    //CHECKING IF THIS IS A REAL USER
     $mysql_qry="SELECT * FROM login WHERE password = '$user_pass' AND email = '$user_email'";
     $result=mysqli_query($conn, $mysql_qry);
         if(!$result) 
@@ -28,14 +25,16 @@ else
             $rows = mysqli_num_rows($result);
             if ($rows == 1)
             {
-                
+                $arr=array();
+                $arr2=array();
                 $user = new UserData();
+                //GETS TYPE OF USER
                 $type_row = mysqli_fetch_assoc($result);                
                 $user->type = $type_row['type'];
                 echo $user->type;
-                
-                $mysql_qry="SELECT * FROM users WHERE  email = '$user_email'";
-                $result=mysqli_query($conn, $mysql_qry);
+//GETS USER INFORMATION                
+$mysql_qry="SELECT * FROM users WHERE  email = '$user_email'";
+$result=mysqli_query($conn, $mysql_qry);
                 if(!$result) 
                 {
                     die(mysqli_error($conn));
@@ -53,54 +52,548 @@ else
                           
                         }
                          
-                        $mysql_qry2="SELECT * FROM meta_data WHERE  user_id = '$user->id'";
-                        $result2=mysqli_query($conn, $mysql_qry2);
+$mysql_qry2="SELECT * FROM meta_data WHERE  user_id = '$user->id'";
+$result2=mysqli_query($conn, $mysql_qry2);
                         if(!$result2) 
                         {
                             die(mysqli_error($conn));
                         }
                         if (mysqli_num_rows($result2) == 1)
                         {
-                            
                             while($row2 = mysqli_fetch_assoc($result2)) 
                             {
-                                
                                 $user->gender=$row2["gender"];
                                 $user->address=$row2["address"];
                                 $user->job=$row2["job"];
                             }
-                
                         }
-                    
-                
                     }      
                 }
 
-                $_SESSION['user_data'] = $user;
-                
-                if (strcmp($user->type , "member")==0)
-                {
-                    
-                    header("location: memberProfileView.php");
-                    
+                        $_SESSION['user_data'] = $user;
+//////////////////////////////////////////////////**********************************************************************                
+if (strcmp($user->type ,"member")== 0)
+{
+//CHECK IF HE IS A SPEAKER    
+$mysqlT="SELECT * FROM speaker WHERE speaker.speaker_id = $user->id ";
+$rT=mysqli_query($conn,$mysqlT);
+if (!$rT)
+{ 
+ $empty_div=0;
+ $empty_div2=0;
+ $_SESSION['empty_attend']=$empty_div;
+ $_SESSION['empty_intrested']=$empty_div2;
+header("location: memberProfileView.php");
+}
+else {
+$mysql3="UPDATE login SET type='speaker' WHERE login.email='$user->email' ";
+$r3=mysqli_query($conn,$mysql3);
 
+if(!$r3){
+    
+  echo"failed"; 
+}
+else{
+ $i=0;               
+$mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
+$r_audience=mysqli_query($conn,$mysql_qry_audience);
+$row_audience= mysqli_fetch_assoc($r_audience);
+$event_id=$row_audience['event_id'];
+
+$mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql_qry_event);
+if (!$r)
+{
+$empty_div=0;
+   die(mysqli_error($conn)); 
+}
+else {
+while ($row_event= mysqli_fetch_assoc($r)) 
+    {
+$event = new eventData();
+$event->event_id = $row_event['event_id'];
+$event->location = $row_event['location_id'];
+$event->name_event = $row_event['event_name'];
+$event->start_date = $row_event['start_date'];
+$event->end_date = $row_event['end_date'];
+
+$id=$row_event['event_id'];
+$arr_date[$j] = $row_event['start_date'];
+//Display If it has Agenda
+$mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
+$r3=mysqli_query($conn,$mysql_qry3);
+if (!$r3)
+{
+$event->start = 'un';
+$event->end ='un';
+}
+else{
+ $row3= mysqli_fetch_assoc($r3);
+$event->start = $row3['start_time'];
+$event->end = $row3['end_time'];
+}
+$arr[$i]=$event;
+$i++;
+    }
+}
+
+
+$j=0;               
+$mysql_qry_Intrested="SELECT * FROM interested where interested.user_id=$user->id";
+$r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
+
+if (!$r_Intrested)
+{
+$empty_div2=0;
+   die(mysqli_error($conn)); 
+}
+else {
+ $row_Intrested= mysqli_fetch_assoc($r_Intrested);
+ $conference_type=$row_Intrested['interested_id'];
+ $mysql_qry_Intrested2="SELECT * FROM my_event where my_event.event_type_id=$conference_type";
+ $r_Intrested2=mysqli_query($conn,$mysql_qry_Intrested2);
+    
+while ($row_Intrested2= mysqli_fetch_assoc($r_Intrested2)) 
+    {
+$event2 = new eventData();
+$event2->event_id = $row_Intrested2['event_id'];
+$event2->location = $row_Intrested2['location_id'];
+$event2->name_event = $row_Intrested2['event_name'];
+$event2->start_date = $row_Intrested2['start_date'];
+$event2->end_date = $row_Intrested2['end_date'];
+
+$id2=$row_Intrested2['event_id'];
+$arr_date2[$j] = $row_Intrested2['start_date'];
+//Display If it has Agenda
+$mysql_qry3_Intrested="SELECT * FROM agenda WHERE agenda.event_id = $id2 ";
+$r3_Intrested=mysqli_query($conn,$mysql_qry3_Intrested);
+if (!$r3_Intrested)
+{
+$event2->start = 'un';
+$event2->end ='un';
+}
+else{
+$row3_Intrested= mysqli_fetch_assoc($r3_Intrested);
+$event2->start = $row3_Intrested['start_time'];
+$event2->end = $row3_Intrested['end_time'];
+}
+$arr2[$j]=$event2;
+$j++;
+    }
+}
+                $_SESSION['empty_attend']=$empty_div;
+                $_SESSION['empty_intrested']=$empty_div2;
+                $_SESSION['event_data'] = $arr;
+                $_SESSION['event_Intrested'] = $arr2;
+ header("location: speakerProfileView.php");
+}
+}                        
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////                
+if (strcmp($user->type ,"admin")==0)
+{
+$i=0;               
+$mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
+$r_audience=mysqli_query($conn,$mysql_qry_audience);
+if (empty($r_audience))
+{
+$empty_div=0;                                    
+die(mysqli_error($conn)); 
+}
+else {
+
+$row_audience= mysqli_fetch_assoc($r_audience);
+$event_id=$row_audience['event_id'];
+
+$mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql_qry_event);
+
+while ($row_event= mysqli_fetch_assoc($r)) 
+    {
+$event = new eventData();
+$event->event_id = $row_event['event_id'];
+$event->location = $row_event['location_id'];
+$event->name_event = $row_event['event_name'];
+$event->start_date = $row_event['start_date'];
+$event->end_date = $row_event['end_date'];
+
+$id=$row_event['event_id'];
+$arr_date[$j] = $row_event['start_date'];
+//Display If it has Agenda
+$mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
+$r3=mysqli_query($conn,$mysql_qry3);
+if (!$r3)
+{
+$event->start = 'un';
+$event->end ='un';
+}
+else{
+ $row3= mysqli_fetch_assoc($r3);
+$event->start = $row3['start_time'];
+$event->end = $row3['end_time'];
+}
+$arr[$i]=$event;
+$i++;
+    }
+}
+
+
+$j=0;               
+$mysql_qry_Intrested="SELECT * FROM interested where interested.user_id=$user->id";
+$r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
+
+if (!$r_Intrested)
+{
+$empty_div2=0;                                    
+   die(mysqli_error($conn)); 
+}
+else {
+ $row_Intrested= mysqli_fetch_assoc($r_Intrested);
+ $conference_type=$row_Intrested['interested_id'];
+ $mysql_qry_Intrested2="SELECT * FROM my_event where my_event.event_type_id=$conference_type";
+ $r_Intrested2=mysqli_query($conn,$mysql_qry_Intrested2);
+    
+while ($row_Intrested2= mysqli_fetch_assoc($r_Intrested2)) 
+    {
+$event2 = new eventData();
+$event2->event_id = $row_Intrested2['event_id'];
+$event2->location = $row_Intrested2['location_id'];
+$event2->name_event = $row_Intrested2['event_name'];
+$event2->start_date = $row_Intrested2['start_date'];
+$event2->end_date = $row_Intrested2['end_date'];
+
+$id2=$row_Intrested2['event_id'];
+$arr_date2[$j] = $row_Intrested2['start_date'];
+//Display If it has Agenda
+$mysql_qry3_Intrested="SELECT * FROM agenda WHERE agenda.event_id = $id2 ";
+$r3_Intrested=mysqli_query($conn,$mysql_qry3_Intrested);
+if (!$r3_Intrested)
+{
+$event2->start = 'un';
+$event2->end ='un';
+}
+else{
+$row3_Intrested= mysqli_fetch_assoc($r3_Intrested);
+$event2->start = $row3_Intrested['start_time'];
+$event2->end = $row3_Intrested['end_time'];
+}
+$arr2[$j]=$event2;
+$j++;
+    }
+}
+
+                $_SESSION['event_data'] = $arr;
+                $_SESSION['event_Intrested'] = $arr2;
+                $_SESSION['empty_attend']=$empty_div;
+                $_SESSION['empty_intrested']=$empty_div2;
+
+header("location: adminProfileView.php");
                 }
-                if (strcmp($user->type , "admin")==0)
-                {
-                    
-                    header("location: adminProfileView.php");
-                    
+///////////////////////////////////////////////////////////////////////////////////////////////////
+if (strcmp($user->type , "speaker")==0)
+{
+$i=0;               
+$mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
+$r_audience=mysqli_query($conn,$mysql_qry_audience);
+if (!$r_audience)
+{
+$empty_div=0;                                    
+   die(mysqli_error($conn)); 
+}
+else {
+$row_audience= mysqli_fetch_assoc($r_audience);
+$event_id=$row_audience['event_id'];
 
+$mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql_qry_event);
+
+while ($row_event= mysqli_fetch_assoc($r)) 
+    {
+$event = new eventData();
+$event->event_id = $row_event['event_id'];
+$event->location = $row_event['location_id'];
+$event->name_event = $row_event['event_name'];
+$event->start_date = $row_event['start_date'];
+$event->end_date = $row_event['end_date'];
+
+$id=$row_event['event_id'];
+$arr_date[$j] = $row_event['start_date'];
+//Display If it has Agenda
+$mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
+$r3=mysqli_query($conn,$mysql_qry3);
+if (!$r3)
+{
+$event->start = 'un';
+$event->end ='un';
+}
+else{
+ $row3= mysqli_fetch_assoc($r3);
+$event->start = $row3['start_time'];
+$event->end = $row3['end_time'];
+}
+$arr[$i]=$event;
+$i++;
+    }
+}
+
+
+$j=0;               
+$mysql_qry_Intrested="SELECT * FROM interested where interested.user_id=$user->id";
+$r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
+
+if (!$r_Intrested)
+{
+$empty_div2=0;
+die(mysqli_error($conn)); 
+}
+else {
+ $row_Intrested= mysqli_fetch_assoc($r_Intrested);
+ $conference_type=$row_Intrested['interested_id'];
+ $mysql_qry_Intrested2="SELECT * FROM my_event where my_event.event_type_id=$conference_type";
+ $r_Intrested2=mysqli_query($conn,$mysql_qry_Intrested2);
+    
+while ($row_Intrested2= mysqli_fetch_assoc($r_Intrested2)) 
+    {
+$event2 = new eventData();
+$event2->event_id = $row_Intrested2['event_id'];
+$event2->location = $row_Intrested2['location_id'];
+$event2->name_event = $row_Intrested2['event_name'];
+$event2->start_date = $row_Intrested2['start_date'];
+$event2->end_date = $row_Intrested2['end_date'];
+
+$id2=$row_Intrested2['event_id'];
+$arr_date2[$j] = $row_Intrested2['start_date'];
+//Display If it has Agenda
+$mysql_qry3_Intrested="SELECT * FROM agenda WHERE agenda.event_id = $id2 ";
+$r3_Intrested=mysqli_query($conn,$mysql_qry3_Intrested);
+if (!$r3_Intrested)
+{
+$event2->start = 'un';
+$event2->end ='un';
+}
+else{
+$row3_Intrested= mysqli_fetch_assoc($r3_Intrested);
+$event2->start = $row3_Intrested['start_time'];
+$event2->end = $row3_Intrested['end_time'];
+}
+$arr2[$j]=$event2;
+$j++;
+    }
+}
+
+                $_SESSION['event_data'] = $arr;
+                $_SESSION['event_Intrested'] = $arr2;  
+                $_SESSION['empty_attend']=$empty_div;
+                $_SESSION['empty_intrested']=$empty_div2;
+header("location: speakerProfileView.php");
                 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
+if (strcmp($user->type , "audience")==0)
+{  
+$mysqlT = "SELECT * FROM speaker where speaker.speaker_id=$user->id";
+$rT=mysqli_query($conn,$mysqlT);
+if (!$rT)
+{
+$i=0;               
+$mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
+$r_audience=mysqli_query($conn,$mysql_qry_audience);
+$row_audience= mysqli_fetch_assoc($r_audience);
+$event_id=$row_audience['event_id'];
+
+$mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql_qry_event);
+if (!$r)
+{
+$empty_div=0;
+   die(mysqli_error($conn)); 
+}
+else {
+while ($row_event= mysqli_fetch_assoc($r)) 
+    {
+$event = new eventData();
+$event->event_id = $row_event['event_id'];
+$event->location = $row_event['location_id'];
+$event->name_event = $row_event['event_name'];
+$event->start_date = $row_event['start_date'];
+$event->end_date = $row_event['end_date'];
+
+$id=$row_event['event_id'];
+$arr_date[$j] = $row_event['start_date'];
+//Display If it has Agenda
+$mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
+$r3=mysqli_query($conn,$mysql_qry3);
+if (!$r3)
+{
+$event->start = 'un';
+$event->end ='un';
+}
+else{
+ $row3= mysqli_fetch_assoc($r3);
+$event->start = $row3['start_time'];
+$event->end = $row3['end_time'];
+}
+$arr[$i]=$event;
+$i++;
+    }
+}
 
 
-                if (strcmp($user->type , "speaker")==0)
-                {                    
-                    header("location: speakerProfileView.php");
-                    
+$j=0;               
+$mysql_qry_Intrested="SELECT * FROM interested where interested.user_id=$user->id";
+$r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
+
+if (!$r_Intrested)
+{
+$empty_div2=0;
+   die(mysqli_error($conn)); 
+}
+else {
+ $row_Intrested= mysqli_fetch_assoc($r_Intrested);
+ $conference_type=$row_Intrested['interested_id'];
+ $mysql_qry_Intrested2="SELECT * FROM my_event where my_event.event_type_id=$conference_type";
+ $r_Intrested2=mysqli_query($conn,$mysql_qry_Intrested2);
+    
+while ($row_Intrested2= mysqli_fetch_assoc($r_Intrested2)) 
+    {
+$event2 = new eventData();
+$event2->event_id = $row_Intrested2['event_id'];
+$event2->location = $row_Intrested2['location_id'];
+$event2->name_event = $row_Intrested2['event_name'];
+$event2->start_date = $row_Intrested2['start_date'];
+$event2->end_date = $row_Intrested2['end_date'];
+
+$id2=$row_Intrested2['event_id'];
+$arr_date2[$j] = $row_Intrested2['start_date'];
+//Display If it has Agenda
+$mysql_qry3_Intrested="SELECT * FROM agenda WHERE agenda.event_id = $id2 ";
+$r3_Intrested=mysqli_query($conn,$mysql_qry3_Intrested);
+if (!$r3_Intrested)
+{
+$event2->start = 'un';
+$event2->end ='un';
+}
+else{
+$row3_Intrested= mysqli_fetch_assoc($r3_Intrested);
+$event2->start = $row3_Intrested['start_time'];
+$event2->end = $row3_Intrested['end_time'];
+}
+$arr2[$j]=$event2;
+$j++;
+    }
+}
+                $_SESSION['empty_attend']=$empty_div;
+                $_SESSION['empty_intrested']=$empty_div2;
+                $_SESSION['event_data'] = $arr;
+                $_SESSION['event_Intrested'] = $arr2;
+header("location: audienceProfileView.php");
+}
+else {
+$mysql2="SELECT * FROM users WHERE users.user_id = $user->id ";
+$email=$row2['email'];       
+$mysql3="UPDATE login SET type='speaker' WHERE login.email='$email' ";
+$r3=mysqli_query($conn,$mysql3);
+if(!$r3){  
+  echo"failed"; 
+}
+else{
+ $i=0;               
+$mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
+$r_audience=mysqli_query($conn,$mysql_qry_audience);
+$row_audience= mysqli_fetch_assoc($r_audience);
+$event_id=$row_audience['event_id'];
+
+$mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql_qry_event);
+if (!$r)
+{
+$empty_div=0;
+   die(mysqli_error($conn)); 
+}
+else {
+while ($row_event= mysqli_fetch_assoc($r)) 
+    {
+$event = new eventData();
+$event->event_id = $row_event['event_id'];
+$event->location = $row_event['location_id'];
+$event->name_event = $row_event['event_name'];
+$event->start_date = $row_event['start_date'];
+$event->end_date = $row_event['end_date'];
+
+$id=$row_event['event_id'];
+$arr_date[$j] = $row_event['start_date'];
+//Display If it has Agenda
+$mysql_qry3="SELECT * FROM agenda WHERE agenda.event_id = $id ";
+$r3=mysqli_query($conn,$mysql_qry3);
+if (!$r3)
+{
+$event->start = 'un';
+$event->end ='un';
+}
+else{
+ $row3= mysqli_fetch_assoc($r3);
+$event->start = $row3['start_time'];
+$event->end = $row3['end_time'];
+}
+$arr[$i]=$event;
+$i++;
+    }
+}
+
+
+$j=0;               
+$mysql_qry_Intrested="SELECT * FROM interested where interested.user_id=$user->id";
+$r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
+
+if (!$r_Intrested)
+{
+$empty_div2=0;
+   die(mysqli_error($conn)); 
+}
+else {
+ $row_Intrested= mysqli_fetch_assoc($r_Intrested);
+ $conference_type=$row_Intrested['interested_id'];
+ $mysql_qry_Intrested2="SELECT * FROM my_event where my_event.event_type_id=$conference_type";
+ $r_Intrested2=mysqli_query($conn,$mysql_qry_Intrested2);
+    
+while ($row_Intrested2= mysqli_fetch_assoc($r_Intrested2)) 
+    {
+$event2 = new eventData();
+$event2->event_id = $row_Intrested2['event_id'];
+$event2->location = $row_Intrested2['location_id'];
+$event2->name_event = $row_Intrested2['event_name'];
+$event2->start_date = $row_Intrested2['start_date'];
+$event2->end_date = $row_Intrested2['end_date'];
+
+$id2=$row_Intrested2['event_id'];
+$arr_date2[$j] = $row_Intrested2['start_date'];
+//Display If it has Agenda
+$mysql_qry3_Intrested="SELECT * FROM agenda WHERE agenda.event_id = $id2 ";
+$r3_Intrested=mysqli_query($conn,$mysql_qry3_Intrested);
+if (!$r3_Intrested)
+{
+$event2->start = 'un';
+$event2->end ='un';
+}
+else{
+$row3_Intrested= mysqli_fetch_assoc($r3_Intrested);
+$event2->start = $row3_Intrested['start_time'];
+$event2->end = $row3_Intrested['end_time'];
+}
+$arr2[$j]=$event2;
+$j++;
+    }
+}
+                $_SESSION['empty_attend']=$empty_div;
+                $_SESSION['empty_intrested']=$empty_div2;
+                $_SESSION['event_data'] = $arr;
+                $_SESSION['event_Intrested'] = $arr2;
+ header("location: speakerProfileView.php");
+}
+
+}                    
+}
+             
                 }
-            
-            }
             else
             {
                     $error = "Email or Password is invalid";

@@ -34,15 +34,14 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: "x.php",
+               url: "administrated.php?id=" + $("#user_id").val(),
                dataType: 'json', 
                 success: function(result){
                   console.log(result);
           $.each(result, function(index, value) {
-             console.log('caste: ' + value['name']);
- 
-              
-              x = '<div class="col-md-4 col-sm-6">'+
+                 console.log('caste: ' + value['name']);
+                       
+                     x = '<div class="col-md-4 col-sm-6">'+
                                 '<div class="schedule-box">'+
                                     '<h3>'+ value.name_event +'</h3>'+
                                     '<p>'+ value.location +'</p>'+
@@ -53,16 +52,15 @@
                                     '<div class="time">'+
                                         '<time datetime="'+ value.start +'">'+ value.start +'</time> - <time datetime="'+ value.end +'">'+ value.end +'</time>'+
                                     '</div>'+
-                    
-                '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.html?id='+value.id+'\')">MORE</button>'+                       
-                '<button type="button" class="btn btn-link"  onclick="window.open(\'chat.php?id='+value.id+'\')">CHAT</button>'+                       
-              
-                '</div>'+
-                                '</div>';
+                                    
+                    '<button type="button" class="btn btn-link"  onclick="window.open(\'conf_sett.html?id='+value.event_id+'\')">Settings</button>'+                       
+                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.html?id='+value.event_id+'\')">Agenda</button>'+    
+                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_Display_DB.php?id='+value.event_id+'\')">Agenda Settings</button>'+    
+                    '<button type="button" class="btn btn-link"  onclick="window.open(\'chat.php?id='+value.event_id+'\')">CHAT</button>'+                       
+                                   '</div>'+
+                                   '</div>';
                    
-                        
                         $("#coming_events").append(x);
-                 
                     
                     });
                     
@@ -107,6 +105,7 @@
                     <li><a href="adminProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
+                    <li><a href="Administrated_display.php">My Conferences </a></li>
                     <li><a href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>
@@ -118,7 +117,7 @@
         <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">UPComing Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">My Conferences</h3>
                 </div>
             </div>
          

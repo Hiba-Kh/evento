@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    
     <style>
                 #map {
                   height: 400px;
                   width: 100%;
                  }
                  *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
-
                 /* Full-width input fields */
                 input[type=text], input[type=password] {
                     width: 90%;
@@ -19,7 +22,6 @@
                     box-sizing: border-box;
                     font-size:16px;
                 }
-
                 /* Set a style for all buttons */
                 button {
                     background-color: #4CAF50;
@@ -34,7 +36,6 @@
                 button:hover {
                     opacity: 0.8;
                 }
-
                 /* Center the image and position the close button */
                 .imgcontainer {
                     text-align: center;
@@ -46,7 +47,6 @@
                     height:200px;
                     border-radius: 50%;
                 }
-
                 /* The Modal (background) */
                 .modal {
                     display:none;
@@ -59,7 +59,6 @@
                     overflow: auto;
                     background-color: rgba(0,0,0,0.4);
             }
-
                 /* Modal Content Box */
                 .modal-content {
                     background-color: #fefefe;
@@ -68,7 +67,6 @@
                     width: 40%; 
                     padding-bottom: 30px;
                 }
-
                 /* The Close Button (x) */
                 .close {
                     position: absolute;
@@ -82,7 +80,6 @@
                     color: red;
                     cursor: pointer;
                 }
-
                 /* Add Zoom Animation */
                 .animate {
                     animation: zoom 0.6s
@@ -92,15 +89,6 @@
                     to {transform: scale(1)}
                 }
               </style>
-              *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
-              
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Conference</title>
-   
-    <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
     
@@ -109,16 +97,13 @@
             sURLVariables = sPageURL.split('&'),
             sParameterName,
             i;
-
         for (i = 0; i < sURLVariables.length; i++) {
             sParameterName = sURLVariables[i].split('=');
-
             if (sParameterName[0] === sParam) {
                 return sParameterName[1] === undefined ? true : sParameterName[1];
             }
         }
     };
-
     $(document).ready(function()
     {
         var speakersInConf = [];
@@ -130,11 +115,7 @@
             success: function(result)
             {
                 console.log(result);
-             //   $.each(data, function() {
-//  $.each(this, function(k, v) {
-                //initMap({lat: result.location_lat, lng: result.location_lng});
-                    
-                 $.each(result.agendas, function() {
+                $.each(result.agendas, function() {
                      $.each(this.sessions,function(index, value){
                         console.log('sessions: ' + value.session_id);
                         var node = '<div class="panel panel-default">'+
@@ -175,27 +156,30 @@
                 
                         $("#list_agenda").append(node);
                     });
-                 });
-                    var attend= 
-                     '<a class="btn btn-white"  id="attendButton" onclick="attendButton()" style="float: right;">Attend</a>'+
-                     '<div class="row">'+ 
-                     '<div class="col-md-12">'+
-                     
-                     ' <a class="btn btn-white" id="interestButton" onclick="interestButton()"   style="float: right;margin-top:8px;"> Interest</a>'+
-                     '<div class="row">'+ 
-                     '<div class="col-md-12">'+
-                     
-                     ' <a class="btn btn-white"   href="ticket.php" style="float: right;margin-top:8px;"> Buy a Ticket</a>'+
-                     '</div>'+
-                     '</div>'+
-                     
-                     '<h2 class="section-title">Agenda</h2>'+
-                    '<h3 class="section-title">**Some Description of the conference</h3>' ; 
+                });
 
-                    $("#attend").append(attend);
+                var attend= 
+                '<div style="float:right;">'+      
+                '<a class="btn btn-white inline"   id="attendButton" onclick="attendButton()" style="width:220px;" >Attend</a>'+
+                    
+                    
+                ' <a class="btn btn-white inline"  id="interestButton" onclick="interestButton()" style="width:220px;" >Interest</a>'+
+                
+                    
+                ' <a class="btn btn-white inline"  href="ticket.php" style="width:220px;">Buy a Ticket</a>'+
+                '</div>'+
+                '<br>'+
+                '<h2 class="section-title">Agenda</h2>'+
+                '<h3 class="section-title">**'+description+'</h3>';
+                
+                $("#attend").append(attend);
+                    
+                drawSpeakerPanel(speakersInConf);
 
-                    drawSpeakerPanel(speakersInConf);
+                //initMap({lat: result.location_lat, lng: result.location_lng});
 
+                drawFactsPanel(result.description, result.location_id, speakersInConf.length, 10, result.start_date);                  
+                        
                 },
                 error:function(error, code){
                     console.log(error);
@@ -205,6 +189,32 @@
                   
         });
     });
+
+    function drawFactsPanel (description, location_name, no_speaker, no_tickets, start_date) {
+        var conc ='<div class="row">'+
+                            '<div class="col-sm-3">'+
+                                '<i class="ion-ios-calendar"></i>'+
+                                '<h3>'+start_date+'</h3>'+
+                            ' </div>'+
+                            
+                        ' <div class="col-sm-3">'+
+                            ' <i class="ion-ios-location"></i>'+
+                                '<h3>'+location_name +'</h3>'+
+                        ' </div>'+
+                        
+                        '  <div class="col-sm-3">'+
+                        '     <i class="ion-pricetags"></i>'+
+                            '    <h3>'+no_tickets+'</h3>'+
+                            '</div>'+
+                            
+                        ' <div class="col-sm-3">'+
+                            '    <i class="ion-speakerphone"></i>'+
+                            '   <h3>'+no_speaker+'</h3>'+
+                        ' </div> '+
+                            '</div>'; 
+                        
+                        $("#conclusion").append(conc);
+    }
     
     function drawSpeakerPanel(speakersInConf) {
         var row = '<div class="row">';
@@ -234,7 +244,6 @@
     }
 
     function attendButton(){
-
         var resp;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function()
@@ -248,13 +257,10 @@
                   var modal = document.getElementById('modal-wrapper');
                     window.onclick = function(event)
                      {
-
                         if (event.target == modal)
                         {
                             modal.style.display = "none";
-
                         }
-
                     } 
  
                } else {
@@ -265,8 +271,6 @@
         xhttp.open("GET", href="signInTest.php", true);
         xhttp.send(); 
     }
-
-
     function interestButton()
     {
         var resp;
@@ -282,13 +286,10 @@
                     var modal = document.getElementById('modal-wrapper2');
                     window.onclick = function(event)
                      {
-
                         if (event.target == modal)
                         {
                             modal.style.display = "none";
-
                         }
-
                     } 
  
                } else {
@@ -299,7 +300,6 @@
         xhttp.open("GET", href="signInTest.php", true);
         xhttp.send(); 
     }
-
     function attendToEvent() {
         
         var text = document.getElementById("attendButton").innerText;
@@ -338,7 +338,6 @@
             });
         }
     }
-
     function interestInEvent() {
         var text = document.getElementById("interestButton").innerText;
         if (text=='INTEREST')
@@ -378,24 +377,15 @@
         }
     }
     </script>
-    <!-- css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    
 </head>
-<body data-spy="scroll" data-target="#site-nav">
+<body background="assets/images/White.jpg">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
-
-               
-                <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png" alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -438,29 +428,18 @@
           <li><a href="Accommodation.html">Accommodation</a></li>
           <li><a href="Photos_event.html">Photos</a></li>
           <li><a href="Videos_event.html">Videos</a></li>
-         
         </ul>
-                        
       </li>
-     
-                    <li><a href="index.html">SignOut </a></li>
-                
-      
-    
-                
+        <li><a href="index.html">SignOut </a></li>
                 </ul>
             </div>
         </div><!-- /.container -->
     </nav>
-
-    
-
-    
    
     <section id="faq" class="section-index2 faq">
         <div class="container">
             <div class="row">
-                <div id="attend"class="col-md-12">
+                <div id="attend" class="col-md-12">
                 </div>
             </div>
            
@@ -471,51 +450,21 @@
         </div>
     </section>
     
-   <section id="speakers" class="section-speaker speakers">
-        <div id="speakersContainer" class="container">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <h2 class="section-title">Speakers</h2>
-                
+        <section id="speakers" class="section-speaker speakers">
+            <div id="speakersContainer" class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="section-title">Speakers</h2>
+                    </div>
                 </div>
             </div>
-
-            
-        </div>
-    </section>
-  <section id="facts" class="section bg-image-1 facts text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-
-                    <i class="ion-ios-calendar"></i>
-                    <h3>2015<br>June 25</h3>
-                
-                </div>
-                <div class="col-sm-3">
-
-                    <i class="ion-ios-location"></i>
-                    <h3>California<br>USA</h3>
-                
-                </div>
-                <div class="col-sm-3">
-
-                    <i class="ion-pricetags"></i>
-                    <h3>150<br>Tickets</h3>
-                
-                </div>
-                <div class="col-sm-3">
-                
-                    <i class="ion-speakerphone"></i>
-                    <h3>06<br>Speakers</h3>
-                
-                </div>
-            </div><!-- row -->
-        </div><!-- container -->
-    </section>
-
-
+        </section>
+    
+        <section id="facts" class="section bg-image-1 facts text-center">
+                <div id="conclusion" class="container" >
+                </div><!-- container -->
+        </section> 
+      
         <section id="location" class="section location">
             <div class="container">
                 <div class="row">
@@ -552,7 +501,6 @@
                                     lat: position.coords.latitude,
                                     lng: position.coords.longitude
                                     };
-
                                     infoWindow.setPosition(pos);
                                     infoWindow.setContent('Location found.');
                                     infoWindow.open(map);
@@ -577,14 +525,11 @@
                        <script async defer
                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfGpSHEHb1lytFDkZ6sesd4H1MbIXzqs&callback=initMap">
                        </script>    
-                      
-
                     </div>
                 </div>
             </div>
         </section>
 
-        
 
     <footer class="site-footer">
         <div class="container">
@@ -637,8 +582,7 @@
         </form>
         
       </div>
-    </div>
-
+  
 
     <div id="modal-wrapper2" class="modal">
         
@@ -668,11 +612,9 @@
         </form>
         
       </div>
-    </div>
 
       <script>
           function  loginAttendFunctoin(){
-
             document.getElementById('modal-wrapper').style.display='none';
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
@@ -697,9 +639,7 @@
                         }
                 });
                 });
-
           }
-
           function loginInterestFunctoin()
           {
               
@@ -727,11 +667,12 @@
                         }
                     });
                 });
-
-
           }
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2cb5003f5cb5bca62c1bc517a5a684f8c3eb501
       </script>
       </body>
 

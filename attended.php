@@ -1,33 +1,26 @@
 <?php
-header('Content-Type: application/json');
-$servername = "localhost";
-$database = "evento";
-$username = "root";
-$password = "";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-class Anything {
-    var $id;
-    var $location;
-    var $name_event;
-    var $start;
-    var $start_date;   
-    var $end_date;
-    var $end;
-}
-$event_id;
-$mysql_qry="SELECT * FROM my_event";
-$r=mysqli_query($conn,$mysql_qry);
+ require "conn.php";
+ require "models.php";
+  session_start();
+ $user=$_SESSION['user_data'];
 $i=0;
 $j=0;
 $l=0;
 $arr=array();
 $arr_date=array();
 $arr_date_sorted=array();
+$event_id;
+$mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
+$r_audience=mysqli_query($conn,$mysql_qry_audience);
+$row_audience= mysqli_fetch_assoc($r_audience);
+$event_id=$row_audience['event_id'];
+
+$mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql_qry_event);
 
 if (!$r)
-{echo "Failed";
+{
+   echo "Failed";
    die(mysqli_error($conn)); 
 }
 
