@@ -52,17 +52,7 @@ if (!$r2)
     echo "ERROR: Could not able to execute $mysql_qry2. " . mysqli_error($conn);
 }
 else {
-$row2= mysqli_fetch_assoc($r2);
-$id = $row2['event_id'];
 
-$sql5 = "INSERT INTO logs (msg,event_id,post_time) VALUES (':',$id,CURRENT_TIMESTAMP)";
-if(mysqli_query($conn, $sql5)){
-       echo "Succ";
-}
-else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-
-}
 header("Location:conf_sett.html?id=$id");
 exit;
 }

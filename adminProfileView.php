@@ -105,7 +105,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
         
     </script>
 </head>
-    <body>
+    <body background="assets/images/white.jpg">
     <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
@@ -166,10 +166,13 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
      if ($i<4){
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                 echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
@@ -192,10 +195,13 @@ if(count($_SESSION['event_data']) > 3)
     {
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                  echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
@@ -230,10 +236,13 @@ if(count($_SESSION['event_data']) > 3)
      if ($j<4){
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                  echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
@@ -256,10 +265,13 @@ if(count($_SESSION['event_data']) > 3){
     {
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                  echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';

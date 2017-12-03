@@ -52,25 +52,28 @@
       
       '<div class="input-group input-group-icon">'+
           '<label style="color :black;font-size: 20px;"> Agenda Date</label>'+
-       ' <input type="date"  name="date_agenda" required/>'+
+                    '<br>'+
+       ' <input style="width:350px;" type="date"  name="date_agenda" required/>'+
      ' </div>'+
      
            '<div class="input-group input-group-icon">'+
            '<label> Start Time </label>'+
-        '<input type="time"  name="s_time" required/>'+
+                               '<br>'+
+        '<input style="width:350px;" type="time"  name="s_time" required/>'+
       '</div>'+
           
      ' <div class="input-group input-group-icon">'+
       '     <label> End Time </label>'+
-       ' <input type="time"  name="e_time" required/>'+
+                                     '<br>'+
+       ' <input style="width:350px;" type="time"  name="e_time" required/>'+
        
      ' </div>'+
      
       '</div>'+
          
-          '<div class="row">'+     
-         '<button type="submit" name="add" style = "border-color: black;margin-left:360px;margin-top: 10px;" class="btn btn-black">Add Sessions</button>'+
-     
+    '<div class="row">'+     
+                '<button type="submit"  name="back" style = "float:left; border-color: black;" class="btn btn-black" onclick="window.location.replace(\'conf_sett.html?id='+value.id+'\')">Back</button>'+
+                '<button type="submit" name="add" style = "border-color: black;margin-top:2px;float:right;" class="btn btn-black">Add Sessions</button>'+
     '</div>'+
   '</form>';
                                 
@@ -103,8 +106,22 @@
                         Evento
                     </a>
                 </div>
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
             </div> 
+            <div class="collapse navbar-collapse" id="navbar-items">
+                <ul class="nav navbar-nav navbar-right" style="margin-right:20px;">
+                    <li><a href="adminProfileView.php">My Profile </a></li> 
+                    <li><a href="Create.html">Create Conference </a></li> 
+                    <li><a href="upComing.html">UpComing </a></li>
+                    <li><a href="signout.php">Sign Out</a></li>
+                </ul>
+            </div>
         </div><!-- /.container -->
     </nav>
 
