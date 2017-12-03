@@ -2,6 +2,22 @@
 <html lang="en">
 
 <head>
+
+   <!-- Content Type Meta tag -->
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+   <!--Responsive Viewport Meta tag-->
+   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+   
+   
+<title>Todo list app</title>
+   
+<!-- Roboto font embed -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" type="text/css" href="resources/css/reset.min.css">
+<link rel="stylesheet" type="text/css" href="resources/css/style.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -639,43 +655,21 @@ $(document).ready(function()
 
 
 
-        <!-- statics end -->
-
-
-
-
-        <!-- project team & activity start -->
-        <div class="row">
-        
-
-                   
-                
-
-
-          </div>
-
           <div class="col-lg-8">
             <!--Project Activity start-->
             <section class="panel" style="  margin-left: 80px">
               <div class="panel-body progress-panel">
-                <div class="row">
-                  <div class="col-lg-8 task-progress pull-left">
-                    <h1>To Do Everyday</h1>
-                  </div>
-                  <div class="col-lg-4">
-                    <span class="profile-ava pull-right">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                        Jenifer smith
-                                </span>
-                  </div>
+                <div class="row" style="padding-bottom:5px; ">
+                <h2>My TO Do List</h2>
                 </div>
               </div>
               <table class="table table-hover personal-task">
                 <tbody>
                   <tr>
-                    <td>Today</td>
+                       
+                    <td><input type="text" placeholder="what day ?" id="item" sty></td>
                     <td>
-                      web design
+                        <input type="text" placeholder="what to do ?" id="item" sty>
                     </td>
                     <td>
                       <span class="badge bg-important">Upload</span>
@@ -686,97 +680,26 @@ $(document).ready(function()
                                     </span>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Yesterday</td>
-                    <td>
-                      Project Design Task
-                    </td>
-                    <td>
-                      <span class="badge bg-success">Task</span>
-                    </td>
-                    <td>
-                      <div id="work-progress2"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>21-10-14</td>
-                    <td>
-                      Generate Invoice
-                    </td>
-                    <td>
-                      <span class="badge bg-success">Task</span>
-                    </td>
-                    <td>
-                      <div id="work-progress3"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>22-10-14</td>
-                    <td>
-                      Project Testing
-                    </td>
-                    <td>
-                      <span class="badge bg-primary">To-Do</span>
-                    </td>
-                    <td>
-                      <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>24-10-14</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-info">Milestone</span>
-                    </td>
-                    <td>
-                      <div id="work-progress4"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>28-10-14</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-primary">To-Do</span>
-                    </td>
-                    <td>
-                      <div id="work-progress5"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Last week</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-primary">To-Do</span>
-                    </td>
-                    <td>
-                      <div id="work-progress1"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>last month</td>
-                    <td>
-                      Project Release Date
-                    </td>
-                    <td>
-                      <span class="badge bg-success">To-Do</span>
-                    </td>
-                    <td>
-                      <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                      </span>
-                    </td>
-                  </tr>
+                    <button id="add">
+                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve"><g><path class="fill" d="M16,8c0,0.5-0.5,1-1,1H9v6c0,0.5-0.5,1-1,1s-1-0.5-1-1V9H1C0.5,9,0,8.5,0,8s0.5-1,1-1h6V1c0-0.5,0.5-1,1-1s1,0.5,1,1v6h6C15.5,7,16,7.5,16,8z"/></g></svg>
+                    </button>
+                    </tr>
+                    <div class="container">
+                        <!-- Uncompleted tasks -->
+                        <ul class="todo" id="todo"></ul>
+                  
+                        <!-- Completed tasks -->
+                        <ul class="todo" id="completed"></ul>
+                      </div>
+                  
+                      <!-- JavaScripts -->
+                      <script src="resources/js/main.js"></script>
+               
                 </tbody>
               </table>
             </section>
+            
+                
             <!--Project Activity end-->
           </div>
         </div><br><br>

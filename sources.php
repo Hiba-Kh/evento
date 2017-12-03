@@ -41,9 +41,75 @@ function GetUser($user_id, $conn) {
                 }
             }
         } 
-    
+
+        $user->events = array();
+        $user->attendedEvents = array();
+        $user->intrestedEvents = array();
+        
         return $user;
     }
+}
+
+
+function GetEvent($event_id, $conn) {
+
+    $adminEvent = new userEvent();
+    $adminEvent->event_id = $event_id;
+    $mysql_qry3="SELECT * FROM my_event  WHERE event_id = ' $adminEvent->event_id' ";
+    $result3=mysqli_query($conn, $mysql_qry3);
+    $row_event = mysqli_fetch_assoc($result3);
+    $adminEvent->event_name = $row_event['event_name'];    
+    $adminEvent->start_date = $row_event['start_date'];
+    $adminEvent->end_date = $row_event['start_date'];
+    $adminEvent->location_id = $row_event['location_id'];
+    $adminEvent->description = $row_event['description'];
+    $adminEvent->NoOfAttendee = $row_event['NoOfAttendee'];
+    $adminEvent->NoOfInterested = $row_event['NoOfInterested'];
+    $adminEvent->agendas = array();
+
+    $mysql_qry4="SELECT * FROM agenda  WHERE event_id = '$adminEvent->event_id'";
+    $result4=mysqli_query($conn, $mysql_qry4);
+
+    while ($row4 = mysqli_fetch_assoc($result4)) 
+    {
+        $eventAgenda = new eventAgenda();
+        $eventAgenda->agenda_id = $row4['agenda_id'];
+        $eventAgenda->agenda_date = $row4['agenda_date'];
+        $eventAgenda->start_time = $row4['start_time'];
+        $eventAgenda->end_time = $row4['agenda_date'];
+        $eventAgenda->sessions = array();
+
+        $mysql_qry5="SELECT * FROM sessions WHERE sessions.agenda_id = '$eventAgenda->agenda_id' ";
+        $result5=mysqli_query($conn,$mysql_qry5);
+
+        while ($row5= mysqli_fetch_assoc($result5)) 
+        {
+            $sessionsData = new agendaSessions();
+            $sessionsData->event_id=$adminEvent->event_id;
+            $sessionsData->session_id =$row5['session_id'];
+            $sessionsData->session_title = $row5['title'];
+            $sessionsData->start_time = $row5['start_time'];
+            $sessionsData->end_time = $row5['end_time'];
+            $sessionsData->speakers = array();
+
+            $mysql_qry6="SELECT * FROM session_speaker WHERE session_id = $sessionsData->session_id ";
+            $result6=mysqli_query($conn,$mysql_qry6);
+            
+            while ($row6= mysqli_fetch_assoc($result6)) 
+            {
+                $speaker_id=$row6['speaker_id'];
+                $mysql_qry7="SELECT * FROM speaker WHERE speaker_id = $speaker_id";
+                $result7=mysqli_query($conn,$mysql_qry7);
+                $row7= mysqli_fetch_assoc($result7);
+                $speaker = GetUser($row7['user_id'], $conn);
+                array_push($sessionsData->speakers,$speaker);
+            }
+            array_push($eventAgenda->sessions,$sessionsData);
+        }
+        array_push($adminEvent->agendas,$eventAgenda);
+    }
+
+    return $adminEvent;
 }
 
 ?>

@@ -16,7 +16,7 @@ header('Content-Type: application/json');
         $notSigned=true;
        // $arr[0]=$notSigned;
        $resp=$notSigned;
-        echo json_encode($resp);
+       echo json_encode("{\"status\":\"false\"}");
        // header("location: signToAttend.php?id=$event_id");
        
     }
@@ -55,6 +55,7 @@ header('Content-Type: application/json');
         $mysql_qry6="UPDATE my_event SET NoOfInterested = $NoOfInterestedSecond  WHERE event_id = $event_id";
         $result6=mysqli_query($conn, $mysql_qry6);
 
+        echo json_encode("{\"status\":\"true\"}");
 
 
 

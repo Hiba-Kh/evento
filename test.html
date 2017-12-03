@@ -1,72 +1,720 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>sly</title>
-  
-  
-  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
-  <link rel='stylesheet prefetch' href='http://darsa.in/sly/css/ospb.css'>
-  <link rel="stylesheet" href="assets/css/style_event.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-
-  
+    
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <style>
+                #map {
+                  height: 400px;
+                  width: 100%;
+                 }
+                 *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
+                /* Full-width input fields */
+                input[type=text], input[type=password] {
+                    width: 90%;
+                    padding: 12px 20px;
+                    margin: 8px 26px;
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    box-sizing: border-box;
+                    font-size:16px;
+                }
+                /* Set a style for all buttons */
+                button {
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 14px 20px;
+                    margin: 8px 26px;
+                    border: none;
+                    cursor: pointer;
+                    width: 90%;
+                    font-size:20px;
+                }
+                button:hover {
+                    opacity: 0.8;
+                }
+                /* Center the image and position the close button */
+                .imgcontainer {
+                    text-align: center;
+                    margin: 24px 0 12px 0;
+                    position: relative;
+                }
+                .avatar {
+                    width: 200px;
+                    height:200px;
+                    border-radius: 50%;
+                }
+                /* The Modal (background) */
+                .modal {
+                    display:none;
+                    position: fixed;
+                    z-index: 1;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                    background-color: rgba(0,0,0,0.4);
+            }
+                /* Modal Content Box */
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: 4% auto 15% auto;
+                    border: 1px solid #888;
+                    width: 40%; 
+                    padding-bottom: 30px;
+                }
+                /* The Close Button (x) */
+                .close {
+                    position: absolute;
+                    right: 25px;
+                    top: 0;
+                    color: #000;
+                    font-size: 35px;
+                    font-weight: bold;
+                }
+                .close:hover,.close:focus {
+                    color: red;
+                    cursor: pointer;
+                }
+                /* Add Zoom Animation */
+                .animate {
+                    animation: zoom 0.6s
+                }
+                @keyframes zoom {
+                    from {transform: scale(0)} 
+                    to {transform: scale(1)}
+                }
+              </style>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+    
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+    $(document).ready(function()
+    {
+        $.ajax
+        ({
+            url: "agendaController.php?id="+getUrlParameter("id"),
+            dataType: 'json', 
+            success: function(result)
+            {
+                console.log(result);
+                function marker ()
+                {
+                    center:new google.maps.LatLng(result.location_lat,result.location_lng);
+                    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                    // lat=geometry.location.lat;
+                    //lng=data.results[0].geometry.location.lng;
+                    //point= new google.maps.LatLng(lat,lng);
+                    map.setCenter(point);
+                    zoom = 14;
+                    marker = createMarker(point,"<h3>Marker"+(markersArray.length+1)+" "+point+"</h3>",zoom);
+                };
+                var description;
+                var location_name;    
+                var no_speaker;    
+                var no_tickets;    
+                var start_date;    
+                 $.each(result, function(index, value) {
+                 console.log('caste: ' + value.id);
+                 description = value.description;
+                 location_name= value.location_name;    
+                 no_speaker= value.no_speaker;    
+                 no_tickets= value.no_tickets;    
+                 start_date= value.start_date;    
+                        var node = '<div class="panel panel-default">'+
+                        '    <div class="panel-heading" role="tab" id="headingTwo">'+
+                        '        <h4 class="panel-title">'+
+                        '            <a class="faq-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo'+value.id+'" aria-expanded="false" aria-controls="collapseTwo'+value.id+'">'+
+                        '                <section id="section-ajenda" class="section-wrapper section-ajenda">'+
+                        '                    <div class="container">'+
+                        '                        <div class="row">'+
+                        '                            <div class="col-md-4">'+
+                        '                                <div class="session">'+
+                        '                                    <time>'+value.start+' - '+value.end+'</time>'+
+                        '                                    <h2>'+value.name+'</h2>'+
+                        '                                </div>'+
+                        '                            </div>'+
+                        '                        </div>'+
+                        '                    </div>'+
+                        '                </section>'+
+                        '            </a>'+
+                        '        </h4>'+
+                        '    </div>';
+                        if(value.speakers.length > 0) {
+                            node += '    <div id="collapseTwo'+value.id+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">'+
+                            '               <div class="panel-body">'+
+                            '            <h3>Speakers</h3>';
+                            for (var i =0; i < value.speakers.length; i++) {
+                                node += '<p>' + value.speakers[i] + '</p>';
+                            }
+                            node +=   '</div>'+
+                                      '</div>';
+                        }
+                       
+                    node += '</div>';
+                
+                    $("#list_agenda").append(node);
+                    });
+                    var attend= 
+                      '<div style="float:right;">'+      
+                     '<a class="btn btn-white inline"   id="attendButton" onclick="attendButton()" style="width:220px;" >Attend</a>'+
+                     
+                     
+                     ' <a class="btn btn-white inline"  id="interestButton" onclick="interestButton()" style="width:220px;" >Interest</a>'+
+                    
+                     
+                     ' <a class="btn btn-white inline"  href="ticket.php" style="width:220px;">Buy a Ticket</a>'+
+                    '</div>'+
+                     '<br>'+
+                     '<h2 class="section-title">Agenda</h2>'+
+                    '<h3 class="section-title">**'+description+'</h3>';
+                  
+                    $("#attend").append(attend);
+                    
+          var conc ='<div class="row">'+
+                  '<div class="col-sm-3">'+
+                    '<i class="ion-ios-calendar"></i>'+
+                    '<h3>'+start_date+'</h3>'+
+                 ' </div>'+
+                  
+               ' <div class="col-sm-3">'+
+                   ' <i class="ion-ios-location"></i>'+
+                    '<h3>'+location_name +'</h3>'+
+               ' </div>'+
+               
+              '  <div class="col-sm-3">'+
+               '     <i class="ion-pricetags"></i>'+
+                '    <h3>'+no_tickets+'</h3>'+
+                '</div>'+
+                
+               ' <div class="col-sm-3">'+
+                '    <i class="ion-speakerphone"></i>'+
+                 '   <h3>'+no_speaker+'</h3>'+
+               ' </div> '+
+                 '</div>'; 
+               
+             $("#conclusion").append(conc);
+                },
+                error:function(error, code){
+                    console.log(error);
+                    console.log(code);
+                    alert("Error" + error);
+                },
+                  
+        });
+    });
+    
+    function attendButton(){
+        var resp;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
+        {  
+             if (this.readyState == 4 && this.status == 200) 
+            {
+               resp = this.responseText;
+               if (resp=="Success")
+               {
+                  document.getElementById('modal-wrapper').style.display='block';
+                  var modal = document.getElementById('modal-wrapper');
+                    window.onclick = function(event)
+                     {
+                        if (event.target == modal)
+                        {
+                            modal.style.display = "none";
+                        }
+                    } 
+ 
+               } else {
+                   attendToEvent();
+               }
+           }
+        };
+        xhttp.open("GET", href="signInTest.php", true);
+        xhttp.send(); 
+    }
+    function interestButton()
+    {
+        var resp;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
+        {  
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                resp = this.responseText;
+                if (resp=="Success")
+                {
+                    document.getElementById('modal-wrapper2').style.display='block';
+                    var modal = document.getElementById('modal-wrapper2');
+                    window.onclick = function(event)
+                     {
+                        if (event.target == modal)
+                        {
+                            modal.style.display = "none";
+                        }
+                    } 
+ 
+               } else {
+                    interestInEvent();
+               }
+           }
+        };
+        xhttp.open("GET", href="signInTest.php", true);
+        xhttp.send(); 
+    }
+    function attendToEvent() {
+        
+        var text = document.getElementById("attendButton").innerText;
+        if (text=='ATTEND')
+        {
+            $(document).ready(function() { 
+                $.ajax ({
+                    url :  "attend.php?id="+getUrlParameter("id"),
+                    dataType: 'json', 
+                    success: function(value){
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                    },
+                    error : function () {
+                        console.log ('error');
+                    }
+                });
+                document.getElementById("attendButton").innerHTML="attended";
+            });
+        } else if(text=="ATTENDED") {
+            document.getElementById( "attendButton").innerHTML="attend";
+            $(document).ready(function() { 
+                $.ajax ({
+                    url :  "attendRemove.php?id="+getUrlParameter("id"),
+                    dataType: 'json', 
+                    success: function(value){
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                    },
+                    error : function () {
+                        console.log ('error');
+                    }
+                });
+            });
+        }
+    }
+    function interestInEvent() {
+        var text = document.getElementById("interestButton").innerText;
+        if (text=='INTEREST')
+        {
+            $(document).ready(function() { 
+                $.ajax ({
+                    url :  "interest.php?id="+getUrlParameter("id"),
+                    dataType: 'json', 
+                    success: function(value){
+                        document.getElementById("interestButton").innerHTML="interested";
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                    },
+                    error : function () {
+                        console.log ('error');
+                    }
+                });
+            });
+            
+        } else if(text=="INTERESTED") {
+           $(document).ready(function() { 
+                $.ajax({
+                    url :  "interestRemove.php?id="+getUrlParameter("id"),
+                    dataType: 'json', 
+                    success: function(value){
+                        document.getElementById( "interestButton").innerHTML="interest";
+                        console.log(value);
+                        console.log('caste: ' + value);
+                        console.log ('success');
+                    },
+                    error : function () {
+                        console.log ('error');
+                    }
+                });
+            });
+        }
+    }
+    </script>
+    
 </head>
+<body background="assets/images/White.jpg">
+    <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="site-branding">
+                    <a class="logo" href="index.html">
+                        <img src="assets/images/logo.png" alt="Logo">
+                        Evento
+                    </a>
+                </div>
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div><!-- /.navbar-header -->
+
+            <div class="collapse navbar-collapse" id="navbar-items">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!-- navigation menu -->
+                    <li><a href="Create.html">CreateConf. </a></li> 
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="upComing.html">UpComing </a></li>
+                    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Program
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="Proceeding.html">Proceedings</a></li>
+          <li><a href="Panel.html">Panel</a></li>
+          <li><a href="Awards.html">Awards</a></li>
+          <li><a href="Paper.html">Paper</a></li>
+          <li><a data-scroll href="#speakers">Speaker</a></li>
+          <li><a  data-scroll href="#faq">Agenda</a></li>
+          <li><a href="Sponsor_Display.html">Sponsors</a></li>
+        </ul>
+                        
+      </li>
+      
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Venue
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="Accommodation.html">Accommodation</a></li>
+          <li><a href="Photos_event.html">Photos</a></li>
+          <li><a href="Videos_event.html">Videos</a></li>
+        </ul>
+      </li>
+        <li><a href="index.html">SignOut </a></li>
+                </ul>
+            </div>
+        </div><!-- /.container -->
+    </nav>
+   
+    <section id="faq" class="section-index2 faq">
+        <div class="container">
+            <div class="row">
+                <div id="attend" class="col-md-12">
+                </div>
+            </div>
+           
+            <div class="row">
+                <div id="list_agenda" class="col-md-12">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+   <section id="speakers" class="section section-speaker speakers">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h2 class="section-title">Speakers</h2>
+                
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="speaker">
+
+                        <figure>
+                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-1.jpg">
+                        </figure>
+
+                        <h4>Jhon Smith</h4>
+
+                        <p>CEO of Peren</p>
+
+                        <ul class="social-block">
+                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
+                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
+                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
+                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
+                        </ul>
+
+                    </div><!-- /.speaker -->
+                </div><!-- /.col-md-4 -->
+
+                <div class="col-md-4">
+                    <div class="speaker">
+
+                        <figure>
+                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-2.jpg">
+                        </figure>
+
+                        <h4>Jhon Smith</h4>
+
+                        <p>CEO of Peren</p>
+
+                        <ul class="social-block">
+                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
+                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
+                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
+                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
+                        </ul>
+
+                    </div><!-- /.speaker -->
+                </div><!-- /.col-md-4 -->
+
+                <div class="col-md-4">
+                    <div class="speaker">
+
+                        <figure>
+                            <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-3.jpg">
+                        </figure>
+
+                        <h4>Jhon Smith</h4>
+
+                        <p>CEO of Peren</p>
+
+                        <ul class="social-block">
+                            <li><a href=""><i class="ion-social-twitter"></i></a></li>
+                            <li><a href=""><i class="ion-social-facebook"></i></a></li>
+                            <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
+                            <li><a href=""><i class="ion-social-googleplus"></i></a></li>
+                        </ul>
+
+                    </div><!-- /.speaker -->
+                </div><!-- /.col-md-4 -->
+            </div><!-- /.row -->
+
+        </div>
+       </section>
+    
+<section id="facts" class="section bg-image-1 facts text-center">
+        <div class="container" id="conclusion">
+
+        </div><!-- container -->
+</section> 
+      
 
 
+        <section id="location" class="section location">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h2 class="section-title">Event Location</h2>
 
+                        <address>
+                            <p>Eardenia<br> The Grand Hall<br> House # 08, Road #52, Street<br> Phone: +1159t3764<br> Email: example@mail.com</p>
+                        </address>
+                    </div>
+                    <div class="col-sm-9">
+               
 
-<body>
-  <div class="wrap">
-  <h2>UpComing Conferences</h2>
-  
-  <div class="scrollbar">
-    <div class="handle">
-      <div class="mousearea"></div>
-    </div>
-  </div>
-
-  <div class="frame" id="basic">
-    <ul class="clearfix">
-        <li>
-       <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="09:00">09:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Welcome and intro</h3>
-                        <p> SD Asia</p>
-          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
+                        <div id="map"></div>
+                        <script>
+                          function initMap()
+                            {
+                                var uluru = {lat: -25.363, lng: 131.044};
+                                var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 4,
+                                center: uluru
+                                });
+                                var marker = new google.maps.Marker({
+                                position: uluru,
+                                map: map
+                                });
+                                 infoWindow = new google.maps.InfoWindow;
+                                if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(function(position) {
+                                    var pos = {
+                                    lat: position.coords.latitude,
+                                    lng: position.coords.longitude
+                                    };
+                                    infoWindow.setPosition(pos);
+                                    infoWindow.setContent('Location found.');
+                                    infoWindow.open(map);
+                                    map.setCenter(pos);
+                                }, function() {
+                                    handleLocationError(true, infoWindow, map.getCenter());
+                                });
+                                } else {
+                                // Browser doesn't support Geolocation
+                                handleLocationError(false, infoWindow, map.getCenter());
+                                }
+                            }
+                            function handleLocationError(browserHasGeolocation, infoWindow, pos)
+                                {
+                                    infoWindow.setPosition(pos);
+                                    infoWindow.setContent(browserHasGeolocation ?
+                                                        'Error: The Geolocation service failed.' :
+                                                        'Error: Your browser doesn\'t support geolocation.');
+                                    infoWindow.open(map);
+                                }
+                                                    </script>
+                       <script async defer
+                       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfGpSHEHb1lytFDkZ6sesd4H1MbIXzqs&callback=initMap">
+                       </script>    
                     </div>
                 </div>
             </div>
-</li>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-    
-    </ul>
-  </div>
+        </section>
 
-  <ul class="pages"></ul>
 
-  
-</div>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://darsa.in/sly/examples/js/vendor/plugins.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Sly/1.6.1/sly.min.js'></script>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="social-block">
+                        <li><a href=""><i class="ion-social-twitter"></i></a></li>
+                        <li><a href=""><i class="ion-social-facebook"></i></a></li>
+                        <li><a href=""><i class="ion-social-linkedin-outline"></i></a></li>
+                        <li><a href=""><i class="ion-social-googleplus"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <script  src="js/upComing.js"></script>
-
+    <!-- script -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
+
+
+<div id="modal-wrapper" class="modal">
+        
+        <form class="modal-content animate" method="post" >
+              
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+            <img src="1.png" alt="Avatar" class="avatar">
+            <h1 style="text-align:center">Please Sign In first</h1>
+          </div>
+      
+          <div class="imgccontainer">
+            <input type="text" id = "email" placeholder="Enter Email" name="email">
+            <input type="password" id="password" placeholder="Enter Password" name="password">        
+            <button type="button" onclick="  loginAttendFunctoin()" style=" background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 26px;
+            border: none;
+            cursor: pointer;
+            width: 90%;
+            font-size:20px;">Login</button>
+            <input type="checkbox" style="margin:26px 30px;"> Remember me      
+            <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+          </div>
+          
+        </form>
+        
+      </div>
+  
+
+    <div id="modal-wrapper2" class="modal">
+        
+        <form class="modal-content animate" method="post" >
+              
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal-wrapper2').style.display='none'" class="close" title="Close PopUp">&times;</span>
+            <img src="1.png" alt="Avatar" class="avatar">
+            <h1 style="text-align:center">Please Sign In first</h1>
+          </div>
+      
+          <div class="imgccontainer">
+            <input type="text" id = "email2" placeholder="Enter Email" name="email2">
+            <input type="password" id="password2" placeholder="Enter Password" name="password2">        
+            <button type="button" onclick="  loginInterestFunctoin()" style=" background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 26px;
+            border: none;
+            cursor: pointer;
+            width: 90%;
+            font-size:20px;">Login</button>
+            <input type="checkbox" style="margin:26px 30px;"> Remember me      
+            <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+          </div>
+          
+        </form>
+        
+      </div>
+
+      <script>
+          function  loginAttendFunctoin(){
+            document.getElementById('modal-wrapper').style.display='none';
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            $(document).ready(function() 
+                { 
+                 $.ajax
+                ({
+                        url :  "signToAttend.php?email="+email+"&pass="+password+"&id="+getUrlParameter("id"),
+                        dataType: 'json', 
+                        success: function(value){
+                            attendToEvent();
+                            document.getElementById("attendButton").innerHTML="attended";
+                            
+                            console.log(value);
+                            console.log('caste: ' + value);
+                            console.log ('success');
+                        },
+                        error : function () {
+                            alert("Your cridentials are wrong!");
+                            document.getElementById('modal-wrapper').style.display='block';
+                            console.log ('error');
+                        }
+                });
+                });
+          }
+          function loginInterestFunctoin()
+          {
+              
+            document.getElementById('modal-wrapper2').style.display='none';
+            var email = document.getElementById('email2').value;
+            var password = document.getElementById('password2').value;
+            $(document).ready(function() 
+                { 
+                 $.ajax
+                    ({
+                        url :  "signToInterest.php?email="+email+"&pass="+password+"&id="+getUrlParameter("id"),
+                        dataType: 'json', 
+                        
+                        success: function(value){
+                            interestInEvent();
+                            document.getElementById("interestButton").innerHTML="interested";
+                            console.log(value);
+                            console.log('caste: ' + value);
+                            console.log ('success');
+                        },
+                        error : function () {
+                            alert("Your cridentials are wrong!");
+                            document.getElementById('modal-wrapper2').style.display='block';
+                            console.log ('error');
+                        }
+                    });
+                });
+          }
+    
+      </script>
+      </body>
+
 </html>
