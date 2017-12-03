@@ -41,14 +41,22 @@ while ($row2= mysqli_fetch_assoc($r2))
         {
 $myObj0 = new Anything();
 $myObj0->id = $row2['event_id'];
+$event_id= $row2['event_id'];
 $myObj0->location =$row2['location_id'];
 $myObj0->name_event = $row2['event_name'];
-$myObj0->start = $row2['start_time'];
 $myObj0->start_date = $row2['start_date'];
 $myObj0->end_date = $row2['end_date'];
-$myObj0->end = $row2['end_time'];
 
 $arr_date[$j] =  $row2['start_date'];
+
+$mysql_qry3="SELECT * FROM agenda WHERE event_id = $event_id ";
+$result3=mysqli_query($conn,$mysql_qry3);
+$row3= mysqli_fetch_assoc($result3); 
+
+$myObj0->end = $row3['end_time'];
+$myObj0->start = $row3['start_time'];
+
+
 
 $arr[$i]=$myObj0;
 $i++;
@@ -70,7 +78,7 @@ for ($k=0,$size=count($arr); $k < $size;$k++){
         }
 }
 echo json_encode($arr_date_sorted);
-header("Location:temp.php?id=$id");
+
 /*echo 
 */
 

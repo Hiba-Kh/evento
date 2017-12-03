@@ -112,7 +112,7 @@ button:hover {
     if (isset($_POST['taskOption'])){
     $selectOption = $_POST['taskOption'];
     
-    header("Location:Display_event.php?id=$selectOption");}
+    header("Location:Display_event.html?id=$selectOption");}
 
 ?>
 
