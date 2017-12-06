@@ -5,7 +5,6 @@ $connect = mysqli_connect("localhost", "root", "", "evento");
     session_start();
     $session_id=$_SESSION['session_id'];
     $event_id=$_SESSION['event_id'];
-    $user=$_SESSION['user_data'];
 
 
 //Variables
@@ -26,38 +25,50 @@ foreach ($speaker_Array_names as $key => $speaker_name_DB) {
   $result = mysqli_query($connect, $query);
   $row = mysqli_fetch_array($result);
   $speaker_id = $row['user_id'];
-  
-  $query2 = "INSERT INTO speaker VALUES ($event_id,$speaker_id,$speaker_id)";
-  if(mysqli_query($connect, $query2))
-  {
-      if ($j===0){
-   echo 'Speakers are Selected Successfully';
-   $j++;
-      }
-      
-      
-  }
-  else 
-  {
- 
-  }
-  
-  $query3 = "INSERT INTO session_speaker VALUES ($session_id,$speaker_id)";
+   echo $speaker_id;  
+
+  $query2 = "SELECT speaker_id FROM speaker where speaker.speaker_id=$speaker_id";
+  $result2 = mysqli_query($connect, $query2);
+
+
+if (mysqli_num_rows($result2) === 0)
+{
+  $query3 = "INSERT INTO speaker (speaker_id,user_id,event_id) VALUES ($speaker_id,$speaker_id,$event_id)";
   if(mysqli_query($connect, $query3))
   {
+   if ($j===0){
+   echo 'Speakers inserted in into speakers tabel';
+   $j++;
+      }
+      
+  }
+  else 
+  {
+     echo 'ma zabat yen7at fel tabel';  
+  }
+     
+}
+ else 
+ {
+          echo 'mawjod aslan fel speaker tabel';  
+
+ }
+  $query4 = "INSERT INTO session_speaker VALUES ($session_id,$speaker_id)";
+  if(mysqli_query($connect, $query4))
+  {
       if ($j===0){
    echo 'Speakers are Selected Successfully';
    $j++;
       }
+     
   }
   else 
-  {
-        echo 'He is already a speaker';
- 
+ {
+      echo 'ma n7at fe tabel el session speaker';
+  
+ }
+  
   }
-  
-  
-}
 
 
 ?>

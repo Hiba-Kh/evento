@@ -52,8 +52,9 @@ if (!$r2)
     echo "ERROR: Could not able to execute $mysql_qry2. " . mysqli_error($conn);
 }
 else {
-
-header("Location:conf_sett.html?id=$id");
+$row2= mysqli_fetch_assoc($r2);
+$event_id = $row2['event_id'];
+header("Location:conf_sett.html?id=$event_id");
 exit;
 }
 } else{

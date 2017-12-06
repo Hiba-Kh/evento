@@ -40,21 +40,12 @@ while ($row = mysqli_fetch_array($result)) {
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     
-<?php
-    require "conn.php";
-    require "models.php";
 
-    session_start();
-    
-    $event_id=$_SESSION['event_id'];
-    
-?>    
 </head>
 <body data-spy="scroll" data-target="#site-nav">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div >
             <div class="navbar-header" style="margin-left: 20px;">
-
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png" alt="Logo">
@@ -77,12 +68,11 @@ while ($row = mysqli_fetch_array($result)) {
                     <!-- navigation menu -->
                     <li><a  href="about.html">About</a></li>          
                     <li><a  href="upComing.html">UpComing</a></li> 
-                   <?php echo "<li><a  href='conf_sett.html?id=$event_id'>Conf_settings</a></li>" ;?>
+                   <?php 
+                   $event_id=$id;
+                   echo "<li><a  href='conf_sett.html?id=$event_id'>Conf_settings</a></li>" ;?>
                     <li><a  href="index.html">Home</a></li>
 
-                   
-                   
-                
                 </ul>
             </div>
         </div><!-- /.container -->

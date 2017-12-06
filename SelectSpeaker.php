@@ -61,20 +61,44 @@ while($row = mysqli_fetch_array($result))
  <body background="assets/images/speaker.jpg" style="background-size: 1850px 1200px; background-repeat: no-repeat;">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div >
-            <div class="navbar-header">
-                <div class="site-branding" style="padding-left: 20px;">
+            <div class="navbar-header" style="margin-left: 20px;">
+                <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png" alt="Logo">
                         Evento
                     </a>
                 </div>
 
-            </div> 
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div><!-- /.navbar-header -->
+
+            <div class="collapse navbar-collapse" id="navbar-items" style="margin-right: 20px;">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!-- navigation menu -->
+                    <li><a  href="about.html">About</a></li>          
+                    <li><a  href="upComing.html">UpComing</a></li> 
+                   <?php 
+                   $event_id=$id;
+             echo "<li><a  href='conf_sett.html?id=$event_id'>Conf_Settings</a></li>" ;?>
+                    <?php 
+                   $event_id=$id;
+             echo "<li><a  href='Agenda_Display_DB.php?id=$event_id'>Agenda_Settings</a></li>" ;?>
+                    <li><a  href="index.html">Home</a></li>
+
+                </ul>
+            </div>
         </div><!-- /.container -->
     </nav>
 
   <br /><br />
-  <div class="container" style="background:gainsboro;align-items: center;height:210px;margin-top: 180px; ">
+  <div class="container" style="background:gainsboro;align-items: center;height:250px;margin-top: 180px; ">
    <br />
    <h4 style="float:left;font-weight: bold;font-size:1.7em; " class="section-title">Select Speaker/s for this session</h4>
 
@@ -88,7 +112,12 @@ while($row = mysqli_fetch_array($result))
      </select>
      <br /><br />
      <input type="hidden" name="hidden_framework" id="hidden_framework" />
-     <input type="submit" name="submit" class="btn btn-info" value="Submit" />
+     <input type="submit" name="Submit" class="btn btn-info" value="Submit"style="padding:10px;" />  
+   <?php 
+   
+   $new_id=$id;
+   echo " <a href='Agenda_Display_DB.php?id=$new_id' class='btn btn-info' style='margin-top:10px;padding:8px 230px;'>Back</a> ";?>
+
     </form>
     <br />
     
