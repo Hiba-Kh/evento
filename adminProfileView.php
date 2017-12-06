@@ -128,7 +128,8 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="adminProfileView.php">My Profile </a></li> 
+                    <li><a href="index_signed.php">Home</a></li>
+                    <li class="active"><a href="adminProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
                     <li><a href="Administrated_display.php">My Conferences </a></li>
@@ -153,11 +154,19 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
         <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Attended Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;border:black;">Attended Conferences</h3>
                 </div>
             </div>
                 <div  id="coming_events" class="bs-docs-example row" >
      <?php
+     if (empty($_SESSION['event_data'])) {
+         echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:blue; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>';   
+     }
+     else {
      $i=0;
      $j=0;
      foreach($_SESSION['event_data'] as $key=>$value)
@@ -185,7 +194,8 @@ if(count($_SESSION['event_data']) > 3)
    echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
     
 }
-    ?>             
+     }
+     ?>             
                     
                     </div>
              <div  id="showmore" style="display:none;" class="bs-docs-example row" >
@@ -228,7 +238,16 @@ if(count($_SESSION['event_data']) > 3)
                 </div>
             </div>
                 <div  id="InterestedComing" class="bs-docs-example row" >
-                        <?php
+       <?php
+        if (empty($_SESSION['event_Intrested'])) {
+         
+echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:blue; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>'; 
+     }
+     else {
      $j=0;
      foreach($_SESSION['event_Intrested'] as $key=>$value)
     {
@@ -255,6 +274,7 @@ if(count($_SESSION['event_data']) > 3){
   
     echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
 }
+     }
     ?>             
                     
                     </div>

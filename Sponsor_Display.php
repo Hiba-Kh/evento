@@ -35,26 +35,29 @@ while ($row = mysqli_fetch_array($result)) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Conference</title>
-
-    <!-- css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    
+<?php
+    require "conn.php";
+    require "models.php";
+
+    session_start();
+    
+    $event_id=$_SESSION['event_id'];
+    
+?>    
 </head>
 <body data-spy="scroll" data-target="#site-nav">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div class="container">
-            <div class="navbar-header">
+        <div >
+            <div class="navbar-header" style="margin-left: 20px;">
 
-                <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
-                        
-                        <!-- logo image  -->
                         <img src="assets/images/logo.png" alt="Logo">
-
                         Evento
                     </a>
                 </div>
@@ -68,16 +71,15 @@ while ($row = mysqli_fetch_array($result)) {
 
             </div><!-- /.navbar-header -->
 
-            <div class="collapse navbar-collapse" id="navbar-items">
+            <div class="collapse navbar-collapse" id="navbar-items" style="margin-right: 20px;">
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- navigation menu -->
-                      <li><a href="signIn.html">Sign in</a></li>
-                      <li ><a  href="about.html">About</a></li>          
+                    <li><a  href="about.html">About</a></li>          
                     <li><a  href="upComing.html">UpComing</a></li> 
-                     <li class="active"><a  href="photos.html">Photos</a></li>
-                         <li><a  href="index.html">Home</a></li>
-                                      
+                   <?php echo "<li><a  href='conf_sett.html?id=$event_id'>Conf_settings</a></li>" ;?>
+                    <li><a  href="index.html">Home</a></li>
+
                    
                    
                 

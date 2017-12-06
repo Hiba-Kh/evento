@@ -1,41 +1,21 @@
 
 <?php
-if (strcmp($user->type ,"member")== 0)
-{
-//CHECK IF HE IS A SPEAKER    
-$mysqlT="SELECT * FROM speaker WHERE speaker.speaker_id = $user->id ";
-$rT=mysqli_query($conn,$mysqlT);
-if (!$rT)
-{ 
- $empty_div=0;
- $empty_div2=0;
- $_SESSION['empty_attend']=$empty_div;
- $_SESSION['empty_intrested']=$empty_div2;
-header("location: memberProfileView.php");
-}
-else {
-$mysql3="UPDATE login SET type='speaker' WHERE login.email='$user->email' ";
-$r3=mysqli_query($conn,$mysql3);
-
-if(!$r3){
-    
-  echo"failed"; 
-}
-else{
- $i=0;               
+$i=0;               
 $mysql_qry_audience="SELECT * FROM event_audience where event_audience.audience_id=$user->id";
 $r_audience=mysqli_query($conn,$mysql_qry_audience);
+if (empty($r_audience))
+{
+$empty_div=0;                                    
+die(mysqli_error($conn)); 
+}
+else {
+
 $row_audience= mysqli_fetch_assoc($r_audience);
 $event_id=$row_audience['event_id'];
 
 $mysql_qry_event="SELECT * FROM my_event where my_event.event_id=$event_id";
 $r=mysqli_query($conn,$mysql_qry_event);
-if (!$r)
-{
-$empty_div=0;
-   die(mysqli_error($conn)); 
-}
-else {
+
 while ($row_event= mysqli_fetch_assoc($r)) 
     {
 $event = new eventData();
@@ -72,7 +52,7 @@ $r_Intrested=mysqli_query($conn,$mysql_qry_Intrested);
 
 if (!$r_Intrested)
 {
-$empty_div2=0;
+$empty_div2=0;                                    
    die(mysqli_error($conn)); 
 }
 else {
@@ -108,13 +88,5 @@ $event2->end = $row3_Intrested['end_time'];
 $arr2[$j]=$event2;
 $j++;
     }
-}
-                $_SESSION['empty_attend']=$empty_div;
-                $_SESSION['empty_intrested']=$empty_div2;
-                $_SESSION['event_data'] = $arr;
-                $_SESSION['event_Intrested'] = $arr2;
- header("location: speakerProfileView.php");
-}
-}                        
 }
 ?>

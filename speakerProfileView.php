@@ -1,31 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Profile</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Classy Resume Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="assets/css/style_profile.css" rel="stylesheet" type="text/css" media="all" />
+<!-- gallery -->
+<link type="text/css" rel="stylesheet" href="assets/css/cm-overlay.css" />
+<!-- //gallery -->
+<!-- font-awesome icons -->
+<link href="assets/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+<link href="//fonts.googleapis.com/css?family=Gidugu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="assets/css/main_profile.css">
 <?php
     require "conn.php";
     require "models.php";
 
     session_start();
     $user=$_SESSION['user_data'];
+    $event=$_SESSION['event_data'];
+    
     if($user == null) {
         header("location: signinView.php");
     }
 ?>
-
-    <!-- Javascript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
-        // A $( document ).ready() block.
         $(document).ready(function() {
             $.ajax({
                 url: "profileController.php?id=" + $("#user_id").val(),
                 dataType: 'json', 
-                success: function(value){
-                  console.log(value);
-        
+                success: function(value){        
                         console.log('caste: ' + value);
                         var x = '<div class="container">'+
                                     '<h3 class="w3l_head" style="font-size: 2.2em;">'+'My Account'+'</h3>'+
@@ -60,7 +75,7 @@
                                         '<div class="clearfix"> </div>'+
                                     '</div>'+
                                 '</div>';
-                                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive" >'+
+                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive" >'+
                                          '<br>'+
                                         '<h2 style="font-size: 2em;">'+value.firstname+' '+value.lastname+'</h2>'+
 					                    '<span>'+value.job+'</span>'+
@@ -73,12 +88,12 @@
     	                                            '<li><a href="#"><i class="fa fa-twitter"></i></a></li>'+
 		                                            '<li><a href="#"><i class="fa fa-linkedin"></i></a></li>'+
                                                     '<li><a href="#"><i class="fa fa-google-plus"></i></a></li>'+
-                                    
-	                                             '</ul>';
+	                                 '</ul>';
+                                 
                         $("#about").append(x);
                         $("#banner").append(y);
-
-              
+                       
+                        
                 },
                 error:function(error, code){
                     console.log(error);
@@ -89,32 +104,12 @@
         });
         
     </script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Classy Resume Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="assets/css/style_profile.css" rel="stylesheet" type="text/css" media="all" />
-<link type="text/css" rel="stylesheet" href="assets/css/cm-overlay.css" />
-<link href="assets/css/font-awesome.css" rel="stylesheet"> 
-<link href="//fonts.googleapis.com/css?family=Gidugu" rel="stylesheet">
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-<link rel="stylesheet" href="assets/css/main_profile.css">
 </head>
-	
-
-    <body>
+    <body background="assets/images/white.jpg">
     <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div class="container">
             <div class="navbar-header">
-
-                <!-- logo -->
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png"  alt="Logo">
@@ -128,38 +123,50 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            </div><!-- /.navbar-header -->
+
+            </div>
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="speakerProfileView.php">My Profile </a></li> 
+                    <li><a href="index_signed.php">Home</a></li>
+                    <li class="active"><a href="speakerProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
                     <li><a href="SpeakerDisplay.php">Speaker At </a></li>
-                    <li><a  href="photos.html">Photos</a></li>
                     <li><a  href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>
-        </div><!-- /.container -->
+        </div>
     </nav>
-
-<div class="main" id="home">
+    
+     <div class="main" id="home">
 	<div class="banner" id="banner">
+		
     </div>
+    
 	</div>
+
 <div class="about" id="about">
 		
-        </div>
-                    
+ </div>
+   
  <section id="upComing" class="section schedule">
         <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Attended Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;border:black;">Attended Conferences</h3>
                 </div>
             </div>
                 <div  id="coming_events" class="bs-docs-example row" >
      <?php
+     if (empty($_SESSION['event_data'])) {
+         echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:blue; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>';   
+     }
+     else {
      $i=0;
      $j=0;
      foreach($_SESSION['event_data'] as $key=>$value)
@@ -168,21 +175,28 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
      if ($i<4){
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                 echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
                     echo' </div>';   
+          
     } 
      }  
 if(count($_SESSION['event_data']) > 3)
 {
    echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
+    
 }
-    ?>             
+     }
+     ?>             
+                    
                     </div>
              <div  id="showmore" style="display:none;" class="bs-docs-example row" >
      <?php
@@ -191,10 +205,13 @@ if(count($_SESSION['event_data']) > 3)
     {
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                  echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
@@ -221,7 +238,16 @@ if(count($_SESSION['event_data']) > 3)
                 </div>
             </div>
                 <div  id="InterestedComing" class="bs-docs-example row" >
-                        <?php
+       <?php
+        if (empty($_SESSION['event_Intrested'])) {
+         
+echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:blue; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>'; 
+     }
+     else {
      $j=0;
      foreach($_SESSION['event_Intrested'] as $key=>$value)
     {
@@ -229,10 +255,13 @@ if(count($_SESSION['event_data']) > 3)
      if ($j<4){
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                  echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
@@ -245,6 +274,7 @@ if(count($_SESSION['event_data']) > 3){
   
     echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
 }
+     }
     ?>             
                     
                     </div>
@@ -255,10 +285,13 @@ if(count($_SESSION['event_data']) > 3){
     {
                echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';
-                      echo"<h3>'$value->name_event'</h3>";
-                 echo" <p>'$value->location'</p>";
+                      echo"<h3>$value->name_event</h3>";
+                 echo" <p>$value->location</p>";
+                  echo'<div class="time">';
+                 echo"<date datetime=$value->start_date>$value->start_date </date> - <date datetime=$value->end_date >$value->end_date</date>";
+                echo"</div>";
                  echo' <div class="time">';
-                 echo"<time datetime='$value->start'></time>'$value->start' - <time datetime='$value->end'>'$value->end'</time>";
+                 echo"<time datetime=$value->start></time>$value->start - <time datetime=$value->end>$value->end</time>";
                  echo'</div>';
                  echo'<button type="button" class="btn btn-link"  onclick="window.open(Agenda.html?id=$value->event_id)"> MORE </button>    ';                     
                      echo' </div>';
@@ -274,7 +307,8 @@ if(count($_SESSION['event_data']) > 3){
             
                     </div>
     </section>
-	<footer class="site-footer">
+    
+    <footer class="site-footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -288,20 +322,22 @@ if(count($_SESSION['event_data']) > 3){
             </div>
         </div>
     </footer>
-
-    <!-- script -->
+    
+    <script src="assets/js/bootstrap.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
     <script src="assets/js/main.js"></script>
-	
-<!-- //mail -->
-<!-- footer -->
-	
-<!-- //footer -->
-<script src="assets/js/jquery-2.2.3.min.js"></script> 
-<!-- skills -->
-<script src="assets/js/pie-chart.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-2.2.3.min.js"></script> 
+    <script src="assets/js/pie-chart.js" type="text/javascript"></script>
+    <script src="assets/js/responsiveslides.min.js"></script>
+    <script src="assets/js/jquery.tools.min.js"></script>
+    <script src="assets/js/jquery.mobile.custom.min.js"></script>
+    <script src="assets/js/jquery.cm-overlay.js"></script>
+    <script src="assets/js/bars.js"></script>
+    <script type="text/javascript" src="assets/js/move-top.js"></script>
+    <script type="text/javascript" src="assets/js/easing.js"></script>
+    
  <script type="text/javascript">
 
         $(document).ready(function () {
@@ -346,41 +382,29 @@ if(count($_SESSION['event_data']) > 3){
             });
         });
     </script>
-<!-- skills -->	
-						<script src="assets/js/responsiveslides.min.js"></script>
-							<script>
-								// You can also use "$(window).load(function() {"
-								$(function () {
-								  // Slideshow 4
-								  $("#slider3").responsiveSlides({
-									auto: true,
-									pager:true,
-									nav:false,
-									speed: 500,
-									namespace: "callbacks",
-									before: function () {
-									  $('.events').append("<li>before event fired.</li>");
-									},
-									after: function () {
-									  $('.events').append("<li>after event fired.</li>");
-									}
-								  });
-							
-								});
-							 </script>
-							 <!-- js -->
-				<script src="assets/js/jquery.tools.min.js"></script>
-				<script src="assets/js/jquery.mobile.custom.min.js"></script>
-				<script src="assets/js/jquery.cm-overlay.js"></script>
-				<script>
-					$(document).ready(function(){
-						$('.cm-overlay').cmOverlay();
-					});
-				</script>
-<script src="assets/js/bars.js"></script>
-
-<script type="text/javascript" src="assets/js/move-top.js"></script>
-<script type="text/javascript" src="assets/js/easing.js"></script>
+<script>
+	$(function () {
+		  $("#slider3").responsiveSlides({
+	      	auto: true,
+			pager:true,
+			nav:false,
+			speed: 500,
+		      namespace: "callbacks",
+			before: function () {
+		      $('.events').append("<li>before event fired.</li>");
+			},
+			after: function () {
+		      $('.events').append("<li>after event fired.</li>");
+			}
+			 });
+			  });
+ </script>
+				
+<script>
+		$(document).ready(function(){
+		$('.cm-overlay').cmOverlay();
+			});
+</script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -390,23 +414,14 @@ if(count($_SESSION['event_data']) > 3){
 	});
 </script>
 
-	<script src="assets/js/bootstrap.js"></script>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-			*/
-								
+		$(document).ready(function() {			
 			$().UItoTop({ easingType: 'easeOutQuart' });
 								
 			});
 	</script>
+        
         <script type="text/javascript">
 		function showMore ()
                 {

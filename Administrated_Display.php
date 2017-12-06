@@ -105,7 +105,7 @@
                     <li><a href="adminProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
-                    <li><a href="Administrated_display.php">My Conferences </a></li>
+                    <li class="active"><a href="Administrated_display.php">My Conferences </a></li>
                     <li><a href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>

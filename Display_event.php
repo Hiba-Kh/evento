@@ -63,21 +63,8 @@ $i++;
 $j++;
     }
 }
-function date_sort($a, $b) {
-    return strtotime($a) - strtotime($b);
-}
-usort($arr_date, "date_sort");
 
-for ($k=0,$size=count($arr); $k < $size;$k++){
-  for ($h=0,$sizeH=count($arr); $h < $sizeH;$h++){
-   if ($arr[$h]->start_date == $arr_date[$k])
-   {
-       $arr_date_sorted[$k]=$arr[$h];
-       break;
-   }
-        }
-}
-echo json_encode($arr_date_sorted);
+echo json_encode($arr);
 
 /*echo 
 */

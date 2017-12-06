@@ -46,7 +46,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                                     '<div class="w3l-grids-about">'+
                                             '<div class="col-md-5 w3ls-ab-right">'+
                                                 '<div class="agile-about-right-img">'+
-                                                    '<img src="assets/images/ab.jpg" alt="">'+
+                                                    '<img src="assets/images/ahBig.jpg" alt="">'+
                                                     '</div>'+
                                                     '</div>'+
                                                     '<div class="col-md-7 w3ls-agile-left">'+
@@ -74,7 +74,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                                         '<div class="clearfix"> </div>'+
                                     '</div>'+
                                 '</div>';
-                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive" >'+
+                    var y = '<img src="assets/images/ah.jpg" alt=" " class="img-responsive" >'+
                                          '<br>'+
                                         '<h2 style="font-size: 2em;">'+value.firstname+' '+value.lastname+'</h2>'+
 					                    '<span>'+value.job+'</span>'+
@@ -127,7 +127,8 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="adminProfileView.php">My Profile </a></li> 
+                    <li><a href="index_signed.php">Home</a></li>
+                    <li class="active"><a href="audienceProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
                     <li><a href="attendedConf.php">My Conferences </a></li>
@@ -157,6 +158,14 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
             </div>
                 <div  id="coming_events" class="bs-docs-example row" >
      <?php
+      if (empty($_SESSION['event_data'])) {
+         echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>';   
+     }
+     else {
      $i=0;
      $j=0;
      foreach($_SESSION['event_data'] as $key=>$value)
@@ -180,6 +189,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     {
            echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
     }
+     }
     ?>             
                     
                     </div>
@@ -224,6 +234,14 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
             </div>
                 <div  id="InterestedComing" class="bs-docs-example row" >
                         <?php
+                         if (empty($_SESSION['event_Intrested'])) {
+         echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>';   
+     }
+     else {
      $j=0;
      foreach($_SESSION['event_Intrested'] as $key=>$value)
     {
@@ -246,6 +264,7 @@ if(count($_SESSION['event_data']) > 3)
     {
    echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
     }
+     }
     ?>             
                     
                     </div>

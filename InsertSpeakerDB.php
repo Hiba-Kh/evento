@@ -5,6 +5,8 @@ $connect = mysqli_connect("localhost", "root", "", "evento");
     session_start();
     $session_id=$_SESSION['session_id'];
     $event_id=$_SESSION['event_id'];
+    $user=$_SESSION['user_data'];
+
 
 //Variables
 $speakers_Array_Comma=$_POST["hidden_framework"];
@@ -53,10 +55,6 @@ foreach ($speaker_Array_names as $key => $speaker_name_DB) {
         echo 'He is already a speaker';
  
   }
-  
-  
-  
-  
   
   
 }

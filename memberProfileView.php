@@ -21,14 +21,14 @@
                 dataType: 'json', 
                 success: function(value){
                   console.log(value);
-        
+        $var="Accountant";
                         console.log('caste: ' + value);
                         var x = '<div class="container">'+
                                     '<h3 class="w3l_head" style="font-size: 2.2em;">'+'My Account'+'</h3>'+
                                     '<div class="w3l-grids-about">'+
                                             '<div class="col-md-5 w3ls-ab-right">'+
                                                 '<div class="agile-about-right-img">'+
-                                                    '<img src="assets/images/ab.jpg" alt="">'+
+                                                    '<img src="assets/images/mem.jpg" alt="">'+
                                                     '</div>'+
                                                     '</div>'+
                                                     '<div class="col-md-7 w3ls-agile-left">'+
@@ -56,10 +56,10 @@
                                         '<div class="clearfix"> </div>'+
                                     '</div>'+
                                 '</div>';
-                                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive" >'+
+                                    var y = '<img src="assets/images/mem.jpg" alt=" " class="img-responsive" >'+
                                          '<br>'+
                                         '<h2 style="font-size: 2em;">'+value.firstname+' '+value.lastname+'</h2>'+
-					                    '<span>'+value.job+'</span>'+
+					                    '<span>'+$var+'</span>'+
                                          '<div class="callbacks_container">'+
 			                                '<div class="clearfix"></div>'+
 		                                    '</div>'+
@@ -141,7 +141,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index_signed.php">Home</a></li>
-                    <li><a href="memberProfileView.php">My Profile </a></li> 
+                    <li class="active"><a href="memberProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
                     <li><a href="signout.php">Sign Out</a></li>   
@@ -167,87 +167,33 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title">To be attended Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Attended Conferences</h3>
                 </div>
+                <div class="col-md-4 col-sm-6">
+                   <div class="schedule-box">       
+<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:5px;">Nothing to Display</h3>
+</div>
+                    </div> 
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="09:00">09:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Welcome and intro</h3>
-                        <p> SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Tips and share</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>View from the top</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                       
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-            </div>
-    </section>
+        </div>
+</section>
 
 <!-- //services -->
 <!-- /education -->
- <section id="upComing" class="section schedule">
+  <section id="upComing" class="section schedule">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title">Intrested Conferences</h3>
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Interested Conferences</h3>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="09:00">09:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Welcome and intro</h3>
-                        <p> SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.html')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>Tips and share</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="schedule-box">
-                        <div class="time">
-                            <time datetime="10:00">10:00 am</time> - <time datetime="22:00">10:00 am</time>
-                        </div>
-                        <h3>View from the top</h3>
-                        <p>Mustafizur Khan, SD Asia</p>
-                       
-                          <button type="button" class="btn btn-link"  onclick="window.open('Agenda.php')">MORE</button>                         
-                    </div>
-                </div>
-            </div>
-    </section>
+                 <div class="col-md-4 col-sm-6">
+                   <div class="schedule-box">       
+<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:5px;">Nothing to Display</h3>
+</div>
+                    </div>             </div>
+        </div>
+</section>
+
 	<footer class="site-footer">
         <div class="container">
             <div class="row">
