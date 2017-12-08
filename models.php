@@ -1,6 +1,6 @@
 <?php
 class Anything {
-    var $id;    
+    var $id;       
     var $session_id;    
     var $event_id;
     var $desc;

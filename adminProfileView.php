@@ -162,7 +162,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
      if (empty($_SESSION['event_data'])) {
          echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';       
-echo '<h3 class="section-title" style="color:blue; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo '<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
 echo' </div>';
                     echo' </div>';   
      }
@@ -243,7 +243,7 @@ if(count($_SESSION['event_data']) > 3)
          
 echo'<div class="col-md-4 col-sm-6">';
                     echo'<div class="schedule-box">';       
-echo '<h3 class="section-title" style="color:blue; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo '<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
 echo' </div>';
                     echo' </div>'; 
      }
