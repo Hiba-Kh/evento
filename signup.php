@@ -100,7 +100,7 @@ while($row4 = mysqli_fetch_assoc($result4))
 }
 
 
-$mysql_qry2 = "INSERT INTO meta_data (user_id,gender,interest,BirthDate,professional_student,job,address) VALUES ('$user_id','$gender', '$interest', '$birthDate','$professional_student','$prof','$address')";
+$mysql_qry2 = "INSERT INTO meta_data (user_id,gender,interest,BirthDate,professional_student,job,address,phone_number) VALUES ('$user_id','$gender', '$interest', '$birthDate','$professional_student','$prof','$address','$phone')";
 $result2=mysqli_query($conn, $mysql_qry2);
 if(!$result2) 
 {
@@ -113,7 +113,7 @@ if(!$result3)
 {
 	die(mysqli_error($conn));
 }
-
+header("location:memberProfileView.php");
 
 
 //////////////// $new_row_id = mysql_insert_id();

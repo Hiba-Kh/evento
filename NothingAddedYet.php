@@ -2,8 +2,8 @@
     <body>
 <?php
 echo "<script>
-alert('There is Nothing To Display');
-window.location.href='upComing.html';
+alert('InCorrect Email/Password');
+window.location.href='signinView.php';
 </script>";
 ?>
     </body>

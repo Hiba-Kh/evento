@@ -375,7 +375,10 @@ header("location: audienceProfileView.php");
                 }
             else
             {
-                    $error = "Email or Password is invalid";
+
+                    header("location:NothingAddedYet.php");
+                    
+                
             }
         }
 }
