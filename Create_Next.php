@@ -44,6 +44,8 @@ if (($paymentDate >= $contractDateBegin) && ($paymentDate <= $contractDateEnd))
  $sql = "INSERT INTO agenda (event_id,agenda_date,start_time,end_time) VALUES ($id,'$date','$s_time','$e_time')";
  
 
+
+ 
 if(mysqli_query($conn, $sql)){
 
 $mysql_qry2="SELECT * FROM agenda WHERE agenda.event_id =$id";

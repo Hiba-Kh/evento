@@ -59,7 +59,7 @@
                                     var y = '<img src="assets/images/mem.jpg" alt=" " class="img-responsive" >'+
                                          '<br>'+
                                         '<h2 style="font-size: 2em;">'+value.firstname+' '+value.lastname+'</h2>'+
-					                    '<span>'+$var+'</span>'+
+					                    '<span>'+value.job+'</span>'+
                                          '<div class="callbacks_container">'+
 			                                '<div class="clearfix"></div>'+
 		                                    '</div>'+
