@@ -65,6 +65,10 @@ $result2=mysqli_query($conn, $mysql_qry2);
                                 $user->gender=$row2["gender"];
                                 $user->address=$row2["address"];
                                 $user->job=$row2["job"];
+                                $user->facebook=$row2["facebook"];
+                                $user->google=$row2["google"];
+                                $user->linkedin=$row2["linkedin"];
+                                $user->twitter=$row2["twitter"];
                             }
                         }
                     }      

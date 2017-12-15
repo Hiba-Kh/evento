@@ -25,7 +25,11 @@ class UserData {
     var $events;
     var $attendedEvents;
     var $intrestedEvents;
-    
+    var $facebook;
+    var $google;
+    var $linkedin;
+    var $twitter;
+
     
 }
 
