@@ -1,5 +1,6 @@
 <?php
 require "conn.php";
+require "models.php";
 
 $flag_firstname =  $flag_lastname = $flag_email = $flag_password  = $flag_gender = $flag_interest = $flag_birthDate = false;
 
@@ -71,7 +72,22 @@ if(isset($_POST['address']))
 $address = $_POST["address"];
 }
 
-
+if(isset($_POST['facebook'])) 
+{
+$facebook = $_POST["facebook"];
+}
+if(isset($_POST['gmail'])) 
+{
+$gmail = $_POST["gmail"];
+}
+if(isset($_POST['twitter'])) 
+{
+$twitter = $_POST["twitter"];
+}
+if(isset($_POST['linkedin'])) 
+{
+$linkedin = $_POST["linkedin"];
+}
 
 
 if (  $flag_firstname || $flag_lastname || $flag_email || $flag_password || $flag_interest || $flag_gender || $flag_birthDate)
@@ -84,7 +100,6 @@ if (  $flag_firstname || $flag_lastname || $flag_email || $flag_password || $fla
 }
 
 $user_id;
-echo $first_name,$last_name,$email,$password,$phone,$interest,$prof;
 $mysql_qry = "INSERT INTO users (user_id,first_name, last_name, email ,pass) VALUES (null,'$first_name', '$last_name', '$email','$password')";
 $result=mysqli_query($conn, $mysql_qry);
 
@@ -100,7 +115,7 @@ while($row4 = mysqli_fetch_assoc($result4))
 }
 
 
-$mysql_qry2 = "INSERT INTO meta_data (user_id,gender,interest,BirthDate,professional_student,job,address,phone_number) VALUES ('$user_id','$gender', '$interest', '$birthDate','$professional_student','$prof','$address','$phone')";
+$mysql_qry2 = "INSERT INTO meta_data (user_id,gender,interest,BirthDate,professional_student,job,address,phone_number,facebook,google,twitter,linkedin) VALUES ('$user_id','$gender', '$interest', '$birthDate','$professional_student','$prof','$address','$phone','$facebook','$gmail','$twitter','$linkedin')";
 $result2=mysqli_query($conn, $mysql_qry2);
 if(!$result2) 
 {
@@ -112,6 +127,68 @@ $result3=mysqli_query($conn, $mysql_qry3);
 if(!$result3) 
 {
 	die(mysqli_error($conn));
+}
+
+
+
+
+session_start();
+$user = new UserData();
+$mysql_qry_user="SELECT * FROM users WHERE  email = '$email'";
+$result_user=mysqli_query($conn, $mysql_qry_user);
+                if(!$result_user) 
+                {
+                    die(mysqli_error($conn));
+                }
+                else {
+                     if (mysqli_num_rows($result_user) == 1)
+                     {
+                        while($row = mysqli_fetch_assoc($result_user)) 
+                        {
+                        
+                            $user->firstname=$row["first_name"];
+                            $user->lastname=$row["last_name"];
+                            $user->email=$row["email"];
+                            $user->id=$row["user_id"];
+                          
+                        }
+                         
+$mysql_qry2="SELECT * FROM meta_data WHERE  user_id = '$user->id'";
+$result2=mysqli_query($conn, $mysql_qry2);
+                        if(!$result2) 
+                        {
+                            die(mysqli_error($conn));
+                        }
+                        if (mysqli_num_rows($result2) == 1)
+                        {
+                            while($row2 = mysqli_fetch_assoc($result2)) 
+                            {
+                                $user->gender=$row2["gender"];
+                                $user->address=$row2["address"];
+                                $user->job=$row2["job"];
+                            }
+                        }
+                     }
+                }
+$_SESSION['user_data'] = $user;
+if (strcmp($user->gender , "female")==0)
+{
+ $image = "images/empty_female.jpg";
+ 
+$sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
+  	mysqli_query($conn, $sql);
+
+  	
+}
+else if (strcmp($user->gender , "male")==0)
+{
+   $image = "images/empty_boy.jpg";
+  
+    $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
+  	mysqli_query($conn, $sql);
+
+  	
+    
 }
 header("location:memberProfileView.php");
 

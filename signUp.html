@@ -13,7 +13,20 @@ option
     background:#76b852;
     color:black;
 }
-    
+.placeholder
+{
+    position: relative;
+}
+
+.placeholder::after
+{
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    content: attr(data-placeholder);
+    pointer-events: none;
+    opacity: 0.6;
+}    
 </style>
 </head>
 
@@ -53,22 +66,54 @@ option
         <input type="tel" name="phone" placeholder="Phone" required/>
         <div class="input-icon"><i class="fa fa-phone"></i></div>
       </div>
+      <h4>Please insert the following accounts if you have </h4>
+      
+      <h4>Your Facebook :</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="facebook" data-placeholder="my placeholder" value="https://www.facebook.com/your_name" placeholder="https://www.facebook.com/your_name" />
+        <div class="input-icon"><i class="fa fa-facebook"></i></div>
+      </div>
+     
+      <h4>Your Gmail:</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="gmail" data-placeholder="my placeholder" value="yourname@gmail.com" placeholder="yourname@gmail.com" />
+        <div class="input-icon"><i class="fa fa-google"></i></div>
+      </div>
+      
+      <h4>Your Twitter :</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="twitter" data-placeholder="my placeholder" value="https://twitter.com/your_name" placeholder="https://twitter.com/your_name" />
+        <div class="input-icon"><i class="fa fa-twitter"></i></div>
+      </div>
+      
+      <h4>Your Linkedin:</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="linkedin" data-placeholder="my placeholder" value="https://www.linkedin.com/your_name" placeholder="https://www.linkedin.com/your_name" />
+        <div class="input-icon"><i class="fa fa-linkedin"></i></div>
+      </div>
     </div>
       
-      <div style="color:black;">
-       <h4>Your Interests:</h4><br />  
-           <p><input type="checkbox" name="language[]" value="Medicine" /> Medicine</p>
-           <p><input type="checkbox" name="language[]" value="Politics" /> Politics</p>
-           <p><input type="checkbox" name="language[]" value="Sport" /> Sport</p>
-           <p><input type="checkbox" name="language[]" value="Technology" /> Technology</p>
-           <p><input type="checkbox" name="language[]" value="Art" /> Art</p>
-           <p><input type="checkbox" name="language[]" value="Engineering" /> Engineering</p>
-           <p><input type="checkbox" name="language[]" value="Science" /> Science</p>
-           <p><input type="checkbox" name="language[]" value="Food" /> Food</p>
-           <p><input type="checkbox" name="language[]" value="Law" /> Law</p>
-           <p><input type="checkbox" name="language[]" value="Economy" /> Economy</p>
-           <p><input type="checkbox" name="language[]" value="Media_TV" /> Media_TV</p>
-      </div>
+      <div style="color:black;">          
+      
+      <div class="row" style="width: 100%;">
+       <div class=" input-group input-group-icon">
+   <select class="input-group input-group-icon" style="color: black;" name="Your_Intreset" id="YourIntreset" required>
+                                <option readonly>Your Intereset</option>
+                                <option style="color: black;">Medicine</option>
+                                <option style="color: black;">Politics</option>
+                                <option style="color: black;">Sport</option>
+                                <option style="color: black;">Technology</option>
+                                <option style="color: black;">Art</option>
+                                <option style="color: black;">Engineering</option>
+                                <option style="color: black;">Science</option>
+                                <option style="color: black;">Food</option>
+                                <option style="color: black;">Law</option>
+                                <option style="color: black;">Economy</option>
+                                <option style="color: black;">Media_TV</option>
+                                
+        </select>
+        </div>
+                   </div>
       
   <div class="row" style="width: 100%;">
        <div class=" input-group input-group-icon">
