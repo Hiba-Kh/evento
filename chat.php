@@ -94,7 +94,9 @@ function post()
 <div id="logout">
 	<a href="logout.php" style="text-decoration:none"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
 </div>
-
+    <div id="upload" style="margin-top:100px;">
+	<a href="logout.php" style="text-decoration:none"><i class="fa fa-photo" aria-hidden="true"></i>Upload</a>
+        </div>
 <div id="container">
 <div id="session-name">
 	Your Name: <input type="text" value="<?php echo $user->firstname ?>" class="session-text" disabled>
@@ -116,8 +118,10 @@ function post()
     	<textarea id="comment"></textarea>
     </div>
     <div class="form-btn">
+        
     	<input type="submit" value="Send" id="btn" name="btn"/>
     </div>
+    
 </div>
 </form>
 
