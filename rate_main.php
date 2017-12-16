@@ -1,24 +1,17 @@
 <html>
 <head>
 	<title>Rating system</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
   	<link rel="stylesheet" href="js/ratingstar.css">  	
          <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
-    <script src="assets/js/main.js"></script>
+   
 <?php
 session_start();
 $event_id=$_GET['id'];
@@ -60,20 +53,71 @@ $_SESSION['event_id']=$event_id;
             </div>
         </div>
     </nav>    
-<div class="container" style="background:white;align-items: center;height:220px;margin-top: 180px; ">    
+<div class="container" style="background:white;align-items: center;height:170px;margin-top: 180px; ">    
 <div class="row">
 <div class="col-md-12">
 	<div class="form-group">
             <label for="email" style="font-size: 1.5em;font-family:Verdana, Geneva, sans-serif;margin-top: 10px;">Overall,How entertaining was the conference ? </label>	  	
-	  <br>	<div class='starrr' id='rating-student'></div> 	<br><br>
-	  	<input type="button" id="submit" class="btn btn-success" value="Submit">
-	  	<div class="msg"></div>
+	  <br>	<div class='starrr' id='rating-student' style="margin-top: 20px;"></div> 	<br><br>
+	  	
 	</div>	
 </div>  
 </div>
  </div>
-
     
+    <div class="container" style="background:white;align-items: center;height:220px;margin-top: 100px; ">    
+<div class="row">
+<div class="col-md-12">
+	<div class="form-group">
+            <label for="email" style="font-size: 1.5em;font-family:Verdana, Geneva, sans-serif;margin-top: 10px;">Do you feel the day provided value for money? </label>	  	
+            <br>	<div class='starrr' id='rating2' style="margin-top: 20px;"></div> 	<br><br>
+	</div>	
+</div>  
+</div>
+ </div>
+    
+<div class="container" style="background:white;align-items: center;height:300px;margin-top: 100px; ">    
+<div class="row">
+<div class="col-md-12">
+	<div class="form-group">
+            <label style="font-size: 1.5em;font-family:Verdana, Geneva, sans-serif;margin-top: 10px;">Would you recommend a similar event to a friend? </label>	  	
+            <br>
+            <div id='RadioRating'>
+	  	<input type='radio' name='rates' value='Yes, definitly'>Yes, definitely
+                <input type='radio' name='rates' value='Maybe, if the content was changed'>Maybe, if the content was changed
+                <input type='radio' name='rates' value='Maybe, if it was cheaper'>Maybe, if it was cheaper
+                <input type='radio' name='rates' value='No, never'>No, never
+            </div>
+            <input type="button" id="submit" class="btn btn-success" value="Submit">
+	  	<div class="msg"></div>
+           </div>
+</div>  
+</div>
+</div>
+    
+    <div class="container" style="background:white;align-items: center;height:300px;margin-top: 100px; ">    
+<div class="row">
+<div class="col-md-12">
+	<div class="form-group">
+            <label style="font-size: 1.5em;font-family:Verdana, Geneva, sans-serif;margin-top: 10px;">Overall, were you satisfied with the venue and were you able to see and hear the presentations clearly? </label>	  	
+            <br>
+            <div id='RadioRating'>
+	  	<input type='radio' name='rates2' value='Yes'>Yes
+                <input type='radio' name='rates2' value='No'>No
+                
+            </div>
+            <input type="button" id="submit" class="btn btn-success" value="Submit">
+	  	<div class="msg"></div>
+           </div>
+</div>  
+</div>
+</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
+    <script src="assets/js/main.js"></script>   
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/ratingstar.js"></script>
@@ -90,13 +134,35 @@ $('#rating-student').starrr({
     }
   }
 });
+
 // ajax submit
+var rate2;
+$('#rating2').starrr({
+  change: function(e, value){ 
+  	rate2 = value;  	       
+    if (value) {
+      $('.your-choice-was').show();      
+    } else {
+      $('.your-choice-was').hide();
+    }
+  }
+});
+// ajax submit
+
+var rate3;
+$('#RadioRating').click(function() {
+   rate3 = $('input:radio[name=rates]');
+    if($radios.is(':checked') === false) {
+        $radios.filter('[value=Yes, definitly]').prop('checked', true);
+    }
+});
+
 $("#submit").click(function(){	
 	
 	$.ajax({		
         url: "rating.php",
         type: 'post',
-        data: {v3 : rate},
+        data: {v3 : rate,v4:rate2,v5:rate3},
         success: function (status) {
         	if(status == 1){
             	$('.msg').html('<b>Thanks for your submission :)</b>');
@@ -107,6 +173,8 @@ $("#submit").click(function(){
     });
 
 });
+
+
 </script>
 </body>
 </html>

@@ -105,7 +105,13 @@ var event_id;
        '<a href="ImageUpload.php?id='+event_id+'" ><img src="assets/images/photos/add1.png" alt="Add2" width="30" height="30" /></a>'+
               '<label style="font-size:1.2em; margin-top:10px;">Add Sponsor</label>'+        
                   '</div>';
-                    
+       
+        node+='<div class="section-title" >'+ 
+      ' <a href="SelectAdmin.php?id='+event_id+'"><img  src="assets/images/photos/add1.png" alt="add" width="30" height="30"  /></a>'+
+              '<label style="font-size:1.2em; margin-top:10px;">Add Admin</label>'+        
+                  '</div>';
+          
+             
                         $("#check").append(node);
 alert("Conference is Created Successfully");
                 },
@@ -120,7 +126,7 @@ alert("Conference is Created Successfully");
     </script>
 <body style="background:#76b852;">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div style="margin-left: 20px;margin-right: 20px;">
+        <div style="margin-left: 15px;">
             <div class="navbar-header">
 
                 <div class="site-branding">
@@ -139,7 +145,7 @@ alert("Conference is Created Successfully");
             </div>
 
             <div class="collapse navbar-collapse" id="navbar-items">
-                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 15px;">
                     <li><a href="Create.html">CreateConf. </a></li> 
                     <li><a href="profile.html">Profile</a></li>
                     <li><a href="upComing.html">UpComing </a></li>

@@ -3,7 +3,6 @@ $connect = mysqli_connect("localhost", "root", "", "evento");
 
     require "models.php";
     session_start();
-    $session_id=$_SESSION['session_id'];
     $event_id=$_SESSION['event_id'];
 
 
@@ -25,24 +24,23 @@ foreach ($speaker_Array_names as $key => $speaker_name_DB) {
   $result = mysqli_query($connect, $query);
   $row = mysqli_fetch_array($result);
   $speaker_id = $row['user_id'];
-   echo $speaker_id;  
 
-  $query2 = "SELECT speaker_id FROM speaker where speaker.speaker_id=$speaker_id";
+  $query2 = "SELECT admin_id FROM admin where admin.admin_id=$speaker_id";
   $result2 = mysqli_query($connect, $query2);
 
 
 if (mysqli_num_rows($result2) === 0)
 {
-  $query3 = "INSERT INTO speaker (speaker_id,user_id,event_id) VALUES ($speaker_id,$speaker_id,$event_id)";
+  $query3 = "INSERT INTO admin (admin_id,user_id) VALUES ($speaker_id,$speaker_id)";
   if(mysqli_query($connect, $query3))
   {
 $mysql2="SELECT * FROM users WHERE users.user_id = $speaker_id ";
-$r2=mysqli_query($conn,$mysql2);
+$r2=mysqli_query($connect,$mysql2);
 $row2= mysqli_fetch_assoc($r2);
 $email=$row2['email'];       
-$mysql3="UPDATE login SET type='speaker' WHERE login.email='$email' ";
-$r3=mysqli_query($conn,$mysql3);
-      
+$mysql3="UPDATE login SET type='admin' WHERE login.email='$email' ";
+$r3=mysqli_query($connect,$mysql3);
+   
   }
   else 
   {
@@ -52,14 +50,14 @@ $r3=mysqli_query($conn,$mysql3);
 }
  else 
  {
-          echo 'mawjod aslan fel speaker tabel';  
+          echo 'mawjod aslan fel admin tabel';  
 
  }
-  $query4 = "INSERT INTO session_speaker VALUES ($session_id,$speaker_id)";
+  $query4 = "INSERT INTO event_admin VALUES ($event_id,$speaker_id)";
   if(mysqli_query($connect, $query4))
   {
       if ($j===0){
-   echo 'Speakers are Selected Successfully';
+   echo 'Admin/s are Selected Successfully';
    $j++;
       }
      

@@ -218,8 +218,8 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
     <body>
     <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div class="container">
-            <div class="navbar-header">
+        <div >
+            <div class="navbar-header" style="margin-left:15px;">
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png"  alt="Logo">
@@ -236,7 +236,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
 
             </div>
 
-            <div class="collapse navbar-collapse" id="navbar-items">
+            <div class="collapse navbar-collapse" id="navbar-items" style="margin-right:15px;">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index_signed.php">Home</a></li>
                     <li class="active"><a href="audienceProfileView.php">My Profile </a></li> 
@@ -279,7 +279,7 @@ echo '<div style="color:white;float:left;width: 30%;
 	                                             echo   '<li><a href="$user->facebook"><i class="fa fa-facebook"></i></a></li>';
     	                                           echo  '<li><a href="$user->twitter"><i class="fa fa-twitter"></i></a></li>';
 		                                      echo       '<li><a href="$user->linkedin"><i class="fa fa-linkedin"></i></a></li>';
-                                                 echo    '<li><a href="$user->google"><i class="fa fa-google"></i></a></li>';
+                                                 echo    '<li><a href="$user->google"><i class="fa fa-google-plus"></i></a></li>';
 	                                echo  '</ul>';   
 echo '</div> ';                                         ?>
 	</div>
