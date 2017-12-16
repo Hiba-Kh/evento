@@ -9,12 +9,7 @@ $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 require "models.php";
 
 session_start();
-$_SESSION['session_id']=$id;
-$mysql_qry2="SELECT * FROM sessions WHERE sessions.session_id = $id ";
-$r2=mysqli_query($connect,$mysql_qry2);
-$row2= mysqli_fetch_assoc($r2);
-$event_id=$row2['event_id'];
-$_SESSION['event_id']=$event_id;
+$_SESSION['event_id']=$id;
 
 //Variables
 $first_name_speaker=array();
@@ -42,7 +37,7 @@ while($row = mysqli_fetch_array($result))
 <!DOCTYPE html>
 <html>
  <head>
-    <title>Choose Speaker</title>
+    <title>Choose Admin</title>
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -58,7 +53,7 @@ while($row = mysqli_fetch_array($result))
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
   
  </head>
- <body background="assets/images/speaker.jpg" style="background-size: 1850px 1200px; background-repeat: no-repeat;">
+ <body background="assets/images/administrator.jpg" style="background-size: 1850px 1200px; background-repeat: no-repeat;">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div >
             <div class="navbar-header" style="margin-left: 20px;">
@@ -100,7 +95,7 @@ while($row = mysqli_fetch_array($result))
   <br /><br />
   <div class="container" style="background:gainsboro;align-items: center;height:250px;margin-top: 180px; ">
    <br />
-   <h4 style="float:left;font-weight: bold;font-size:1.7em; " class="section-title">Select Speaker/s for this session</h4>
+   <h4 style="float:left;font-weight: bold;font-size:1.7em; " class="section-title">Select Admin/s for this session</h4>
 
    <br />
    <div>
@@ -113,11 +108,7 @@ while($row = mysqli_fetch_array($result))
      <br /><br />
      <input type="hidden" name="hidden_framework" id="hidden_framework" />
      <input type="submit" name="Submit" class="btn btn-info" value="Submit"style="padding:10px;" />  
-   <?php 
    
-   $new_id=$id;
-   echo " <a href='Agenda_Display_DB.php?id=$new_id' class='btn btn-info' style='margin-top:10px;padding:8px 230px;'>Back</a> ";?>
-
     </form>
     <br />
     
@@ -141,7 +132,7 @@ $(document).ready(function(){
   {
    var form_data = $(this).serialize();
    $.ajax({
-    url:"InsertSpeakerDB.php",
+    url:"InsertAdminDB.php",
     method:"POST",
     data:form_data,
     success:function(data)

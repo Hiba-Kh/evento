@@ -15,16 +15,19 @@ $arr_date=array();
 $arr_date_sorted=array();
 //GET ALL EVENTS THAT IS ADMINISTRATED BY THIS USER
 $user_id=$user->id;
-$mysql_qry="SELECT * FROM my_event where my_event.admin_id=$user_id";
-$r=mysqli_query($conn,$mysql_qry);
-$row= mysqli_fetch_assoc($r);
+$mysql_qry="SELECT * FROM event_admin where event_admin.admin_id=$user_id";
+$r_qry=mysqli_query($conn,$mysql_qry_qry);
 
-if (!$r)
+if (mysqli_num_rows($r_qry) === 0)
 {
    echo "NO events for this admin";
    die(mysqli_error($conn)); 
 }
 else {
+$row_qry= mysqli_fetch_assoc($r_qry);
+$event_id=$row_qry['event_id'];
+$mysql="SELECT * FROM my_event where my_event.event_id=$event_id";
+$r=mysqli_query($conn,$mysql);    
 while ($row= mysqli_fetch_assoc($r)) 
     {
 $myObj0 = new Anything();

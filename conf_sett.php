@@ -1,8 +1,8 @@
 <?php
 header('Content-Type: application/json');
-
+session_start();
 $id = $_GET["id"];
-
+$_SESSION['event_id']=$id;
 $servername = "localhost";
 $database = "evento";
 $username = "root";

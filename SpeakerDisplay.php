@@ -77,11 +77,11 @@
     </script>
 
 </head>
- <body background="assets/images/blueNew.jpg">
+ <body background="assets/images/white.jpg">
   <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div class="container">
-            <div class="navbar-header">
+        <div >
+            <div class="navbar-header" style="margin-left:15px;">
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png" alt="Logo" >
@@ -98,11 +98,12 @@
 
             </div><!-- /.navbar-header -->
 
-          <div class="collapse navbar-collapse" id="navbar-items">
+          <div class="collapse navbar-collapse" id="navbar-items" style="margin-right:15px;">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="adminProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
+                    <li class="active"><a href="SpeakerDisplay.php">Speak at </a></li> 
                     <li><a href="SpeakerDisplay.php">My Conferences </a></li>
                     <li><a href="signout.php">Sign Out</a></li>   
                 </ul>

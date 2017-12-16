@@ -113,7 +113,6 @@ button:hover {
     $selectOption = $_POST['taskOption'];
     
     header("Location:Display_event.html?id=$selectOption");}
-    
 ?>
     <div class="login-page">
 

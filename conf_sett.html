@@ -81,7 +81,7 @@ var event_id;
           '<label style="color:Black;font-size: 1.3em;"> Conference Description</label>'+
                 '<br>'+
 
-                '<input style="width:350px;" type="text" style="text-align:left;" name="description" value="'+value.description+'"/>'+
+    '<textarea rows="8" cols="50" type="text" style="text-align:left;" name="description" placeholder="'+value.description+'"/>'+'</textarea>'+
       '</div>'+
           
           
@@ -105,7 +105,13 @@ var event_id;
        '<a href="ImageUpload.php?id='+event_id+'" ><img src="assets/images/photos/add1.png" alt="Add2" width="30" height="30" /></a>'+
               '<label style="font-size:1.2em; margin-top:10px;">Add Sponsor</label>'+        
                   '</div>';
-                    
+       
+        node+='<div class="section-title" >'+ 
+      ' <a href="SelectAdmin.php?id='+event_id+'"><img  src="assets/images/photos/add1.png" alt="add" width="30" height="30"  /></a>'+
+              '<label style="font-size:1.2em; margin-top:10px;">Add Admin</label>'+        
+                  '</div>';
+          
+             
                         $("#check").append(node);
 alert("Conference is Created Successfully");
                 },
@@ -118,9 +124,9 @@ alert("Conference is Created Successfully");
     });
 
     </script>
-<body background="assets/images/blueNew.jpg">
+<body style="background:#76b852;">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div style="margin-left: 20px;margin-right: 20px;">
+        <div style="margin-left: 15px;">
             <div class="navbar-header">
 
                 <div class="site-branding">
@@ -139,40 +145,17 @@ alert("Conference is Created Successfully");
             </div>
 
             <div class="collapse navbar-collapse" id="navbar-items">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 15px;">
                     <li><a href="Create.html">CreateConf. </a></li> 
                     <li><a href="profile.html">Profile</a></li>
                     <li><a href="upComing.html">UpComing </a></li>
-                    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Program
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Proceeding.html">Proceedings</a></li>
-          <li><a href="Panel.html">Panel</a></li>
-          <li><a href="Awards.html">Awards</a></li>
-          <li><a href="Paper.html">Paper</a></li>
-          <li><a data-scroll href="#speakers">Speaker</a></li>
-          <li><a  data-scroll href="#faq">Agenda</a></li>
-          <li><a href="Sponsor_Display.html">Sponsors</a></li>
-        </ul>
-      </li>
-      
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Venue
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Accommodation.html">Accommodation</a></li>
-          <li><a href="Photos_event.html">Photos</a></li>
-          <li><a href="Videos_event.html">Videos</a></li>
-         </ul>
-         </li>
-         <li><a href="index.html">SignOut</a></li>
+                    <li><a href="index.html">SignOut</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div id ="check" class="container" style="max-width:800px;background-color:lightblue">
+    <div id ="check" class="container" style="max-width:800px;background-color:white">
 
     </div>
   

@@ -14,20 +14,7 @@ $row2= mysqli_fetch_assoc($r2);
 $email=$row2['email'];       
 $mysql3="UPDATE login SET type='admin' WHERE login.email='$email' ";
 $r3=mysqli_query($conn,$mysql3);
-if(!$r3){
-    
-  echo"failed"; 
-}
-else 
-{
-$mysql4="INSERT INTO admin (admin_id,user_id) VALUES ($user->id,$user->id)";
-if(mysqli_query($conn, $mysql4)){
-    echo"succ"; 
-}
-else 
-{
-   echo"failed"; 
-}}}    
+}    
                     $c_name=$_POST['c_name'];
                     $s_date=$_POST['s_date'];                 
                     $e_date=$_POST['e_date'];    
@@ -53,17 +40,16 @@ if (!$r2)
 }
 else {
 $row2= mysqli_fetch_assoc($r2);
-$id = $row2['event_id'];
-
-$sql5 = "INSERT INTO logs (msg,event_id,post_time) VALUES (':',$id,CURRENT_TIMESTAMP)";
-if(mysqli_query($conn, $sql5)){
-       echo "Succ";
+$event_id = $row2['event_id'];
+$mysql4="INSERT INTO event_admin (admin_id,event_id) VALUES ($user->id,$event_id)";
+if(mysqli_query($conn, $mysql4)){
+    echo"succ"; 
 }
-else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-
+else 
+{
+   echo"failed"; 
 }
-header("Location:conf_sett.html?id=$id");
+header("Location:conf_sett.html?id=$event_id");
 exit;
 }
 } else{

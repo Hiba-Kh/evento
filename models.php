@@ -1,6 +1,6 @@
 <?php
 class Anything {
-    var $id;    
+    var $id;       
     var $session_id;    
     var $event_id;
     var $desc;
@@ -27,6 +27,11 @@ class UserData {
     var $intrestedEvents;
     var $upcomingEvents;
     var $token;
+    var $facebook;
+    var $google;
+    var $linkedin;
+    var $twitter;
+
     
 }
 

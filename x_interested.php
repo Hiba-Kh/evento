@@ -1,13 +1,10 @@
 <?php
 header('Content-Type: application/json');
-$servername = "localhost";
-$database = "evento";
-$username = "root";
-$password = "";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-class Anything {
+ require "conn.php";
+ require "models.php";
+ session_start();
+ $user=$_SESSION['user_data'];
+class Any {
     var $id;
     var $location;
     var $name_event;
@@ -16,16 +13,33 @@ class Anything {
     var $end_date;
     var $end;
 }
-$event_id;
-$mysql_qry="SELECT * FROM my_event";
-$r=mysqli_query($conn,$mysql_qry);
 $i=0;
 $j=0;
 $l=0;
+$s=0;
+
 $arr=array();
 $arr_date=array();
 $arr_date_sorted=array();
+$interested = array();
+$user_id=$user->id;
+$event_id;
 
+$mysql="SELECT * FROM interested where interested.user_id=$user_id";
+$r_sql=mysqli_query($conn,$mysql);
+ 
+  while($row_sql= mysqli_fetch_assoc($r_sql)) 
+   {
+        echo 'yes';        
+$interested[$s] = $row_sql['event_type_id'];
+$s++;
+   }
+       
+ 
+
+
+$mysql_qry="SELECT * FROM my_event";
+$r=mysqli_query($conn,$mysql_qry);
 if (!$r)
 {echo "Failed";
    die(mysqli_error($conn)); 
@@ -35,7 +49,7 @@ else {
   
 while ($row= mysqli_fetch_assoc($r)) 
         {
-$myObj0 = new Anything();
+$myObj0 = new Any();
 $myObj0->id = $row['event_id'];
 $id=$row['event_id'];
 $myObj0->location =$row['location_id'];

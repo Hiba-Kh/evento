@@ -10,14 +10,27 @@
 <style>
 option
 {
-    
+    background:#76b852;
     color:black;
 }
-    
+.placeholder
+{
+    position: relative;
+}
+
+.placeholder::after
+{
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    content: attr(data-placeholder);
+    pointer-events: none;
+    opacity: 0.6;
+}    
 </style>
 </head>
 
-<body background="assets/images/White.jpg">
+<body style="background:#76b852;">
   
 <div class="container" style="color: black;">
   <form action="signup.php" method="post">
@@ -53,27 +66,55 @@ option
         <input type="tel" name="phone" placeholder="Phone" required/>
         <div class="input-icon"><i class="fa fa-phone"></i></div>
       </div>
+      <h4>Please insert the following accounts if you have </h4>
       
+      <h4>Your Facebook :</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="facebook" data-placeholder="my placeholder" value="https://www.facebook.com/your_name" placeholder="https://www.facebook.com/your_name" />
+        <div class="input-icon"><i class="fa fa-facebook"></i></div>
+      </div>
+     
+      <h4>Your Gmail:</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="gmail" data-placeholder="my placeholder" value="yourname@gmail.com" placeholder="yourname@gmail.com" />
+        <div class="input-icon"><i class="fa fa-google-plus"></i></div>
+      </div>
+      
+      <h4>Your Twitter :</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="twitter" data-placeholder="my placeholder" value="https://twitter.com/your_name" placeholder="https://twitter.com/your_name" />
+        <div class="input-icon"><i class="fa fa-twitter"></i></div>
+      </div>
+      
+      <h4>Your Linkedin:</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="linkedin" data-placeholder="my placeholder" value="https://www.linkedin.com/your_name" placeholder="https://www.linkedin.com/your_name" />
+        <div class="input-icon"><i class="fa fa-linkedin"></i></div>
+      </div>
     </div>
-       <div class="row">
-       <div class="form-group input-group">
-   <select class="form-control" style="color: black;" name="Your_Intreset" id="YourIntreset"  required>
-                                <option readonly>* Your Intreset</option> 
+      
+      <div style="color:black;">          
+      
+      <div class="row" style="width: 100%;">
+       <div class=" input-group input-group-icon">
+   <select class="input-group input-group-icon" style="color: black;" name="Your_Intreset" id="YourIntreset" required>
+                                <option readonly>Your Intereset</option>
                                 <option style="color: black;">Medicine</option>
                                 <option style="color: black;">Politics</option>
-                                <option style="color: black;">sport</option>
+                                <option style="color: black;">Sport</option>
                                 <option style="color: black;">Technology</option>
                                 <option style="color: black;">Art</option>
                                 <option style="color: black;">Engineering</option>
                                 <option style="color: black;">Science</option>
                                 <option style="color: black;">Food</option>
                                 <option style="color: black;">Law</option>
-                                <option style="color: black;">Economy</option>                                
-                                <option style="color: black;">Media and TV </option>
+                                <option style="color: black;">Economy</option>
+                                <option style="color: black;">Media_TV</option>
                                 
         </select>
         </div>
-      </div>
+                   </div>
+      
   <div class="row" style="width: 100%;">
        <div class=" input-group input-group-icon">
    <select class="input-group input-group-icon" style="color: black;" name="Your_Profession" id="YourProfession" required>
@@ -120,13 +161,14 @@ option
 
    
     <div class="row" >
-      <input onclick="window.location.href = 'memberProfileView.php';" style="border-color: yellowgreen;" type="submit" name="Submit" value="Submit request" class="btn btn-white"/>
+      <input style="border-color: yellowgreen;" type="submit" name="Submit" value="Submit request" class="btn btn-white"/>
     </div>
   </form>
 </div>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-    <script  src="js/index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script  src="js/index.js"></script>
  
 </body>
 </html>

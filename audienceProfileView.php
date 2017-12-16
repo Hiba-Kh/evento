@@ -23,17 +23,153 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
 <link rel="stylesheet" href="assets/css/main_profile.css">
 <?php
-    require "conn.php";
+
     require "models.php";
+    $db = mysqli_connect("localhost", "root", "", "evento");
 
     session_start();
     $user=$_SESSION['user_data'];
     $event=$_SESSION['event_data'];
+    
     if($user == null) {
         header("location: signinView.php");
     }
+
+  $msg = "";
+
+  if (isset($_POST['upload'])) {
+  	// Get image name
+  	$image = $_FILES['image']['name'];
+  
+  	$target = "images/".basename($image);
+
+$sql_Check = "SELECT * FROM profilePic where profilePic.user_id=$user->id";
+$r=mysqli_query($db, $sql_Check);        
+
+if(mysql_num_rows($r) === 0) {
+    
+    $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
+  	mysqli_query($db, $sql);
+
+  	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+  		$msg = "Image uploaded successfully";
+  	}else{
+  		$msg = "Failed to upload image";
+  	}
+} 
+else {
+$sql_Delete = "DELETE FROM profilePic WHERE profilePic.user_id=$user->id";
+if (mysqli_query($db, $sql_Delete)) {
+} else {
+    echo "Error deleting record: " . mysqli_error($db);
+}
+
+$sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
+  	mysqli_query($db, $sql);
+
+  	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+  		$msg = "Image uploaded successfully";
+  	}else{
+  		$msg = "Failed to upload image";
+  	}    
+}
+        
+        
+  	
+  }//post_uploaded
+  $result = mysqli_query($db, "SELECT * FROM profilePic where profilePic.user_id=$user->id");
 ?>
-    <script src="js/jquery-3.2.1.min.js"></script>
+<style type="text/css">
+   #content{
+   	width: 30%;
+        height: 30%;
+   	margin: 20px auto;
+   }
+   form{
+   	width: 50%;
+   	margin: 20px auto;
+   }
+   form div{
+   	margin-top: 5px;
+   }
+   #img_div{
+   	
+   }
+   #img_div:after{
+   	content: "";
+   	display: block;
+   	clear: both;
+   }
+   .container {
+
+  width: 80%;
+   	padding: 5px;
+   	margin: 15px auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+}
+
+.container:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, .3);
+}
+
+
+
+.title {
+  position: absolute;
+  width: 500px;
+  left: 0;
+  top: 120px;
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  z-index: 1;
+  transition: top .5s ease;
+}
+
+.container:hover .title {
+  top: 90px;
+}
+
+.button {
+  position: absolute;
+  width: 300px;
+  left:0;
+  margin-left: 580px;
+  top: 380px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.button a {
+  width: 100px;
+  padding: 5px 65px;
+  text-align: center;
+  color: white;
+  border: solid 2px white;
+  z-index: 1;
+ 
+}
+
+.container:hover .button {
+  opacity: 1;
+}
+
+   
+</style>
+<script src="js/jquery-3.2.1.min.js"></script>
     <script>
         $(document).ready(function() {
             $.ajax({
@@ -41,15 +177,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                 dataType: 'json', 
                 success: function(value){        
                         console.log('caste: ' + value);
-                        var x = '<div class="container">'+
-                                    '<h3 class="w3l_head" style="font-size: 2.2em;">'+'My Account'+'</h3>'+
-                                    '<div class="w3l-grids-about">'+
-                                            '<div class="col-md-5 w3ls-ab-right">'+
-                                                '<div class="agile-about-right-img">'+
-                                                    '<img src="assets/images/ab.jpg" alt="">'+
-                                                    '</div>'+
-                                                    '</div>'+
-                                                    '<div class="col-md-7 w3ls-agile-left">'+
+                         var x = 
                                                 '<div class="w3ls-agile-left-info">'+
                                                     '<h4 style="font-size:1.3em;">'+'JobTitle'+'</h4>'+
                                                     '<p>'+value.job+'</p>'+
@@ -66,32 +194,15 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                                                     '<h4 style="font-size:1.3em;">'+'Address'+'</h4>'+
                                                     '<p>'+ value.address+'</p>'+
                                                     '</div>'+
-                                                '<div class="w3ls-agile-left-info">'+
+                                                '<div >'+
                                                     '<h4 style="font-size:1.3em;">'+'Email Address'+'</h4>'+
                                                     '<p><a href="mailto:example@email.com">'+value.email+'</a></p>'+
-                                                '</div>'+
-                                        '</div>'+
-                                        '<div class="clearfix"> </div>'+
-                                    '</div>'+
-                                '</div>';
-                    var y = '<img src="assets/images/pic2.jpg" alt=" " class="img-responsive" >'+
-                                         '<br>'+
-                                        '<h2 style="font-size: 2em;">'+value.firstname+' '+value.lastname+'</h2>'+
-					                    '<span>'+value.job+'</span>'+
-                                         '<div class="callbacks_container">'+
-			                                '<div class="clearfix"></div>'+
-		                                    '</div>'+
-                                            '<br><br>'+
-                                              '<ul class="top-links">'+
-	                                                '<li><a href="#"><i class="fa fa-facebook"></i></a></li>'+
-    	                                            '<li><a href="#"><i class="fa fa-twitter"></i></a></li>'+
-		                                            '<li><a href="#"><i class="fa fa-linkedin"></i></a></li>'+
-                                                    '<li><a href="#"><i class="fa fa-google-plus"></i></a></li>'+
-	                                 '</ul>';
+                                                '</div>';
+                                        
+                                    
+                   
                                  
                         $("#about").append(x);
-                        $("#banner").append(y);
-                       
                         
                 },
                 error:function(error, code){
@@ -107,12 +218,12 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     <body>
     <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div class="container">
-            <div class="navbar-header">
+        <div >
+            <div class="navbar-header" style="margin-left:15px;">
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png"  alt="Logo">
-                        Evento
+                        Conferencer
                     </a>
                 </div>
 
@@ -125,9 +236,10 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
 
             </div>
 
-            <div class="collapse navbar-collapse" id="navbar-items">
+            <div class="collapse navbar-collapse" id="navbar-items" style="margin-right:15px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="adminProfileView.php">My Profile </a></li> 
+                    <li><a href="index_signed.php">Home</a></li>
+                    <li class="active"><a href="audienceProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
                     <li><a href="attendedConf.php">My Conferences </a></li>
@@ -137,18 +249,64 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
         </div>
     </nav>
     
-     <div class="main" id="home">
-	<div class="banner" id="banner">
-		
-    </div>
+          <div class="main" id="home">
+         <div class="banner" id="content">
+  <?php
+    $row = mysqli_fetch_array($result);
+      echo "<div class='container'>";
+      	echo "<img src='images/".$row['image']."'  style='float:left;margin:5px;width:300px;height:300px;'>";
+              echo ' <div class="overlay"></div>';
+        echo' <div class="button"><a href="#upload"> UPLOAD A PROFILE PIC </a></div>';
+      echo "</div>";
     
+  
+  ?>
+             
+       
+</div>
+         
+ 
+  <?php
+echo '<div style="color:white;float:left;width: 30%;
+        height: 10%;
+   	margin: 5px auto; margin-left:567px;"> '; 
+                                     echo   "<h2 style='font-size: 2em;'>$user->firstname $user->lastname</h2>";
+					                   echo   "<span>$user->job</span>";
+                                         echo   '<div class="callbacks_container">';
+			                                echo '<div class="clearfix"></div>';
+		                                  echo  '</div>';
+                                            echo '<ul class="top-links" style="margin-left:60px;">';
+	                                             echo   '<li><a href="$user->facebook"><i class="fa fa-facebook"></i></a></li>';
+    	                                           echo  '<li><a href="$user->twitter"><i class="fa fa-twitter"></i></a></li>';
+		                                      echo       '<li><a href="$user->linkedin"><i class="fa fa-linkedin"></i></a></li>';
+                                                 echo    '<li><a href="$user->google"><i class="fa fa-google-plus"></i></a></li>';
+	                                echo  '</ul>';   
+echo '</div> ';                                         ?>
 	</div>
 
-<div class="about" id="about">
-		
+<div class="about" >
+    <div class="container">
+                                    <h3 class="w3l_head" style="font-size: 2.2em;">My Account</h3>
+                                    <div class="w3l-grids-about">
+                                            <div class="col-md-5 w3ls-ab-right">
+              <?php
+     $db = mysqli_connect("localhost", "root", "", "evento");
+    $result = mysqli_query($db,"SELECT * FROM profilePic where profilePic.user_id=$user->id");
+           
+   $row = mysqli_fetch_array($result);
+       echo '<div class="agile-about-right-img container" style="border:3px solid #021a40">';
+      echo "<img src='images/".$row['image']."'  alt=''>";
+       echo '</div>';
+  ?>
+          </div>
+          <div class="col-md-7 w3ls-agile-left" id="about">
+                 </div>
+   <div class="clearfix w3ls-agile-left-info" style="width:1400px;"> </div>
  </div>
+    </div>
+       </div>         
    
- <section id="upComing" class="section schedule">
+ <section id="upComing" class="section schedule w3ls-agile-left-info">
         <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
@@ -157,6 +315,14 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
             </div>
                 <div  id="coming_events" class="bs-docs-example row" >
      <?php
+      if (empty($_SESSION['event_data'])) {
+         echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>';   
+     }
+     else {
      $i=0;
      $j=0;
      foreach($_SESSION['event_data'] as $key=>$value)
@@ -180,6 +346,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
     {
            echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore()"> ';     
     }
+     }
     ?>             
                     
                     </div>
@@ -215,7 +382,7 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
  </section>
     
     
- <section class="section schedule">
+ <section class="section schedule w3ls-agile-left-info">
         <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
@@ -224,6 +391,14 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
             </div>
                 <div  id="InterestedComing" class="bs-docs-example row" >
                         <?php
+                         if (empty($_SESSION['event_Intrested'])) {
+         echo'<div class="col-md-4 col-sm-6">';
+                    echo'<div class="schedule-box">';       
+echo '<h3 class="section-title" style="color:white; font-weight:bold; font-size: 2em; margin-left:20px;border:">Nothing to Display</h3>';
+echo' </div>';
+                    echo' </div>';   
+     }
+     else {
      $j=0;
      foreach($_SESSION['event_Intrested'] as $key=>$value)
     {
@@ -246,6 +421,7 @@ if(count($_SESSION['event_data']) > 3)
     {
    echo '<input type="button" class="btn btn-black" name="Show More" value="Show More" style="margin-top:20px;height:50px;margin-left:17px;" onClick="showMore2()"> ';     
     }
+     }
     ?>             
                     
                     </div>
@@ -273,6 +449,19 @@ if(count($_SESSION['event_data']) > 3)
                     </div>
             
                     </div>
+    </section>
+  
+    <section class="section schedule" id="upload" style="border:2px;">
+        <div class="container" style="width:1400px;">
+          
+                    <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Upload a profile picture</h3>
+                    <form method="POST" action="audienceProfileView.php" enctype="multipart/form-data" >
+            <div class="row">
+                <input  style="float:left;" type="file" name="image">
+          <button style="float:right;" type="submit" name="upload">UPLOAD</button>
+  	</div>
+  </form>
+        </div>
     </section>
     
     <footer class="site-footer">

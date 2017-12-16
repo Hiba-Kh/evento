@@ -138,12 +138,13 @@
 
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="nav navbar-nav navbar-right">
-                
-                    <li><a href="memberProfileView.php">My Profile </a></li> 
-                    <li><a data-scroll href="#about">About</a></li>          
+                    
+                    <li><a data-scroll href="#about">About</a></li> 
+                    <li class="active"><a data-scroll href="#site-header">Home</a></li>
                     <li><a data-scroll href="#upComing">UpComing</a></li> 
                     <li><a data-scroll href="#photos">Photos</a></li>
-                    <li class="active"><a data-scroll href="#site-header">Home</a></li>
+                     <li><a href="memberProfileView.php">My Profile </a></li> 
+
                 </ul>
             </div>
         </div>

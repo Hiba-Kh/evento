@@ -11,7 +11,6 @@
     <?php
     require "conn.php";
     require "models.php";
-
     session_start();
     $session_data=$_SESSION['session_data'];
     $Agenda_id=$_SESSION['Agenda_id'];
@@ -25,7 +24,6 @@
             $(".delete").click(function(){
              var item = $(this).parent();
              var id =$(this).attr('rel'); 
-
             $.post('DeletePage.php',{'id' : id},function(data){
               $(item).hide();
             });     
@@ -34,7 +32,6 @@
     $(".deleteAgenda").click(function(){
              var item_Agenda = $(this).parent();
              var id_Agenda =$(this).attr('rel'); 
-
             $.post('DeleteAgenda.php',{'id' : id_Agenda},function(data){
               $(item_Agenda).hide();
             });     
@@ -48,8 +45,8 @@
 </head>
 <body background="assets/images/White.jpg">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div class="container">
-            <div class="navbar-header">
+        <div >
+            <div class="navbar-header" style="margin-left: 15px;">
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png" alt="Logo">
@@ -66,7 +63,7 @@
 
             </div>
 
-            <div class="collapse navbar-collapse" id="navbar-items">
+            <div class="collapse navbar-collapse" id="navbar-items" style="margin-right: 15px;">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="adminProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 

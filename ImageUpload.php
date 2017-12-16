@@ -46,18 +46,34 @@ $msg = "";
 <body background="assets/images/download.jpg">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
         <div >
-            <div class="navbar-header">
-
-                <!-- logo -->
-                <div class="site-branding" style="padding-left: 20px;">
+            <div class="navbar-header" style="margin-left: 15px;" >
+                <div class="site-branding">
                     <a class="logo" href="index.html">
-                        <img src="assets/images/logo.png" alt="Logo">
+                        <img src="assets/images/logo.png"  alt="Logo">
                         Evento
                     </a>
                 </div>
 
-            </div> 
-        </div><!-- /.container -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-items" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-items"  style="margin-right: 15px;">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index_signed.php">Home</a></li>
+                    <li class="active"><a href="adminProfileView.php">My Profile </a></li> 
+                    <li><a href="Create.html">Create Conference </a></li> 
+                    <li><a href="upComing.html">UpComing </a></li>
+                    <li><a href="Administrated_display.php">My Conferences </a></li>
+                    <li><a href="signout.php">Sign Out</a></li>   
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <div class="container" style="background:gainsboro;align-items: center;height:300px;margin-top: 180px; ">
