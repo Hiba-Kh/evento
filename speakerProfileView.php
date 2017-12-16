@@ -146,7 +146,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
   position: absolute;
   width: 300px;
   left:0;
-  margin-left: 523px;
+  margin-left: 580px;
   top: 380px;
   text-align: center;
   opacity: 0;
@@ -223,7 +223,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png"  alt="Logo">
-                        Evento
+                        Conferencer
                     </a>
                 </div>
 
@@ -269,7 +269,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
   <?php
 echo '<div style="color:white;float:left;width: 30%;
         height: 10%;
-   	margin: 5px auto; margin-left:510px;"> '; 
+   	margin: 5px auto; margin-left:567px;"> '; 
                                      echo   "<h2 style='font-size: 2em;'>$user->firstname $user->lastname</h2>";
 					                   echo   "<span>$user->job</span>";
                                          echo   '<div class="callbacks_container">';
@@ -291,11 +291,11 @@ echo '</div> ';                                         ?>
                                     <div class="w3l-grids-about">
                                             <div class="col-md-5 w3ls-ab-right">
               <?php
-     $db = mysqli_connect("localhost", "root", "", "evento");
+    $db = mysqli_connect("localhost", "root", "", "evento");
     $result = mysqli_query($db,"SELECT * FROM profilePic where profilePic.user_id=$user->id");
            
    $row = mysqli_fetch_array($result);
-       echo '<div class="agile-about-right-img container">';
+       echo '<div class="agile-about-right-img container " style="border:3px solid #021a40">';
       echo "<img src='images/".$row['image']."'  alt=''>";
        echo '</div>';
   ?>
@@ -469,7 +469,7 @@ if(count($_SESSION['event_data']) > 3){
         <div class="container" style="width:1400px;">
           
                     <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Upload a profile picture</h3>
-     <form method="POST" action="adminProfileView.php" enctype="multipart/form-data" >
+     <form method="POST" action="speakerProfileView.php" enctype="multipart/form-data" >
             <div class="row">
                 <input  style="float:left;" type="file" name="image">
           <button style="float:right;" type="submit" name="upload">UPLOAD</button>

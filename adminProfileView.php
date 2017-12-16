@@ -146,7 +146,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
   position: absolute;
   width: 300px;
   left:0;
-  margin-left: 523px;
+  margin-left: 580px;
   top: 380px;
   text-align: center;
   opacity: 0;
@@ -270,7 +270,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
   <?php
 echo '<div style="color:white;float:left;width: 30%;
         height: 10%;
-   	margin: 5px auto; margin-left:510px;"> '; 
+   	margin: 5px auto; margin-left:567px;"> '; 
                                      echo   "<h2 style='font-size: 2em;'>$user->firstname $user->lastname</h2>";
 					                   echo   "<span>$user->job</span>";
                                          echo   '<div class="callbacks_container">';
@@ -295,8 +295,8 @@ echo '</div> ';                                         ?>
     $result = mysqli_query($db,"SELECT * FROM profilePic where profilePic.user_id=$user->id");
            
    $row = mysqli_fetch_array($result);
-       echo '<div class="agile-about-right-img container">';
-      echo "<img src='images/".$row['image']."'  alt=''>";
+       echo '<div class="agile-about-right-img container" style="border:3px solid #021a40">';
+      echo "<img src='images/".$row['image']."'   alt=''>";
        echo '</div>';
   ?>
           </div>

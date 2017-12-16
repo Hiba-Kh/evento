@@ -1,8 +1,29 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Profile</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Classy Resume Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="assets/css/style_profile.css" rel="stylesheet" type="text/css" media="all" />
+<!-- gallery -->
+<link type="text/css" rel="stylesheet" href="assets/css/cm-overlay.css" />
+<!-- //gallery -->
+<!-- font-awesome icons -->
+<link href="assets/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+<link href="//fonts.googleapis.com/css?family=Gidugu" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="assets/css/main_profile.css">
 <?php
+
     require "models.php";
     $db = mysqli_connect("localhost", "root", "", "evento");
 
@@ -10,6 +31,9 @@
     $user=$_SESSION['user_data'];
     $event=$_SESSION['event_data'];
     
+    if($user == null) {
+        header("location: signinView.php");
+    }
 
   $msg = "";
 
@@ -50,6 +74,8 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
   	}    
 }
         
+        
+  	
   }//post_uploaded
   $result = mysqli_query($db, "SELECT * FROM profilePic where profilePic.user_id=$user->id");
 ?>
@@ -120,7 +146,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
   position: absolute;
   width: 300px;
   left:0;
-  margin-left: 500px;
+  margin-left: 580px;
   top: 380px;
   text-align: center;
   opacity: 0;
@@ -149,8 +175,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
             $.ajax({
                 url: "profileController.php?id=" + $("#user_id").val(),
                 dataType: 'json', 
-                success: function(value){
-                  console.log(value);
+                success: function(value){        
                         console.log('caste: ' + value);
                         var x = 
                                                 '<div class="w3ls-agile-left-info">'+
@@ -178,7 +203,8 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
                    
                                  
                         $("#about").append(x);
-              
+                       
+                        
                 },
                 error:function(error, code){
                     console.log(error);
@@ -189,35 +215,16 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
         });
         
     </script>
-
-<!-- for-mobile-apps -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Classy Resume Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="assets/css/style_profile.css" rel="stylesheet" type="text/css" media="all" />
-<link type="text/css" rel="stylesheet" href="assets/css/cm-overlay.css" />
-<link href="assets/css/font-awesome.css" rel="stylesheet"> 
-<link href="//fonts.googleapis.com/css?family=Gidugu" rel="stylesheet">
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/main_profile.css">
 </head>
-	
-
-    <body>
+    <body background="assets/images/white.jpg">
     <input type="hidden" name="user_id" id="user_id" value="<?php echo $user->id ?>">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
-        <div>
+        <div >
             <div class="navbar-header" style="margin-left: 15px;">
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png"  alt="Logo">
-                        Evento
+                        Conferencer
                     </a>
                 </div>
 
@@ -227,20 +234,22 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            </div><!-- /.navbar-header -->
+
+            </div>
 
             <div class="collapse navbar-collapse" id="navbar-items" style="margin-right: 15px;">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index_signed.php">Home</a></li>
-                    <li class="active"><a href="memberProfileView.php">My Profile </a></li> 
+                    <li class="active"><a href="adminProfileView.php">My Profile </a></li> 
                     <li><a href="Create.html">Create Conference </a></li> 
                     <li><a href="upComing.html">UpComing </a></li>
+                    <li><a href="Administrated_display.php">My Conferences </a></li>
                     <li><a href="signout.php">Sign Out</a></li>   
                 </ul>
             </div>
-        </div><!-- /.container -->
+        </div>
     </nav>
-
+    
      <div class="main" id="home">
          <div class="banner" id="content">
   <?php
@@ -251,14 +260,17 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
         echo' <div class="button"><a href="#upload"> UPLOAD A PROFILE PIC </a></div>';
       echo "</div>";
     
+  
   ?>
+             
+       
 </div>
          
  
   <?php
 echo '<div style="color:white;float:left;width: 30%;
         height: 10%;
-   	margin: 5px auto; margin-left:550px;"> '; 
+   	margin: 5px auto; margin-left:567px;"> '; 
                                      echo   "<h2 style='font-size: 2em;'>$user->firstname $user->lastname</h2>";
 					                   echo   "<span>$user->job</span>";
                                          echo   '<div class="callbacks_container">';
@@ -273,18 +285,18 @@ echo '<div style="color:white;float:left;width: 30%;
 echo '</div> ';                                         ?>
 	</div>
 
-
 <div class="about" >
     <div class="container">
                                     <h3 class="w3l_head" style="font-size: 2.2em;">My Account</h3>
                                     <div class="w3l-grids-about">
-                                    <div class="col-md-5 w3ls-ab-right">
+                                            <div class="col-md-5 w3ls-ab-right">
               <?php
-   $db = mysqli_connect("localhost", "root", "", "evento");
-   $result = mysqli_query($db,"SELECT * FROM profilePic where profilePic.user_id=$user->id");
+     $db = mysqli_connect("localhost", "root", "", "evento");
+    $result = mysqli_query($db,"SELECT * FROM profilePic where profilePic.user_id=$user->id");
+           
    $row = mysqli_fetch_array($result);
-       echo '<div class="agile-about-right-img container">';
-      echo "<img src='images/".$row['image']."'  alt=''>";
+       echo '<div class="agile-about-right-img container" style="border:3px solid #021a40">';
+      echo "<img src='images/".$row['image']."'   alt=''>";
        echo '</div>';
   ?>
           </div>
@@ -293,10 +305,10 @@ echo '</div> ';                                         ?>
    <div class="clearfix w3ls-agile-left-info" style="width:1400px;"> </div>
  </div>
     </div>
-       </div>         
-  
- <section id="upComing" class="section schedule w3ls-agile-left-info">
-        <div class="container">
+       </div>                          
+   
+  <section id="upComing" class="section schedule w3ls-agile-left-info">
+        <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Attended Conferences</h3>
@@ -311,7 +323,7 @@ echo '</div> ';                                         ?>
 </section>
 
   <section id="upComing" class="section schedule w3ls-agile-left-info">
-        <div class="container">
+        <div class="container" style="width:1400px;">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Interested Conferences</h3>
@@ -323,12 +335,12 @@ echo '</div> ';                                         ?>
                     </div>             </div>
         </div>
 </section>
-
-<section class="section schedule" id="upload" style="border:2px;">
+    
+ <section class="section schedule" id="upload" style="border:2px;">
         <div class="container" style="width:1400px;">
           
                     <h3 class="section-title" style="color:black; font-weight:bold; font-size: 2em;">Upload a profile picture</h3>
-     <form method="POST" action="adminProfileView.php" enctype="multipart/form-data" >
+     <form method="POST" action="memberProfileView.php" enctype="multipart/form-data" >
             <div class="row">
                 <input  style="float:left;" type="file" name="image">
           <button style="float:right;" type="submit" name="upload">UPLOAD</button>
@@ -336,7 +348,8 @@ echo '</div> ';                                         ?>
   </form>
         </div>
     </section>
-	<footer class="site-footer">
+    
+    <footer class="site-footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -350,13 +363,22 @@ echo '</div> ';                                         ?>
             </div>
         </div>
     </footer>
-
+    
+    <script src="assets/js/bootstrap.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/smooth-scroll/dist/js/smooth-scroll.min.js"></script>
     <script src="assets/js/main.js"></script>
-<script src="assets/js/jquery-2.2.3.min.js"></script> 
-<script src="assets/js/pie-chart.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-2.2.3.min.js"></script> 
+    <script src="assets/js/pie-chart.js" type="text/javascript"></script>
+    <script src="assets/js/responsiveslides.min.js"></script>
+    <script src="assets/js/jquery.tools.min.js"></script>
+    <script src="assets/js/jquery.mobile.custom.min.js"></script>
+    <script src="assets/js/jquery.cm-overlay.js"></script>
+    <script src="assets/js/bars.js"></script>
+    <script type="text/javascript" src="assets/js/move-top.js"></script>
+    <script type="text/javascript" src="assets/js/easing.js"></script>
+    
  <script type="text/javascript">
 
         $(document).ready(function () {
@@ -401,41 +423,29 @@ echo '</div> ';                                         ?>
             });
         });
     </script>
-<!-- skills -->	
-						<script src="assets/js/responsiveslides.min.js"></script>
-							<script>
-								// You can also use "$(window).load(function() {"
-								$(function () {
-								  // Slideshow 4
-								  $("#slider3").responsiveSlides({
-									auto: true,
-									pager:true,
-									nav:false,
-									speed: 500,
-									namespace: "callbacks",
-									before: function () {
-									  $('.events').append("<li>before event fired.</li>");
-									},
-									after: function () {
-									  $('.events').append("<li>after event fired.</li>");
-									}
-								  });
-							
-								});
-							 </script>
-							 <!-- js -->
-				<script src="assets/js/jquery.tools.min.js"></script>
-				<script src="assets/js/jquery.mobile.custom.min.js"></script>
-				<script src="assets/js/jquery.cm-overlay.js"></script>
-				<script>
-					$(document).ready(function(){
-						$('.cm-overlay').cmOverlay();
-					});
-				</script>
-
-<script src="assets/js/bars.js"></script>
-<script type="text/javascript" src="assets/js/move-top.js"></script>
-<script type="text/javascript" src="assets/js/easing.js"></script>
+<script>
+	$(function () {
+		  $("#slider3").responsiveSlides({
+	      	auto: true,
+			pager:true,
+			nav:false,
+			speed: 500,
+		      namespace: "callbacks",
+			before: function () {
+		      $('.events').append("<li>before event fired.</li>");
+			},
+			after: function () {
+		      $('.events').append("<li>after event fired.</li>");
+			}
+			 });
+			  });
+ </script>
+				
+<script>
+		$(document).ready(function(){
+		$('.cm-overlay').cmOverlay();
+			});
+</script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -444,21 +454,43 @@ echo '</div> ';                                         ?>
 		});
 	});
 </script>
-	<script src="assets/js/bootstrap.js"></script>
+
+
 	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-			*/
-								
+		$(document).ready(function() {			
 			$().UItoTop({ easingType: 'easeOutQuart' });
 								
 			});
+	</script>
+        
+        <script type="text/javascript">
+		function showMore ()
+                {
+      
+    document.getElementById("showmore").style.display = "";
+    document.getElementById("coming_events").style.display = "none";
+             }
+             
+             function showLess ()
+                {
+      
+    document.getElementById("coming_events").style.display = "";
+    document.getElementById("showmore").style.display = "none";
+             }
+             
+             function showMore2 ()
+                {
+      
+    document.getElementById("showmore2").style.display = "";
+    document.getElementById("InterestedComing").style.display = "none";
+             }
+             
+             function showLess2 ()
+                {
+      
+    document.getElementById("InterestedComing").style.display = "";
+    document.getElementById("showmore2").style.display = "none";
+             }
 	</script>
 </body>
 </html>
