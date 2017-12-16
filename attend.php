@@ -2,8 +2,11 @@
 <?php
 header('Content-Type: application/json');
 
-    require "conn.php";
-    require "models.php";
+require "conn.php";
+require "Firebase.php";
+require "models.php";
+require "sources.php";
+
      $event_id = $_GET["id"];
     
      $notSigned=false;     
@@ -58,6 +61,16 @@ header('Content-Type: application/json');
 
         echo json_encode("{\"status\":\"true\"}");
 
+        $registeredUser = GetUser($user_id, $conn);
+        //Get it from database -_-
+        $ids = array($registeredUser->token);
+        
+        $msg = new push();
+        $msg->title = "update";
+        $msg->message = "You attended new event!";
+        
+        $firebase = new Firebase();
+        $firebase->send($ids, $msg);
 
     }
 

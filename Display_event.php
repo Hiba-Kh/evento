@@ -16,6 +16,7 @@ class Anything {
     var $end_date;
     var $end;
 }
+
 $event_id;
 $mysql_qry="SELECT * FROM event_type where event_type_name='$id' ";
 $r=mysqli_query($conn,$mysql_qry);
@@ -70,7 +71,6 @@ for ($k=0,$size=count($arr); $k < $size;$k++){
         }
 }
 echo json_encode($arr_date_sorted);
-header("Location:temp.php?id=$id");
 /*echo 
 */
 

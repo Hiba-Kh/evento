@@ -1,8 +1,10 @@
 <?php
- require "conn.php";
- require "models.php";
-  session_start();
- $user=$_SESSION['user_data'];
+require "conn.php";
+require "models.php";
+require "Firebase.php";
+
+session_start();
+$user=$_SESSION['user_data'];
 $i=0;
 $j=0;
 $l=0;

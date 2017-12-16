@@ -103,7 +103,7 @@ button:hover {
 }
 </style>
 </style>
-<body background="assets/images/flat_icons.jpg">
+<body background="assets\images\flat_icons.JPG">
 
   <?php
     require "conn.php";
@@ -112,19 +112,20 @@ button:hover {
     if (isset($_POST['taskOption'])){
     $selectOption = $_POST['taskOption'];
     
-    header("Location:Display_event.php?id=$selectOption");}
-
+    header("Location:Display_event.html?id=$selectOption");}
+    
 ?>
+    <div class="login-page">
 
     <form class="modal-content animate"  action="category.php" method="post">
         
     <div class="imgcontainer">
-      <h1 style="text-align:center;color: #7ed321;">Please choose the category of the conferences you are interested in to see</h1>
+      <h1 style="text-align:center;color: grey;font-weight:normal;">Please choose the category of the conferences you are interested to see</h1>
     </div>
 
     <div class="container">
       <div class="row">
-       <div class="form-group input-group">
+       <div class="form-group input-group" style=" width:430px;margin-left:2.8cm;margin-right:auto;display:block;margin-top:1cm;margin-bottom:0%">
    <select  onchange="this.className=this.options[this.selectedIndex].className"  class="form-control greenText" name="taskOption" id="category"  required>
                                 <option  readonly>Choose Category</option> 
                                 <option>All</option>
@@ -143,12 +144,13 @@ button:hover {
         </select>
         </div>
       </div> 
-        <input type="submit" value="Press Ok" style="color: #7ed321"/>
+        <input type="submit" value="Press Ok" style="color: grey;font-weight:bold; height:50px;
+    width:220px; margin-left:auto;margin-right:auto;display:block;margin-top:1cm;margin-bottom:0%""/>
      
     </div>
     
   </form>
-  
+    </div>
 </body>
 </html>
 
@@ -156,4 +158,4 @@ button:hover {
 
 
 
- 
+  

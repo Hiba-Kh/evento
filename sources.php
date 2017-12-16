@@ -21,6 +21,7 @@ function GetUser($user_id, $conn) {
             $user->firstname=$row["first_name"];
             $user->lastname=$row["last_name"];
             $user->email=$row["email"];
+            $user->token=$row["token"];
             $user->id=$user_id;
              
             $mysql_meta_qry="SELECT * FROM meta_data WHERE user_id='$user->id'";
@@ -42,9 +43,10 @@ function GetUser($user_id, $conn) {
             }
         } 
 
-        $user->events = array();
+        $user->myEvents = array();
         $user->attendedEvents = array();
         $user->intrestedEvents = array();
+        $user ->upcomingEvents = array();
         
         return $user;
     }
@@ -54,8 +56,8 @@ function GetUser($user_id, $conn) {
 function GetEvent($event_id, $conn) {
 
     $adminEvent = new userEvent();
-    $adminEvent->event_id = $event_id;
-    $mysql_qry3="SELECT * FROM my_event  WHERE event_id = ' $adminEvent->event_id' ";
+    $mysql_qry3="SELECT * FROM my_event  WHERE event_id = ' $event_id' ";
+    $adminEvent->event_id = $event_id;    
     $result3=mysqli_query($conn, $mysql_qry3);
     $row_event = mysqli_fetch_assoc($result3);
     $adminEvent->event_name = $row_event['event_name'];    
@@ -111,5 +113,24 @@ function GetEvent($event_id, $conn) {
 
     return $adminEvent;
 }
+
+
+
+
+function GetInterestedEvent($user_id, $conn) {
+    
+        $interestedEvent = new userEvent();
+        $mysql_qry10="SELECT * FROM interested WHERE user_id = '$user_id' ";
+        $result10=mysqli_query($conn, $mysql_qry10);
+        $row10 = mysqli_fetch_assoc($result10);
+        $interested_id=$row10["interested_id"];
+        $mysql_qry11="SELECT * FROM event_interested  WHERE interested_id = '$interested_id' ";
+        $result11=mysqli_query($conn, $mysql_qry11);
+        $row11 = mysqli_fetch_assoc($result11);
+        $interestedEvent = GetEvent($row11['event_id'], $conn);
+        return $interestedEvent;
+        
+    }
+    
 
 ?>

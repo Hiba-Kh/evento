@@ -22,10 +22,11 @@ class UserData {
     var $email;
     var $job;
     var $type;
-    var $events;
+    var $myEvents;
     var $attendedEvents;
     var $intrestedEvents;
-    
+    var $upcomingEvents;
+    var $token;
     
 }
 
@@ -94,7 +95,9 @@ class agendaSessions {
     var $speakers;
 }
 
-
-
+class push {
+    var $title;
+    var $message;
+}
 
 ?>
