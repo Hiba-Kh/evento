@@ -25,23 +25,22 @@ $interested = array();
 $user_id=$user->id;
 $event_id;
 
-$mysql="SELECT * FROM interested where interested.user_id=$user_id";
+$mysql="SELECT * FROM event_interested where event_interested.user_id=$user_id";
 $r_sql=mysqli_query($conn,$mysql);
  
   while($row_sql= mysqli_fetch_assoc($r_sql)) 
    {
-        echo 'yes';        
 $interested[$s] = $row_sql['event_type_id'];
 $s++;
+print_r($interested);
    }
-       
- 
+  $s=0;     
 
-
-$mysql_qry="SELECT * FROM my_event";
+$mysql_qry="SELECT * FROM my_event where my_event.event_type_id=$interested[$s]";
 $r=mysqli_query($conn,$mysql_qry);
 if (!$r)
-{echo "Failed";
+{
+    echo "Failed";
    die(mysqli_error($conn)); 
 }
 
