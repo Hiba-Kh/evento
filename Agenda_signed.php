@@ -200,21 +200,23 @@ $s++;
                     });
                 });
 
-                var attend= 
-                '<div style="float:right;">'+      
-                '<a class="btn btn-white inline"   id="attendButton" onclick="attendButton()" style="width:220px;" >Attend</a>'+
+                var actionTool= '<div style="float:right;">';    
+                if(result.isFree == '0') {
+                    actionTool += ' <a class="btn btn-white inline"  href="ticket.php" style="width:220px;">Reserve your seat</a>';
+                } else {
+                    actionTool += '<a class="btn btn-white inline"   id="attendButton" onclick="attendButton()" style="width:220px;" >Attend</a>';
+                }                   
                     
-                    
-                ' <a class="btn btn-white inline"  id="interestButton" onclick="interestButton()" style="width:220px;" >Interest</a>'+
+                actionTool += ' <a class="btn btn-white inline"  id="interestButton" onclick="interestButton()" style="width:220px;" >Interest</a>';
                 
                     
-                ' <a class="btn btn-white inline"  href="ticket.php" style="width:220px;">Buy a Ticket</a>'+
-                '</div>'+
+                
+                actionTool += '</div>'+
                 '<br>'+
                 '<h2 class="section-title">Agenda</h2>'+
                 '<h3 style="font-size:1.4em;color:black;">**'+result.description+'</h3>';
                 
-                $("#attend").append(attend);
+                $("#attend").append(actionTool);
                     
                 drawSpeakerPanel(speakersInConf);
 

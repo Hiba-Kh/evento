@@ -22,6 +22,7 @@ class UserData {
     var $email;
     var $job;
     var $type;
+    var $isFree;    
     var $myEvents;
     var $attendedEvents;
     var $intrestedEvents;
@@ -34,7 +35,14 @@ class UserData {
 
     
 }
-
+class accommodation
+{
+    var $location_description;
+    var $suggested_hotels;
+    var $contact_phone_number;
+    var $contact_email;
+    var $hall_name;
+}
 class eventData
 {
     var $event_id;

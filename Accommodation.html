@@ -11,6 +11,74 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
+
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+    
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+    $(document).ready(function()
+    {
+
+     $.ajax
+        ({
+            url:"accommodationController.php?id="+getUrlParameter("id"),
+            dataType: 'json', 
+            success: function(value)
+            {
+                console.log(value);
+              
+                    console.log('caste: ' + value);
+                 var hotels= 'Dear MODELS authors and attendees,'+
+                              'The followings are suggested hotels from the conference adminstration,that may be comfortable for you. You can also'+ 
+                               'contact us via the phone number and email account in the dscreption below:'+
+                                value.suggested_hotels+'</div>'+
+                            '<div class="title">GOING</div>'+
+                            '</div>';
+
+                    var desc=  value.location_description;
+                    var phone = value.contact_phone_number;
+                    var email = value.contact_email;
+                    var hall = value.hall_name;
+               
+
+                $("#hotel_suggestions").append(hotels);
+                $("#desc").append(desc);
+                $("#hall").append(hall);
+
+                $("#phone").append(phone);
+                $("#email").append(email);
+
+
+
+                    
+                },
+        
+                error:function(error, code){
+                    console.log(error);
+                    console.log(code);
+                    alert("Error" + error);
+                },
+
+                  
+                  
+            });
+    });
+
+</script>
+
+
 </head>
 <body data-spy="scroll" data-target="#site-nav">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
@@ -95,33 +163,40 @@
                     <br>
                     <h2 class="section-title">Accommodation</h2>
                   
-                    <h3 class="panel-title"> The congress center offers you a selection of recommended hotels with fixed rates and a number of blocked rooms.
-The online booking is now closed. </h3>
+                     <h3 class="panel-title"> The conference adminstration tries to facilitate all what 
+                         you need to attend the conference, down are more information that will help you to find the location
+                         of the conference, and suggested hotels.</h3>
                <br>
- <h3 class="section-title">Hotel Spam Alert</h3>
+               <br>
+ <h3 class="section-title">Hotels Suggestions</h3>
                   
  
- <p class="panel-title">Dear MODELS authors and attendees,
-
-Previous editions of MODELS were targeted by a hotel-related scam. You may be contacted on the phone by a company acting as the congress center.
-
-They say they are unable to track your hotel reservation and will ask details or to call a phone number to confirm your booking.
-Please ignore this call, as neither MODELS nor the congress center is associated with this number.</p>
-
-
-                    
-            </div>
+ <p class="panel-title" id= "hotel_suggestions">
+</p>
+         </div>
                 </div>
-            </div>
+                    </div>
     </section>
     
   <section id="location" class="section location">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h2 class="section-title">Event Location</h2>
+
+                        <h2 class="section-title">Location Description</h2>
+                        <p id="desc"></p>
+                        <br>
+                        <br>
+                    <h2 class="section-title">Conference Contacts</h2>
                     <address>
-                        <p>Eardenia<br> The Grand Hall<br> House # 08, Road #52, Street<br> Phone: +1159t3764<br> Email: example@mail.com</p>
+                        <p id="phone">
+                            Phone number : 
+                        </p>
+                        <p id="email">
+                              email :  
+                         </p>
+                         <p id="hall">
+                                    </p>
                     </address>
                 </div>
                 <div class="col-sm-9">
