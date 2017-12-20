@@ -270,13 +270,13 @@ $sql = "INSERT INTO profilepic (image,user_id) VALUES ('$image',$user->id)";
   <?php
 echo '<div style="color:white;float:left;width: 30%;
         height: 10%;
-   	margin: 5px auto; margin-left:567px;"> '; 
+   	margin: 5px auto; margin-left:600px;"> '; 
                                      echo   "<h2 style='font-size: 2em;'>$user->firstname $user->lastname</h2>";
 					                   echo   "<span>$user->job</span>";
                                          echo   '<div class="callbacks_container">';
 			                                echo '<div class="clearfix"></div>';
 		                                  echo  '</div>';
-                                             echo '<ul class="top-links" style="margin-left:60px;">';
+                                             echo '<ul class="top-links" style="margin-left:40px;">';
 	                                             echo   '<li><a href="$user->facebook"><i class="fa fa-facebook"></i></a></li>';
     	                                           echo  '<li><a href="$user->twitter"><i class="fa fa-twitter"></i></a></li>';
 		                                      echo       '<li><a href="$user->linkedin"><i class="fa fa-linkedin"></i></a></li>';
