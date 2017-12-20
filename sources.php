@@ -64,11 +64,12 @@ function GetEvent($event_id, $conn) {
     $adminEvent->start_date = $row_event['start_date'];
     $adminEvent->end_date = $row_event['start_date'];
     $adminEvent->location_id = $row_event['location_id'];
+    $adminEvent->isFree = $row_event['isFree'];
+    
     $adminEvent->description = $row_event['description'];
     $adminEvent->NoOfAttendee = $row_event['NoOfAttendee'];
     $adminEvent->NoOfInterested = $row_event['NoOfInterested'];
     $adminEvent->agendas = array();
-
     $mysql_qry4="SELECT * FROM agenda  WHERE event_id = '$adminEvent->event_id'";
     $result4=mysqli_query($conn, $mysql_qry4);
 
