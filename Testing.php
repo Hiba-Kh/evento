@@ -9,7 +9,7 @@ $(document).ready(function (){
     $("input").change(function(){
             var input = document.getElementById('txt1').value;
             document.getElementById('btn_2').style.visibility='visible';
-            document.getElementById("txt2").value = input;   
+              
 });
 });
 </script>
