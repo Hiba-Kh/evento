@@ -36,7 +36,7 @@ $mysql2="SELECT event_id FROM my_event WHERE my_event.event_name='$names_found[$
 $re2=mysqli_query($conn, $mysql2);
 $row_s2= mysqli_fetch_assoc($re2); 
 $event_id_arr[$j] =$row_s2['event_id'];
-$list = $list."<li><a href='Agenda_signed.html?id=$event_id_arr[$j]'>$names_found[$i]</a></li>";
+$list = $list."<li><a href='Agenda_signed.php?id=$event_id_arr[$j]'>$names_found[$i]</a></li>";
 
     $j++;
     $i++;
