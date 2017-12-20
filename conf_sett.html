@@ -42,8 +42,12 @@ var event_id;
                         console.log(value.id);
                         event_id=value.id;
                         node =
-  '<div class="row" style="margin-bottom: 15px;">'+     
-     '<button type="submit"  name="create" style = "border-color: black; float:right; margin-right:60px; margin-top:60px; padding:15px;" class="btn btn-white" onclick="window.open(\'Create_Next.html?id='+value.id+'\')">Create_Agenda</button>'+
+  '<div class="row" style="margin-bottom: 15px;">'+ 
+  '<div id="btn_2_container">'+    
+        '<button id="btn_2" type="submit"  name="create" style = "border-color: black; float:right; margin-right:10px; margin-top:60px; padding:15px;" class="btn btn-white">Save</button>'+
+        '</div>'+
+        '<button type="submit"  name="create" style = "border-color: black; float:right; margin-right:60px; margin-top:60px; padding:15px;" class="btn btn-white" onclick="window.open(\'Create_Next.html?id='+value.id+'\')">Create_Agenda</button>'+
+     
           '<h4 style="margin-top:50px;font-size: 2em;color:Black;">Conference Basics</h4>'+
           '<br>'+
       '<div class="input-group input-group-icon" >'+
@@ -108,12 +112,22 @@ var event_id;
        
         node+='<div class="section-title" >'+ 
       ' <a href="SelectAdmin.php?id='+event_id+'"><img  src="assets/images/photos/add1.png" alt="add" width="30" height="30"  /></a>'+
-              '<label style="font-size:1.2em; margin-top:10px;">Add Admin</label>'+        
+              '<label style="font-size:1.2em; margin-top:10px;">Add Admin</label>'+    
+              ''+    
                   '</div>';
           
+             //node += "";
              
-                        $("#check").append(node);
-alert("Conference is Created Successfully");
+                    $("#check").append(node);
+                    
+              
+                    $("#btn_2_container").attr("style", "visibility: hidden;");
+
+                    $("input").change(function(){
+                        $("#btn_2_container").attr("style", "visibility: block;");
+                    });
+
+                    alert("Conference is Created Successfully");
                 },
                 error:function(error, code){
                     console.log(error);
@@ -123,6 +137,21 @@ alert("Conference is Created Successfully");
             });
     });
 
+        function save () {
+            var n_attendee = document.getElementsByName("n_attendee");
+            $.ajax({
+                url: "edit_conf.php?n_attendee="+n_attendee+"&n_attendee"+n_attendee,
+                dataType: 'json', 
+                success: function(result){
+                    console.log(result);
+                },
+                error:function(error, code){
+                    console.log(error);
+                    console.log(code);
+                    alert("Error" + error);
+                }   
+            });
+        }
     </script>
 <body style="background:#76b852;">
     <nav id="site-nav" class="navbar navbar-fixed-top navbar-custom">
@@ -157,6 +186,8 @@ alert("Conference is Created Successfully");
 
     <div id ="check" class="container" style="max-width:800px;background-color:white">
 
+            <input id='btn_2' type="submit" class="button" value='Save' style='visibility:hidden' onclick='javascript:saved()' />
+            
     </div>
   
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
