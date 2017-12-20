@@ -67,7 +67,7 @@
                                     '</div>'+
                                     
                                   
-                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.html?id='+value.id+'\')">MORE</button>'+                       
+                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.php?id='+value.id+'\')">MORE</button>'+                       
                                 '</div>'+
                                 '</div>';
                    
