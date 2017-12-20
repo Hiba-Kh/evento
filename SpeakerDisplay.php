@@ -53,7 +53,7 @@
                                         '<time datetime="'+ value.start +'">'+ value.start +'</time> - <time datetime="'+ value.end +'">'+ value.end +'</time>'+
                                     '</div>'+
                     '<button type="button" class="btn btn-link"  onclick="window.open(\'UploadFile.php?id='+value.event_id+'\')">UPLOAD FILES</button>'+    
-                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.html?id='+value.event_id+'\')">Agenda</button>'+    
+                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.php?id='+value.event_id+'\')">Agenda</button>'+    
                     '<button type="button" class="btn btn-link"  onclick="window.open(\'chat.php?id='+value.event_id+'\')">CHAT</button>'+                       
                                    '</div>'+
                                    '</div>';                      

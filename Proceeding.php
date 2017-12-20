@@ -77,7 +77,7 @@ $i++;
           <li><a href="Panel.html">Panel</a></li>
           <li><a href="Awards.html">Awards</a></li>
           <li><a href="paper.php">Paper</a></li>
-          <li><a href="Agenda_signed.html">Agenda</a></li>
+          <li><a href="Agenda_signed.php">Agenda</a></li>
           <li><a href="Sponsor_Display.html">Sponsors</a></li>
         </ul>
                         

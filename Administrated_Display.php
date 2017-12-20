@@ -54,7 +54,7 @@
                                     '</div>'+
                                     
                     '<button type="button" class="btn btn-link"  onclick="window.open(\'conf_sett.html?id='+value.event_id+'\')">Settings</button>'+                       
-                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.html?id='+value.event_id+'\')">Agenda</button>'+    
+                    '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_signed.php?id='+value.event_id+'\')">Agenda</button>'+    
                     '<button type="button" class="btn btn-link"  onclick="window.open(\'Agenda_Display_DB.php?id='+value.event_id+'\')">Agenda Settings</button>'+    
                     '<button type="button" class="btn btn-link"  onclick="window.open(\'chat.php?id='+value.event_id+'\')">CHAT</button>'+                       
                                    '</div>'+
