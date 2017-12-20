@@ -43,12 +43,12 @@ Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Son
   
   	$target = "images/".basename($image);
 
-$sql_Check = "SELECT * FROM profilePic where profilePic.user_id=$user->id";
+$sql_Check = "SELECT * FROM profilepic where profilepic.user_id=$user->id";
 $r=mysqli_query($db, $sql_Check);        
 
 if(mysql_num_rows($r) === 0) {
     
-    $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
+    $sql = "INSERT INTO profilepic (image,user_id) VALUES ('$image',$user->id)";
   	mysqli_query($db, $sql);
 
   	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
@@ -58,13 +58,13 @@ if(mysql_num_rows($r) === 0) {
   	}
 } 
 else {
-$sql_Delete = "DELETE FROM profilePic WHERE profilePic.user_id=$user->id";
+$sql_Delete = "DELETE FROM profilepic WHERE profilepic.user_id=$user->id";
 if (mysqli_query($db, $sql_Delete)) {
 } else {
     echo "Error deleting record: " . mysqli_error($db);
 }
 
-$sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
+$sql = "INSERT INTO profilepic (image,user_id) VALUES ('$image',$user->id)";
   	mysqli_query($db, $sql);
 
   	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
@@ -77,7 +77,7 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
         
   	
   }//post_uploaded
-  $result = mysqli_query($db, "SELECT * FROM profilePic where profilePic.user_id=$user->id");
+  $result = mysqli_query($db, "SELECT * FROM profilepic where profilepic.user_id=$user->id");
 ?>
 <style type="text/css">
    #content{
@@ -270,13 +270,13 @@ $sql = "INSERT INTO profilePic (image,user_id) VALUES ('$image',$user->id)";
   <?php
 echo '<div style="color:white;float:left;width: 30%;
         height: 10%;
-   	margin: 5px auto; margin-left:567px;"> '; 
+   	margin: 5px auto; margin-left:600px;"> '; 
                                      echo   "<h2 style='font-size: 2em;'>$user->firstname $user->lastname</h2>";
 					                   echo   "<span>$user->job</span>";
                                          echo   '<div class="callbacks_container">';
 			                                echo '<div class="clearfix"></div>';
 		                                  echo  '</div>';
-                                             echo '<ul class="top-links" style="margin-left:60px;">';
+                                             echo '<ul class="top-links" style="margin-left:40px;">';
 	                                             echo   '<li><a href="$user->facebook"><i class="fa fa-facebook"></i></a></li>';
     	                                           echo  '<li><a href="$user->twitter"><i class="fa fa-twitter"></i></a></li>';
 		                                      echo       '<li><a href="$user->linkedin"><i class="fa fa-linkedin"></i></a></li>';
@@ -292,7 +292,7 @@ echo '</div> ';                                         ?>
                                             <div class="col-md-5 w3ls-ab-right">
               <?php
      $db = mysqli_connect("localhost", "root", "", "evento");
-    $result = mysqli_query($db,"SELECT * FROM profilePic where profilePic.user_id=$user->id");
+    $result = mysqli_query($db,"SELECT * FROM profilepic where profilepic.user_id=$user->id");
            
    $row = mysqli_fetch_array($result);
        echo '<div class="agile-about-right-img container" style="border:3px solid #021a40">';

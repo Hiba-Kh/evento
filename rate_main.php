@@ -71,47 +71,16 @@ $_SESSION['event_id']=$event_id;
 	<div class="form-group">
             <label for="email" style="font-size: 1.5em;font-family:Verdana, Geneva, sans-serif;margin-top: 10px;">Do you feel the day provided value for money? </label>	  	
             <br>	<div class='starrr' id='rating2' style="margin-top: 20px;"></div> 	<br><br>
-	</div>	
+	<input type="button" id="submit" class="btn btn-success" value="Submit">
+	  	<div class="msg"></div>
+        </div>	
 </div>  
 </div>
  </div>
     
-<div class="container" style="background:white;align-items: center;height:300px;margin-top: 100px; ">    
-<div class="row">
-<div class="col-md-12">
-	<div class="form-group">
-            <label style="font-size: 1.5em;font-family:Verdana, Geneva, sans-serif;margin-top: 10px;">Would you recommend a similar event to a friend? </label>	  	
-            <br>
-            <div id='RadioRating'>
-	  	<input type='radio' name='rates' value='Yes, definitly'>Yes, definitely
-                <input type='radio' name='rates' value='Maybe, if the content was changed'>Maybe, if the content was changed
-                <input type='radio' name='rates' value='Maybe, if it was cheaper'>Maybe, if it was cheaper
-                <input type='radio' name='rates' value='No, never'>No, never
-            </div>
-            <input type="button" id="submit" class="btn btn-success" value="Submit">
-	  	<div class="msg"></div>
-           </div>
-</div>  
-</div>
-</div>
+
     
-    <div class="container" style="background:white;align-items: center;height:300px;margin-top: 100px; ">    
-<div class="row">
-<div class="col-md-12">
-	<div class="form-group">
-            <label style="font-size: 1.5em;font-family:Verdana, Geneva, sans-serif;margin-top: 10px;">Overall, were you satisfied with the venue and were you able to see and hear the presentations clearly? </label>	  	
-            <br>
-            <div id='RadioRating'>
-	  	<input type='radio' name='rates2' value='Yes'>Yes
-                <input type='radio' name='rates2' value='No'>No
-                
-            </div>
-            <input type="button" id="submit" class="btn btn-success" value="Submit">
-	  	<div class="msg"></div>
-           </div>
-</div>  
-</div>
-</div>
+    
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
@@ -149,20 +118,13 @@ $('#rating2').starrr({
 });
 // ajax submit
 
-var rate3;
-$('#RadioRating').click(function() {
-   rate3 = $('input:radio[name=rates]');
-    if($radios.is(':checked') === false) {
-        $radios.filter('[value=Yes, definitly]').prop('checked', true);
-    }
-});
 
 $("#submit").click(function(){	
 	
 	$.ajax({		
         url: "rating.php",
         type: 'post',
-        data: {v3 : rate,v4:rate2,v5:rate3},
+        data: {v3 : rate,v4:rate2},
         success: function (status) {
         	if(status == 1){
             	$('.msg').html('<b>Thanks for your submission :)</b>');
