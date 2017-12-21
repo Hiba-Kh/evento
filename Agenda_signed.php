@@ -219,8 +219,10 @@ $s++;
                 $("#attend").append(actionTool);
                     
                 drawSpeakerPanel(speakersInConf);
+                
 
-                //initMap({lat: result.location_lat, lng: result.location_lng});
+
+                initMap({lat: 32.2249, lng: 35.2359});
 
                 drawFactsPanel(result.description, result.location_id, speakersInConf.length, 10, result.start_date);                  
                         
@@ -257,12 +259,12 @@ $s++;
                             
                         ' <div class="col-sm-3">'+
                             ' <i class="ion-ios-location"></i>'+
-                                '<h3>'+location_name +'</h3>'+
+                                '<h3>Hamdi Manko</h3>'+
                         ' </div>'+
                         
                         '  <div class="col-sm-3">'+
                         '     <i class="ion-pricetags"></i>'+
-                            '    <h3>'+no_tickets+'</h3>'+
+                            '    <h3>350</h3>'+
                             '</div>'+
                             
                         ' <div class="col-sm-3">'+
@@ -284,7 +286,7 @@ $s++;
                             '    <img alt="" class="img-responsive center-block" src="assets/images/speakers/speaker-1.jpg">'+
                             '</figure>'+
                             '<h4>'+ speakersInConf[index].firstname +' '+ speakersInConf[index].lastname + '</h4>'+
-                            '<p>CEO of Peren</p>'+
+                            '<p>Nablus</p>'+
                             '<ul class="social-block">'+
                             '     <li><a href=""><i class="ion-social-twitter"></i></a></li>'+
                             '    <li><a href=""><i class="ion-social-facebook"></i></a></li>'+
@@ -444,7 +446,7 @@ $s++;
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png" alt="Logo">
-                        Evento
+                        Conferencer
                     </a>
                 </div>
 
@@ -461,20 +463,18 @@ $s++;
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- navigation menu -->
-                    <li><a href="Create.html">CreateConf. </a></li> 
-                    <li><a href="profile.html">Profile</a></li>
                     <li><a href="upComing.html">UpComing </a></li>
                     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Program
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="Proceeding.html">Proceedings</a></li>
-          <li><a href="Panel.html">Panel</a></li>
+           <?php $event_id=$id; echo "<li><a href='Proceeding.php?id=$event_id'>Proceedings</a></li>"; ?>
+<li><a href="Panel.html">Panel</a></li>
           <li><a href="Awards.html">Awards</a></li>
           <li><a href="Paper.html">Paper</a></li>
           <li><a data-scroll href="#speakers">Speaker</a></li>
           <li><a  data-scroll href="#faq">Agenda</a></li>
-          <li><a href="Sponsor_Display.html">Sponsors</a></li>
+         <?php $event_id=$id; echo "<li><a href='Sponsor_Display.php?id=$event_id'>Sponsors</a></li>"; ?>
         </ul>
                         
       </li>
@@ -484,8 +484,7 @@ $s++;
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="Accommodation.html">Accommodation</a></li>
-          <li><a href="Photos_event.html">Photos</a></li>
-          <li><a href="Videos_event.html">Videos</a></li>
+          
         </ul>
       </li>
       
@@ -539,7 +538,7 @@ $s++;
                         <h2 class="section-title">Event Location</h2>
 
                         <address>
-                            <p>Eardenia<br> The Grand Hall<br> House # 08, Road #52, Street<br> Phone: +1159t3764<br> Email: example@mail.com</p>
+                            <p>Nablus<br> Hamdi Manko<br> Phone: +597136396 <br> Email: shoshoarafat-1996@hotmail.com</p>
                         </address>
                     </div>
                     <div class="col-sm-9">

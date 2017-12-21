@@ -49,7 +49,7 @@ while ($row = mysqli_fetch_array($result)) {
                 <div class="site-branding">
                     <a class="logo" href="index.html">
                         <img src="assets/images/logo.png" alt="Logo">
-                        Evento
+                        Conferencer
                     </a>
                 </div>
 
