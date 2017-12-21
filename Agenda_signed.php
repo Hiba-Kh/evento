@@ -202,7 +202,7 @@ $s++;
 
                 var actionTool= '<div style="float:right;">';    
                 if(result.isFree == '0') {
-                    actionTool += ' <a class="btn btn-white inline"  href="ticket.php" style="width:220px;">Reserve your seat</a>';
+                    actionTool += ' <a class="btn btn-white inline"  onclick="payFees()" style="width:220px;">Reserve your seat</a>';
                 } else {
                     actionTool += '<a class="btn btn-white inline"   id="attendButton" onclick="attendButton()" style="width:220px;" >Attend</a>';
                 }                   
@@ -234,6 +234,20 @@ $s++;
         });
     });
 
+    function payFees()
+    {
+        document.getElementById('modal-wrapper-fees').style.display='block';
+                  var modal = document.getElementById('modal-wrapper');
+                    window.onclick = function(event)
+                     {
+                        if (event.target == modal)
+                        {
+                            modal.style.display = "none";
+                        }
+                    } 
+ 
+
+    }
     function drawFactsPanel (description, location_name, no_speaker, no_tickets, start_date) {
         var conc ='<div class="row">'+
                             '<div class="col-sm-3">'+
@@ -666,7 +680,47 @@ $s++;
         
       </div>
 
+      <div id="modal-wrapper-fees" class="modal">
+        
+     
+      <form class="modal-content animate" method="post" >
+              
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('modal-wrapper2').style.display='none'" class="close" title="Close PopUp">&times;</span>
+            <img src="2.jpg" alt="Avatar" class="avatar">
+            <h3 style="text-align:center">Pay for Conference Fees</h3>
+          </div>
+      
+          <div class="imgccontainer">
+            <input type="text" id = "email2" placeholder="Name on Car" name="email2">
+            <input type="password" id="password2" placeholder="Card Number" name="password2"> 
+
+            <input type="password" id="password2" placeholder="CVV" name="password2">        
+            <input type="password" id="password2" placeholder="Expiration Date" name="password2">        
+       
+            <button type="button" onclick="display_none()" style=" background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 26px;
+            border: none;
+            cursor: pointer;
+            width: 90%;
+            font-size:20px;">Make Your Payment</button>
+          </div>
+          
+        </form>
+        
+      </div>
+
       <script>
+          function display_none()
+          {
+            var modal = document.getElementById('modal-wrapper-fees');
+                   
+                            modal.style.display = "none";
+                        
+                     
+          }
           function  loginAttendFunctoin(){
             document.getElementById('modal-wrapper').style.display='none';
             var email = document.getElementById('email').value;
@@ -726,3 +780,6 @@ $s++;
       </body>
 
 </html>
+
+
+

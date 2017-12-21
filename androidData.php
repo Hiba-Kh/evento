@@ -95,17 +95,15 @@ else
                 }
 
                 $current_date = date('Y-m-d');
-$mysql_qry3="SELECT * FROM my_event  WHERE start_date > '$current_date' ";
-$result3=mysqli_query($conn, $mysql_qry3);
-$row3 = mysqli_fetch_assoc($result3);
-while($row3 = mysqli_fetch_assoc($result3))
-{
-    $UpComingEvent = GetEvent($row3['event_id'], $conn);
-    array_push($returnedUser->upcomingEvents,$UpComingEvent);
-}
+                $mysql_qry3="SELECT * FROM my_event  WHERE start_date > '$current_date' ";
+                $result3=mysqli_query($conn, $mysql_qry3);
+                $row3 = mysqli_fetch_assoc($result3);
+                while($row3 = mysqli_fetch_assoc($result3))
+                {
+                    $UpComingEvent = GetEvent($row3['event_id'], $conn);
+                    array_push($returnedUser->upcomingEvents,$UpComingEvent);
+                }
 
-
-             
                echo json_encode($returnedUser);
                
             }
