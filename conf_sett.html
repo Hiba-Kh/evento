@@ -139,8 +139,15 @@ var event_id;
 
         function save () {
             var n_attendee = document.getElementsByName("n_attendee");
+            var c_name = document.getElementsByName("c_name");
+            var s_date = document.getElementsByName("s_date");
+            var e_date = document.getElementsByName("e_date");
+            var type = document.getElementsByName("type");
+            var description = document.getElementsByName("description");
+           
             $.ajax({
-                url: "edit_conf.php?n_attendee="+n_attendee+"&n_attendee"+n_attendee,
+                url: "edit_conf.php?c_name="+c_name+"&id="+getUrlParameter("id"),
+                
                 dataType: 'json', 
                 success: function(result){
                     console.log(result);
