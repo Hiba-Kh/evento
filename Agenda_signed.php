@@ -496,7 +496,6 @@ $s++;
         </ul>      
       </li>
       
-        <li><a href="index.html">SignOut </a></li>
                 </ul>
             </div>
         </div><!-- /.container -->

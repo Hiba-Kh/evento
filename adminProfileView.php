@@ -276,7 +276,7 @@ echo '<div style="color:white;float:left;width: 30%;
                                          echo   '<div class="callbacks_container">';
 			                                echo '<div class="clearfix"></div>';
 		                                  echo  '</div>';
-                                             echo '<ul class="top-links" style="margin-left:40px;">';
+                                             echo '<ul class="top-links" style="margin-left:30px;">';
 	                                             echo   '<li><a href="$user->facebook"><i class="fa fa-facebook"></i></a></li>';
     	                                           echo  '<li><a href="$user->twitter"><i class="fa fa-twitter"></i></a></li>';
 		                                      echo       '<li><a href="$user->linkedin"><i class="fa fa-linkedin"></i></a></li>';
